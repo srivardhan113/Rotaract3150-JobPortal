@@ -35,7 +35,7 @@ const Header = () => {
                   <Image
                     width={154}
                     height={50}
-                    src="/images/logo-2.svg"
+                    src="/images-rotaract/ri3150-logo.png"
                     alt="logo"
                     title="brand"
                   />
@@ -44,7 +44,7 @@ const Header = () => {
                   <Image
                     width={154}
                     height={50}
-                    src="/images/logo.svg"
+                    src="/images-rotaract/ri3150-logo.png"
                     alt="logo"
                     title="brand"
                   />
@@ -58,10 +58,10 @@ const Header = () => {
             {/* <!-- Login/Register --> */}
             <div className="btn-box">
               <Link
-                href="/employers-dashboard/post-jobs"
+                href="/contact"
                 className="theme-btn btn-style-one"
               >
-                <span className="btn-title">Job Post</span>
+                <span className="btn-title">Contact Us!!</span>
               </Link>
             </div>
           </div>

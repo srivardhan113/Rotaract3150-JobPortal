@@ -80,7 +80,7 @@ const Header = () => {
                   isActiveParentChaild(pageItems, pathname) ? "current" : ""
                 } dropdown`}
               >
-                <span>Pages</span>
+                <span>More</span>
                 <ul>
                   {pageItems.map((item, i) => (
                     <li
@@ -100,10 +100,10 @@ const Header = () => {
         <div className="outer-box">
           <div className="btn-box">
             <a
-              href="#"
+              href="/register"
               className="theme-btn btn-style-three btn-white-10 call-modal"
-              data-bs-toggle="modal"
-              data-bs-target="#loginPopupModal"
+              // data-bs-toggle="modal"
+              // data-bs-target="#loginPopupModal"
             >
               Login / Register
             </a>

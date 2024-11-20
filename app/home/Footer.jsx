@@ -1,8 +1,8 @@
 import Image from "next/image";
-import CopyrightFooter from "../footer/common-footer/CopyrightFooter";
-import FooterApps from "../footer/FooterApps";
-import FooterContent3 from "../footer/FooterContent3";
-import SearchForm2 from "../footer/SearchForm2";
+import CopyrightFooter from "/components/footer/common-footer/CopyrightFooter";
+// import FooterApps from "../footer/FooterApps";
+import FooterContent3 from "/components/footer/FooterContent3";
+import SearchForm2 from "/components/footer/SearchForm2";
 
 const Footer = () => {
   return (

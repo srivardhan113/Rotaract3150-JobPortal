@@ -6,17 +6,16 @@ const CallToAction3 = () => {
       <div className="auto-container">
         <div className="outer-box">
           <div className="sec-title">
-            <h2>Let employers find you</h2>
+            <h2>We Connect You to the Career Opputunities</h2>
             <div className="text">
-              Advertise your jobs to millions of monthly users and search 15.8
-              million CVs in our database.
+            "We connect you to the jobs that match your skills, passion, and aspirations, empowering your career growth through Rotaract 3150."
             </div>
           </div>
           {/* End sec title */}
 
           <div className="btn-box">
             <Link
-              href="/job-list-v7"
+              href="/job-list"
               className="theme-btn btn-style-one bg-blue"
             >
               <span className="btn-title">Search Job</span>

@@ -1,14 +1,9 @@
 const IntroDescriptions = () => {
   return (
     <div className="text-box">
-      <h4>About Superio</h4>
+      <h4><br/><br/>About Rotaract 3150 - Job Portal</h4>
       <p>
-        Far much that one rank beheld bluebird after outside ignobly allegedly
-        more when oh arrogantly vehement irresistibly fussy penguin insect
-        additionally wow absolutely crud meretriciously hastily dalmatian a
-        glowered inset one echidna cassowary some parrot and much as goodness
-        some froze the sullen much connected bat wonderfully on instantaneously
-        eel valiantly petted this along across highhandedly much.
+      Rotaract 3150 is a dynamic youth-driven organization dedicated to fostering leadership, community service, and professional development. As part of the global Rotary family, it empowers young individuals to create meaningful change while building lifelong friendships and networks. With a focus on community impact and personal growth, Rotaract 3150 brings together passionate members to lead projects, tackle societal challenges, and promote cultural and social harmony. The district thrives on innovation and collaboration, making it a hub for inspiring leaders of tomorrow.
       </p>
       <p>
         Repeatedly dreamed alas opossum but dramatically despite expeditiously

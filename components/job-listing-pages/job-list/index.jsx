@@ -1,6 +1,6 @@
-import FooterDefault from "../../../components/footer/common-footer";
+import FooterDefault from "/app/home/footer";
 import LoginPopup from "../../common/form/login/LoginPopup";
-import DefaulHeader2 from "../../header/DefaulHeader2";
+import DefaulHeader from "/app/home/Header";
 import MobileMenu from "../../header/MobileMenu";
 import FilterJobsBox from "./FilterJobsBox";
 import Breadcrumb from "../../common/Breadcrumb";
@@ -15,13 +15,13 @@ const index = () => {
       <LoginPopup />
       {/* End Login Popup Modal */}
 
-      <DefaulHeader2 />
+      <DefaulHeader />
       {/* End Header with upload cv btn */}
 
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <Breadcrumb title="Find Jobs" meta="Jobs" />
+      <Breadcrumb title="Find Opputunities" meta="Opputunities" />
       {/* <!--End Breadcrumb Start--> */}
 
       <section className="ls-section">

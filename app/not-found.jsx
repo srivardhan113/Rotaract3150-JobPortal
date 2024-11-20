@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Page Not Found || Superio - Job Borad React NextJS Template",
-  description: "Superio - Job Borad React NextJS Template",
+  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
 };
 
 const index = () => {
@@ -23,7 +23,7 @@ const index = () => {
               <Image
                 width={154}
                 height={50}
-                src="/images/logo.svg"
+                src="/images-rotaract/ri3150-logo.png"
                 alt="brand"
               />
             </Link>

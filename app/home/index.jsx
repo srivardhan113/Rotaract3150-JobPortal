@@ -1,14 +1,14 @@
-import About9 from "../about/About9";
-import AppSection3 from "../app-section/AppSection3";
-import Block8 from "../block/Block8";
-import RegBanner from "../block/RegBanner";
-import LoginPopup from "../common/form/login/LoginPopup";
-import CallToAction6 from "../call-to-action/CallToAction6";
-import Partner2 from "../common/partner/Partner2";
-import MobileMenu from "../header/MobileMenu";
-import Hero13 from "../hero/hero-13";
-import JobCategorie1 from "../job-categories/JobCategorie1";
-import JobFeatured9 from "../job-featured/JobFeatured9";
+import About9 from "/components/about/About9";
+// import AppSection3 from "../app-section/AppSection3";
+import Block8 from "/components/block/Block8";
+import RegBanner from "/components/block/RegBanner";
+import LoginPopup from "/components/common/form/login/LoginPopup";
+import CallToAction6 from "/components/call-to-action/CallToAction6";
+import Partner2 from "/components/common/partner/Partner2";
+import MobileMenu from "/components/header/MobileMenu";
+import Hero13 from "/components/hero/hero-13";
+import JobCategorie1 from "/components/job-categories/JobCategorie1";
+import JobFeatured9 from "/components/job-featured/JobFeatured9";
 // import Pricing3 from "../pricing/Pricing3";
 // import TopCompany from "../top-company/TopCompany";
 import Header from "./Header";
@@ -75,12 +75,6 @@ const index = () => {
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 
-
-      <About9 />
-      {/* <!-- End About Section --> */}
-
-{/* ----------------------------------------------------------------------------------------------------------------- */}
-
       <section className="layout-pt-60 layout-pb-60">
         <div className="auto-container">
           <div className="featured-column">
@@ -104,6 +98,12 @@ const index = () => {
         </div>
       </section>
       {/* <!-- End Job Section --> */}
+
+{/* ----------------------------------------------------------------------------------------------------------------- */}
+
+
+<About9 />
+      {/* <!-- End About Section --> */}
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 

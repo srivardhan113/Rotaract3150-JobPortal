@@ -41,8 +41,8 @@ const SalaryRangeSlider = () => {
             <div className="input-outer">
                 <div className="amount-outer">
                     <span className="d-inline-flex align-items-center">
-                        <span className="min">${salary.min}</span>
-                        <span className="max ms-2">${salary.max}</span>
+                        <span className="min">₹{salary.min}</span>
+                        <span className="max ms-2">₹{salary.max}</span>
                     </span>
                 </div>
             </div>

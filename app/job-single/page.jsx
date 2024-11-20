@@ -1,22 +1,22 @@
 import dynamic from "next/dynamic";
 import jobs from "@/data/job-featured";
-import LoginPopup from "@/components/common/form/login/LoginPopup";
-import FooterDefault from "@/components/footer/common-footer";
-import DefaulHeader from "@/components/header/DefaulHeader";
+// import LoginPopup from "@/components/common/form/login/LoginPopup";
+import FooterDefault from "@/app/home/Footer";
+import DefaulHeader from "@/app/home/Header";
 import MobileMenu from "@/components/header/MobileMenu";
 import RelatedJobs from "@/components/job-single-pages/related-jobs/RelatedJobs";
 import JobOverView from "@/components/job-single-pages/job-overview/JobOverView";
 import JobSkills from "@/components/job-single-pages/shared-components/JobSkills";
 import CompnayInfo from "@/components/job-single-pages/shared-components/CompanyInfo";
-import MapJobFinder from "@/components/job-listing-pages/components/MapJobFinder";
-import SocialTwo from "@/components/job-single-pages/social/SocialTwo";
+// import MapJobFinder from "@/components/job-listing-pages/components/MapJobFinder";
+// import SocialTwo from "@/components/job-single-pages/social/SocialTwo";
 import JobDetailsDescriptions from "@/components/job-single-pages/shared-components/JobDetailsDescriptions";
 import ApplyJobModalContent from "@/components/job-single-pages/shared-components/ApplyJobModalContent";
 import Image from "next/image";
 
 export const metadata = {
-  title: "Job Single Dyanmic V1 || Superio - Job Borad React NextJS Template",
-  description: "Superio - Job Borad React NextJS Template",
+  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
 };
 
 const JobSingleDynamicV1 = ({ params }) => {
@@ -28,7 +28,7 @@ const JobSingleDynamicV1 = ({ params }) => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DefaulHeader />
@@ -145,12 +145,12 @@ const JobSingleDynamicV1 = ({ params }) => {
                 <JobDetailsDescriptions />
                 {/* End jobdetails content */}
 
-                <div className="other-options">
+                {/* <div className="other-options">
                   <div className="social-share">
                     <h5>Share this job</h5>
                     <SocialTwo />
                   </div>
-                </div>
+                </div> */}
                 {/* <!-- Other Options --> */}
 
                 <div className="related-jobs">
@@ -176,14 +176,14 @@ const JobSingleDynamicV1 = ({ params }) => {
                     <JobOverView />
 
                     {/* <!-- Map Widget --> */}
-                    <h4 className="widget-title mt-5">Job Location</h4>
+                    {/* <h4 className="widget-title mt-5">Job Location</h4>
                     <div className="widget-content">
                       <div className="map-outer">
                         <div style={{ height: "300px", width: "100%" }}>
                           <MapJobFinder />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* <!--  Map Widget --> */}
 
                     <h4 className="widget-title">Job Skills</h4>

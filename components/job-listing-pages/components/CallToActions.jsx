@@ -1,12 +1,11 @@
 const CallToActions = () => {
   return (
     <div className="call-to-action-four ">
-      <h5>Recruiting?</h5>
+      <h5>Do you wanna Recruit someone?</h5>
       <p>
-        Advertise your jobs to millions of monthly users and search 15.8 million
-        CVs in our database.
+      Join Rotaract 3150 - Job Portal to post job opportunities and connect with passionate, skilled candidates who are eager to make an impact.
       </p>
-      <a href="#" className="theme-btn btn-style-one bg-blue">
+      <a href="/register" className="theme-btn btn-style-one bg-blue">
         <span className="btn-title">Start Recruiting Now</span>
       </a>
       <div

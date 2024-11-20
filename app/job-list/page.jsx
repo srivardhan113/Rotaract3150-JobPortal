@@ -1,9 +1,9 @@
 import dynamic from "next/dynamic";
-import JobList from "@/components/job-listing-pages/job-list-v8";
+import JobList from "@/components/job-listing-pages/job-list";
 
 export const metadata = {
-  title: "Job List V8 || Superio - Job Borad React NextJS Template",
-  description: "Superio - Job Borad React NextJS Template",
+  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
 };
 
 const index = () => {

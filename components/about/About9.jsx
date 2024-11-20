@@ -19,7 +19,7 @@ const About9 = () => {
                   <Image
                     width={570}
                     height={558}
-                    src="/images/index-13/images/1.png"
+                    src="/images-rotaract/home-about.png"
                     alt="resource"
                   />
                 </figure>

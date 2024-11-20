@@ -17,8 +17,8 @@ const CallToAction6 = () => {
           {/* End sec-title */}
 
           <div className="btn-box">
-            <Link href="/faq" className="theme-btn btn-style-three">
-              FAQ's
+            <Link href="/about" className="theme-btn btn-style-three">
+              Contact Us
             </Link>
           </div>
         </div>

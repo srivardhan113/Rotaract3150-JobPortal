@@ -303,7 +303,7 @@ export const blogItems = [
 
 export const pageItems = [
   {
-    name: "About",
+    name: "Who we are?",
     routePath: "/about",
   },
   // {
@@ -322,10 +322,10 @@ export const pageItems = [
   //   name: "Invoice",
   //   routePath: "/invoice",
   // },
-  {
-    name: "Contact",
-    routePath: "/contact",
-  },
+  // {
+  //   name: "Contact",
+  //   routePath: "/contact",
+  // },
   {
     name: "404",
     routePath: "/404",

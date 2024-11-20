@@ -56,17 +56,17 @@ const Header = () => {
 
               {/* Find Jobs */}
               <li className={`${isActiveLink("/find-jobs", pathname) ? "current" : ""}`}>
-                <Link href="/find-jobs">Find Jobs</Link>
+                <Link href="/job-list">Find Jobs</Link>
               </li>
 
               {/* Employers */}
-              <li className={`${isActiveLink("/employers", pathname) ? "current" : ""}`}>
-                <Link href="/employers">Employers</Link>
+              <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
+                <Link href="/employers-dashboard">Job Provider Dashboard</Link>
               </li>
 
               {/* Candidates */}
-              <li className={`${isActiveLink("/candidates", pathname) ? "current" : ""}`}>
-                <Link href="/candidates">Candidates</Link>
+              <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
+                <Link href="/candidates-dashboard">Job Seeker Dashboard</Link>
               </li>
 
               {/* Blog */}

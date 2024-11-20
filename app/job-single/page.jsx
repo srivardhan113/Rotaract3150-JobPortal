@@ -98,9 +98,9 @@ const JobSingleDynamicV1 = ({ params }) => {
                   >
                     Apply For Job
                   </a>
-                  <button className="bookmark-btn">
+                  {/* <button className="bookmark-btn">
                     <i className="flaticon-bookmark"></i>
-                  </button>
+                  </button> */}
                 </div>
                 {/* End apply for job btn */}
 

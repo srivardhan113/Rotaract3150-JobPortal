@@ -18,7 +18,7 @@ const JobApplied = () => {
                 />
               </span>
               <h4>
-                <Link href={`/job-single-v1/${item.id}`}>{item.jobTitle}</Link>
+                <Link href={`/job-single/${item.id}`}>{item.jobTitle}</Link>
               </h4>
 
               <ul className="job-info">
@@ -52,9 +52,9 @@ const JobApplied = () => {
               </ul>
               {/* End .job-other-info */}
 
-              <button className="bookmark-btn">
+              {/* <button className="bookmark-btn">
                 <span className="flaticon-bookmark"></span>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

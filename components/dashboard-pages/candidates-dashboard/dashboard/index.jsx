@@ -1,10 +1,10 @@
 import MobileMenu from "../../../header/MobileMenu";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+import DashboardCandidatesSidebar from "/App/candidates-dashboard/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import TopCardBlock from "./components/TopCardBlock";
 import ProfileChart from "./components/ProfileChart";
-import Notification from "./components/Notification";
+// import Notification from "./components/Notification";
 import CopyrightFooter from "../../CopyrightFooter";
 import JobApplied from "./components/JobApplied";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
@@ -16,7 +16,7 @@ const Index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DashboardCandidatesHeader />
@@ -31,7 +31,7 @@ const Index = () => {
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Howdy, Jerome!!" />
+          <BreadCrumb title="Welcome to Dashboard" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -45,16 +45,17 @@ const Index = () => {
           <div className="row">
             <div className="col-xl-7 col-lg-12">
               {/* <!-- Graph widget --> */}
-              <div className="graph-widget ls-widget">
+              {/* <div className="graph-widget ls-widget">
                 <ProfileChart />
-              </div>
+              </div> */}
               {/* End profile chart */}
             </div>
             {/* End .col */}
 
-            <div className="col-xl-5 col-lg-12">
-              {/* <!-- Notification Widget --> */}
-              <div className="notification-widget ls-widget">
+
+{/* <!-- Notification Widget --> */}
+            {/* <div className="col-xl-5 col-lg-12">
+               <div className="notification-widget ls-widget">
                 <div className="widget-title">
                   <h4>Notifications</h4>
                 </div>
@@ -62,7 +63,7 @@ const Index = () => {
                   <Notification />
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* End .col */}
 
             <div className="col-lg-12">

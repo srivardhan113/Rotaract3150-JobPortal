@@ -2,7 +2,7 @@ import About9 from "/components/about/About9";
 // import AppSection3 from "../app-section/AppSection3";
 import Block8 from "/components/block/Block8";
 import RegBanner from "/components/block/RegBanner";
-import LoginPopup from "/components/common/form/login/LoginPopup";
+// import LoginPopup from "/components/common/form/login/LoginPopup";
 import CallToAction6 from "/components/call-to-action/CallToAction6";
 import Partner2 from "/components/common/partner/Partner2";
 import MobileMenu from "/components/header/MobileMenu";
@@ -17,7 +17,7 @@ import Footer from "./Footer";
 const index = () => {
   return (
     <>
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <Header />

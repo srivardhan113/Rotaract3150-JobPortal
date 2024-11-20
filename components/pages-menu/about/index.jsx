@@ -11,6 +11,9 @@ import Testimonial2 from "../../testimonial/Testimonial2";
 import Block8 from "../../block/Block8";
 import Breadcrumb from "../../common/Breadcrumb";
 import Image from "next/image";
+import Address from "./Address";
+// import ContactForm from "./ContactForm";
+import MapBox from "./MapBox";
 
 const index = () => {
   return (
@@ -90,7 +93,32 @@ const index = () => {
       </section>
       {/* <!-- End Testimonial Section --> */}
 
+      <section className="map-section">
+        <div className="map-outer">
+          <MapBox />
+        </div>
+      </section>
+      {/* <!-- End Map Section --> */}
 
+      <section className="contact-section">
+        <div className="auto-container">
+          <div className="upper-box">
+            <div className="row">
+              <Address />
+            </div>
+            {/* End .row */}
+          </div>
+          {/* End upperbox */}
+
+        </div>
+      </section>
+
+        {/* <!-- Contact Form --> */}
+          {/* <div className="contact-form default-form">
+            <h3>Leave A Message</h3>
+            <ContactForm />
+          </div> */}
+          {/* <!--End Contact Form --> */}
 
 
       <FooterDefault />

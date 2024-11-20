@@ -42,7 +42,7 @@ const DashboardCandidatesHeader = () => {
                                 <Link href="/">
                                     <Image
                                         alt="brand"
-                                        src="/images/logo.svg"
+                                        src="/images-rotaract/ri3150-logo.png"
                                         width={154}
                                         height={50}
                                         priority

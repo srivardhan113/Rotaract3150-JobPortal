@@ -4,7 +4,7 @@ import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSideb
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import Resume from "./components";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
+import DashboardCandidatesHeader from "/app/home/header";
 import MenuToggler from "../../MenuToggler";
 
 const index = () => {

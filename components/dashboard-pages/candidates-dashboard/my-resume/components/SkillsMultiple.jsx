@@ -1,30 +1,47 @@
-
 'use client'
 
-import Select from "react-select";
+import { useState } from 'react';
 
 const SkillsMultiple = () => {
-  const catOptions = [
-    { value: "Banking", label: "Banking" },
-    { value: "Digital & Creative", label: "Digital & Creative" },
-    { value: "Retail", label: "Retail" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Managemnet", label: "Managemnet" },
-    { value: "Accounting & Finance", label: "Accounting & Finance" },
-    { value: "Digital", label: "Digital" },
-    { value: "Creative Art", label: "Creative Art" },
-  ];
+  const [skills, setSkills] = useState([]);
+  const [input, setInput] = useState('');
+
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && input.trim()) {
+      setSkills([...skills, input.trim()]);
+      setInput('');
+    }
+  };
+
+  const handleRemoveSkill = (skill) => {
+    setSkills(skills.filter(s => s !== skill));
+  };
 
   return (
-    <Select
-      defaultValue={[catOptions[1]]}
-      isMulti
-      name="colors"
-      options={catOptions}
-      className="basic-multi-select"
-      classNamePrefix="select"
-      required
-    />
+    <div className="form-group col-lg-6 col-md-12">
+      <label>Skills</label>
+      <div className="skills-input">
+        <input
+          type="text"
+          value={input}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          className="form-control"
+          placeholder="Add skills (Press Enter to add)"
+        />
+        <div className="skills-list">
+          {skills.map((skill, index) => (
+            <span key={index} className="skill-badge">
+              {skill} <button type="button" onClick={() => handleRemoveSkill(skill)} className="remove-btn">x</button>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

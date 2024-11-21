@@ -1,4 +1,4 @@
-import Categories from "../components/Categories";
+// import Categories from "../components/Categories";
 import LocationBox from "../components/LocationBox";
 import SearchBox from "../components/SearchBox";
 
@@ -16,8 +16,8 @@ const JobSearchForm = () => {
         </div>
         {/* <!-- Form Group --> */}
 
-        <div className="form-group col-lg-3 col-md-12 col-sm-12 location">
-          <Categories />
+        <div className="form-group col-lg-2 col-md-12 col-sm-12 location">
+          {/* <Categories /> */}
         </div>
         {/* <!-- Form Group --> */}
 

@@ -14,13 +14,13 @@ const TopCardBlock = () => {
       metaName: "Application",
       uiClass: "ui-red",
     },
-    {
-      id: 3,
-      icon: "la-comment-o",
-      countNumber: "74",
-      metaName: "Messages",
-      uiClass: "ui-yellow",
-    },
+    // {
+    //   id: 3,
+    //   icon: "la-comment-o",
+    //   countNumber: "74",
+    //   metaName: "Messages",
+    //   uiClass: "ui-yellow",
+    // },
     {
       id: 4,
       icon: "la-bookmark-o",

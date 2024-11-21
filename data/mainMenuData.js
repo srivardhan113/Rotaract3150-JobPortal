@@ -326,10 +326,10 @@ export const pageItems = [
   //   name: "Contact",
   //   routePath: "/contact",
   // },
-  {
-    name: "404",
-    routePath: "/404",
-  },
+  // {
+  //   name: "404",
+  //   routePath: "/404",
+  // },
 ];
 
 export const shopItems = [

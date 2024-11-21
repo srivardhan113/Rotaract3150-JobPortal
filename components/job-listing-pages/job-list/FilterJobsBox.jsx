@@ -3,7 +3,6 @@
 'use client'
 
 import Link from "next/link";
-import Pagination from "../components/Pagination";
 import jobs from "../../../data/job-featured";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -108,7 +107,6 @@ const FilterJobsBox = () => {
     sort === "des" ? a.id > b.id && -1 : a.id < b.id && -1;
 
   let content = jobs
-    ?.slice(perPage.start === 0 ? 20 : 0, perPage.end !== 0 ? perPage.end : 28)
     ?.filter(keywordFilter)
     ?.filter(locationFilter)
     ?.filter(destinationFilter)
@@ -119,35 +117,49 @@ const FilterJobsBox = () => {
     ?.filter(salaryFilter)
     ?.filter(tagFilter)
     ?.sort(sortFilter)
+    .slice(perPage.start, perPage.end !== 0 ? perPage.end : 11)
     ?.map((item) => (
-      <div className="job-block-four col-lg-6 col-md-6 col-sm-12" key={item.id}>
+      <div className="job-block" key={item.id}>
         <div className="inner-box">
-          <ul className="job-other-info">
-            {item?.jobType?.map((val, i) => (
-              <li key={i} className={`${val.styleClass}`}>
-                {val.type}
+          <div className="content">
+            <span className="company-logo">
+              <Image width={50} height={49} src={item.logo} alt="item brand" />
+            </span>
+            <h4>
+              <Link href={`/job-single-v1/${item.id}`}>{item.jobTitle}</Link>
+            </h4>
+
+            <ul className="job-info">
+              <li>
+                <span className="icon flaticon-briefcase"></span>
+                {item.company}
               </li>
-            ))}
-          </ul>
-          <span className="company-logo">
-            <Image width={90} height={90} src={item.logo} alt="featured job" />
-          </span>
-          <span className="company-name">{item.company}</span>
-          <h4>
-            <Link href={`/job-single-v3/${item.id}`}>{item.jobTitle}</Link>
-          </h4>
-          <div className="location">
-            <span className="icon flaticon-map-locator"></span>
-            {item.location}
+              {/* compnay info */}
+              <li>
+                <span className="icon flaticon-map-locator"></span>
+                {item.location}
+              </li>
+              {/* location info */}
+              <li>
+                <span className="icon flaticon-clock-3"></span> {item.time}
+              </li>
+              {/* time info */}
+              <li>
+                <span className="icon flaticon-money"></span> {item.salary}
+              </li>
+              {/* salary info */}
+            </ul>
+            {/* End .job-info */}
+
+            <ul className="job-other-info">
+              {item?.jobType?.map((val, i) => (
+                <li key={i} className={`${val.styleClass}`}>
+                  {val.type}
+                </li>
+              ))}
+            </ul>
+            {/* End .job-other-info */}
           </div>
-          <ul className="post-tags">
-            {item?.jobTag?.map((val, i) => (
-              <li key={i}>
-                <a href="#">{val}</a>
-              </li>
-            ))}
-            <li className="colored">+2</li>
-          </ul>
         </div>
       </div>
       // End all jobs
@@ -181,10 +193,11 @@ const FilterJobsBox = () => {
     dispatch(addSort(""));
     dispatch(addPerPage({ start: 0, end: 0 }));
   };
+
   return (
     <>
       <div className="ls-switcher">
-        <div className="showing-result">
+        <div className="show-result">
           <div className="show-1023">
             <button
               type="button"
@@ -201,7 +214,8 @@ const FilterJobsBox = () => {
             Show <strong>{content?.length}</strong> jobs
           </div>
         </div>
-        {/* End showing-result */}
+        {/* End show-result */}
+
         <div className="sort-by">
           {keyword !== "" ||
           location !== "" ||
@@ -252,39 +266,42 @@ const FilterJobsBox = () => {
             </option>
             <option
               value={JSON.stringify({
-                start: 20,
-                end: 26,
+                start: 0,
+                end: 15,
               })}
             >
-              25 per page
+              15 per page
             </option>
             <option
               value={JSON.stringify({
-                start: 25,
-                end: 31,
+                start: 0,
+                end: 20,
+              })}
+            >
+              20 per page
+            </option>
+            <option
+              value={JSON.stringify({
+                start: 0,
+                end: 30,
               })}
             >
               30 per page
-            </option>
-            <option
-              value={JSON.stringify({
-                start: 30,
-                end: 36,
-              })}
-            >
-              35 per page
             </option>
           </select>
           {/* End select */}
         </div>
       </div>
       {/* End top filter bar box */}
-
-      <div className="row">{content}</div>
-      {/* End .row */}
-
-      <Pagination />
-      {/* <!-- End Pagination --> */}
+      {content}
+      {/* <!-- List Show More --> */}
+      <div className="ls-show-more">
+        <p>Show 36 of 497 Jobs</p>
+        <div className="bar">
+          <span className="bar-inner" style={{ width: "40%" }}></span>
+        </div>
+        <button className="show-more">Show More</button>
+      </div>
     </>
   );
 };

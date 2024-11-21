@@ -1,13 +1,18 @@
+
 import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import MyProfile from "./components/my-profile";
-import SocialNetworkBox from "./components/SocialNetworkBox";
-import ContactInfoBox from "./components/ContactInfoBox";
 import CopyrightFooter from "../../CopyrightFooter";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
+import DashboardCandidatesHeader from "/app/home/header";
 import MenuToggler from "../../MenuToggler";
+import Achievements from "./components/career-data/Achievements";
+import Social from "./components/my-profile/SocialNetworkBox";
+import Education from "./components/career-data/Education";
+import Experiences from "./components/career-data/Experiences";
+import Skills from "./components/career-data/SkillsMultiple";
+
+
 
 const index = () => {
   return (
@@ -15,7 +20,7 @@ const index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DashboardCandidatesHeader />
@@ -47,39 +52,46 @@ const index = () => {
                 </div>
               </div>
               {/* <!-- Ls widget --> */}
-
-              <div className="ls-widget">
-                <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Social Network</h4>
-                  </div>
-                  {/* End widget-title */}
-
-                  <div className="widget-content">
-                    <SocialNetworkBox />
-                  </div>
-                </div>
-              </div>
-              {/* <!-- Ls widget --> */}
-
-              <div className="ls-widget">
-                <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Contact Information</h4>
-                  </div>
-                  {/* End widget-title */}
-                  <div className="widget-content">
-                    <ContactInfoBox />
-                  </div>
-                </div>
-              </div>
-              {/* <!-- Ls widget --> */}
             </div>
+          </div>
+
+        <div className=" dashboard-outer row ls-widget tabs-box form-group col-lg-12 col-md-12  ">
+          <Education />
+          {/* <!-- Resume / Education --> */}
+
+          <Experiences />
+          {/* <!-- Resume / Work & Experience --> */}
+          <Achievements />
+
+          <Skills/>
+
+        </div>
+        {/* <!--  education and word-experiences --> */}
+
+        <div className=" dashboard-outer row ls-widget tabs-box form-group col-lg-12 col-md-12  ">
+            <div className="widget-title">
+                <h4>Social Links</h4>
+            </div>
+          <Social />
+
+        </div>
+        {/* <!--  education and word-experiences --> */}
+
+
+
+
+
+          <div className="form-group col-lg-6 col-md-12">
+            <button type="submit" className="theme-btn btn-style-one">
+              Save
+            </button>
           </div>
           {/* End .row */}
         </div>
+        
         {/* End dashboard-outer */}
       </section>
+      
       {/* <!-- End Dashboard --> */}
 
       <CopyrightFooter />

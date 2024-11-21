@@ -1,20 +1,20 @@
-const Awards = () => {
+const Experiences = () => {
   return (
-    <div className="resume-outer theme-yellow">
+    <div className="resume-outer theme-blue">
       <div className="upper-title">
-        <h4>Awards</h4>
+        <h4>Work & Experience</h4>
         <button className="add-info-btn">
-          <span className="icon flaticon-plus"></span> Awards
+          <span className="icon flaticon-plus"></span> Add Work
         </button>
       </div>
       {/* <!-- Resume BLock --> */}
       <div className="resume-block">
         <div className="inner">
-          <span className="name">P</span>
+          <span className="name">S</span>
           <div className="title-box">
             <div className="info-box">
-              <h3>Perfect Attendance Programs</h3>
-              <span></span>
+              <h3>Product Designer</h3>
+              <span>Spotify Inc.</span>
             </div>
             <div className="edit-box">
               <span className="year">2012 - 2014</span>
@@ -39,11 +39,11 @@ const Awards = () => {
       {/* <!-- Resume BLock --> */}
       <div className="resume-block">
         <div className="inner">
-          <span className="name">T</span>
+          <span className="name">D</span>
           <div className="title-box">
             <div className="info-box">
-              <h3>Top Performer Recognition</h3>
-              <span></span>
+              <h3>Sr UX Engineer</h3>
+              <span>Dropbox Inc.</span>
             </div>
             <div className="edit-box">
               <span className="year">2012 - 2014</span>
@@ -68,4 +68,4 @@ const Awards = () => {
   );
 };
 
-export default Awards;
+export default Experiences;

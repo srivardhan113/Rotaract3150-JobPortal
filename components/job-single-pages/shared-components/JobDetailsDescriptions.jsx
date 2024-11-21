@@ -1,6 +1,14 @@
 const JobDetailsDescriptions = () => {
   return (
     <div className="job-detail">
+      <h4>About Company</h4>
+      <p>
+        As a company, you will work within a  engineering, product and data talent. You will help the
+        team design beautiful interfaces that solve business challenges for our
+        clients. We work with a number of Tier 1 banks on building web-based
+        applications  and Sanctions List management workflows. This
+        role is ideal if you are looking to segue your career into the FinTech.
+      </p>
       <h4>Job Description</h4>
       <p>
         As a Product Designer, you will work within a Product Delivery Team

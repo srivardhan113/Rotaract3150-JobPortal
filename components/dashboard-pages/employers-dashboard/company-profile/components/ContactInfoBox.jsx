@@ -1,4 +1,4 @@
-import Map from "../../../Map";
+// import Map from "../../../Map";
 
 const ContactInfoBox = () => {
     return (
@@ -39,8 +39,8 @@ const ContactInfoBox = () => {
                     />
                 </div>
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
+               
+                {/* <div className="form-group col-lg-6 col-md-12">
                     <label>Find On Map</label>
                     <input
                         type="text"
@@ -50,7 +50,7 @@ const ContactInfoBox = () => {
                     />
                 </div>
 
-                {/* <!-- Input --> */}
+              
                 <div className="form-group col-lg-3 col-md-12">
                     <label>Latitude</label>
                     <input
@@ -61,7 +61,7 @@ const ContactInfoBox = () => {
                     />
                 </div>
 
-                {/* <!-- Input --> */}
+                
                 <div className="form-group col-lg-3 col-md-12">
                     <label>Longitude</label>
                     <input
@@ -70,22 +70,22 @@ const ContactInfoBox = () => {
                         placeholder="Melbourne"
                         required
                     />
-                </div>
+                </div> */}
 
                 {/* <!-- Input --> */}
-                <div className="form-group col-lg-12 col-md-12">
+                {/* <div className="form-group col-lg-12 col-md-12">
                     <button className="theme-btn btn-style-three">
                         Search Location
                     </button>
-                </div>
+                </div> */}
 
-                <div className="form-group col-lg-12 col-md-12">
+                {/* <div className="form-group col-lg-12 col-md-12">
                     <div className="map-outer">
                         <div style={{ height: "420px", width: "100%" }}>
                             <Map />
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {/* End MapBox */}
 
                 {/* <!-- Input --> */}

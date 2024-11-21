@@ -1,9 +1,8 @@
 import FooterDefault from "/app/home/footer";
-import LoginPopup from "../../common/form/login/LoginPopup";
-import DefaulHeader from "/app/home/Header";
+import DefaulHeader2 from "/app/home/header";
 import MobileMenu from "../../header/MobileMenu";
 import FilterJobsBox from "./FilterJobsBox";
-import Breadcrumb from "../../common/Breadcrumb";
+import JobSearchForm from "./JobSearchForm";
 import FilterSidebar from "./FilterSidebar";
 
 const index = () => {
@@ -12,17 +11,22 @@ const index = () => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
-      <DefaulHeader />
+      <DefaulHeader2 />
       {/* End Header with upload cv btn */}
 
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <Breadcrumb title="Find Opputunities" meta="Opputunities" />
-      {/* <!--End Breadcrumb Start--> */}
+      <section className="page-title style-two">
+        <div className="auto-container">
+          <JobSearchForm />
+          {/* <!-- Job Search Form --> */}
+        </div>
+      </section>
+      {/* <!--End Page Title--> */}
 
       <section className="ls-section">
         <div className="auto-container">

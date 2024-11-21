@@ -1,7 +1,7 @@
 import MobileMenu from "../../../header/MobileMenu";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+import DashboardCandidatesHeader from "/app/home/header";
+// import LoginPopup from "../../../common/form/login/LoginPopup";
+import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import JobListingsTable from "./components/JobListingsTable";
@@ -13,7 +13,7 @@ const index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DashboardCandidatesHeader />

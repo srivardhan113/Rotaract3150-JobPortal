@@ -14,6 +14,8 @@ const JobFeatured9 = () => {
     { id: 1, name: "Freelancer", value: "freelancer", isChecked: false },
     { id: 2, name: "Full Time", value: "full-time", isChecked: true },
     { id: 3, name: "Internship", value: "internship", isChecked: false },
+    { id: 4, name: "Passion", value: "Passion", isChecked: true },
+    { id: 5, name: "Temporary", value: "Temporary", isChecked: false },
   ]);
 
   const dispatch = useDispatch();
@@ -69,7 +71,7 @@ const JobFeatured9 = () => {
                 />
               </span>
               <h4>
-                <Link href={`/job-single-v4/${item.id}`}>{item.jobTitle}</Link>
+                <Link href={`/job-single/${item.id}`}>{item.jobTitle}</Link>
               </h4>
               <ul className="job-info">
                 <li>

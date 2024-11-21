@@ -20,7 +20,7 @@ const FormInfoBox = () => {
             <div className="row">
                 {/* <!-- Input --> */}
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Company name (optional)</label>
+                    <label>Company Legal Name</label>
                     <input
                         type="text"
                         name="name"
@@ -57,7 +57,7 @@ const FormInfoBox = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="www.invision.com"
+                        placeholder="www.sripto.com"
                         required
                     />
                 </div>
@@ -77,11 +77,12 @@ const FormInfoBox = () => {
                 <div className="form-group col-lg-6 col-md-12">
                     <label>Team Size</label>
                     <select className="chosen-single form-select" required>
-                        <option>50 - 100</option>
-                        <option>100 - 150</option>
-                        <option>200 - 250</option>
-                        <option>300 - 350</option>
+                        <option>0 - 100</option>
+                        <option>100 - 250</option>
+                        <option>250 - 500</option>
                         <option>500 - 1000</option>
+                        <option>1000 - 5000</option>
+                        <option>5000+</option>
                     </select>
                 </div>
 
@@ -99,13 +100,13 @@ const FormInfoBox = () => {
                 </div>
 
                 {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
+                {/* <div className="form-group col-lg-6 col-md-12">
                     <label>Allow In Search & Listing</label>
                     <select className="chosen-single form-select">
                         <option>Yes</option>
                         <option>No</option>
                     </select>
-                </div>
+                </div> */}
 
                 {/* <!-- About Company --> */}
                 <div className="form-group col-lg-12 col-md-12">

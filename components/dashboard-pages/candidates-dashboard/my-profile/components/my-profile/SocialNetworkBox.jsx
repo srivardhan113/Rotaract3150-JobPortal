@@ -4,11 +4,11 @@ const SocialNetworkBox = () => {
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Facebook</label>
+          <label>LinkedIn</label>
           <input
             type="text"
             name="name"
-            placeholder="www.facebook.com/Invision"
+            placeholder="www.LinkedIn.com/Rotaract3150"
             required
           />
         </div>
@@ -21,22 +21,22 @@ const SocialNetworkBox = () => {
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Linkedin</label>
+          <label>Instagram</label>
           <input type="text" name="name" placeholder="" required />
         </div>
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Google Plus</label>
+          <label>facebook</label>
           <input type="text" name="name" placeholder="" required />
         </div>
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <button type="submit" className="theme-btn btn-style-one">
             Save
           </button>
-        </div>
+        </div> */}
       </div>
     </form>
   );

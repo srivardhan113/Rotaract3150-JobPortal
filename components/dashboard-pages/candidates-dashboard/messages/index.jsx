@@ -9,7 +9,7 @@ import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSideb
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import ChatBox from "./components";
-import DashboardCandidatesHeader from "/app/home/header";
+import DashboardCandidatesHeader from "/app/home/Header";
 import MenuToggler from "../../MenuToggler";
 import { useSelector } from "react-redux";
 

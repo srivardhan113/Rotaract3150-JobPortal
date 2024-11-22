@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import candidatesuData from "/App/candidates-dashboard/candidatesMenuData";
+import candidatesuData from "/app/candidates-dashboard/candidatesMenuData";
 import { isActiveLink } from "../../utils/linkActiveChecker";
 
 import { useDispatch, useSelector } from "react-redux";

@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer
       className="main-footer style-three"
-      style={{ backgroundImage: "url(/images/background/3.png)" }}
+      style={{ backgroundImage: "url(/images/background/footerdown.jpg)" }}
     >
       <div className="auto-container">
         {/* <!--Widgets Section--> */}

@@ -6,7 +6,7 @@ import RegBanner from "/components/block/RegBanner";
 import CallToAction6 from "/components/call-to-action/CallToAction6";
 import Partner2 from "/components/common/partner/Partner2";
 import MobileMenu from "/components/header/MobileMenu";
-import Hero13 from "/components/hero/hero-13";
+import Hero from "/components/hero/hero-13";
 import JobCategorie1 from "/components/job-categories/JobCategorie1";
 import JobFeatured9 from "/components/job-featured/JobFeatured9";
 // import Pricing3 from "../pricing/Pricing3";
@@ -26,51 +26,52 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <Hero13 />
+      <Hero />
       {/* End Hero Section */}
 
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 
 
-      <section className="job-categories style-two" style={{ backgroundColor: '#ffffff' }}>
-        <div className="auto-container">
-          <div className="sec-title text-center">
-            <h2>Popular Job Categories - Jobs Live</h2>
-            <div className="text">Rotaract 3150</div>
-          </div>
+<section className="job-categories style-two" style={{ backgroundColor: '#ffffff', paddingBottom: '50px' }}>
+  <div className="auto-container">
+    <div className="sec-title text-center">
+      <h2>Popular Job Categories - Jobs Live</h2>
+      <div className="text">Rotaract 3150</div>
+    </div>
 
-          <div
-            className="row "
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
-          >
-            {/* <!-- Category Block --> */}
-            <JobCategorie1 />
-          </div>
-        </div>
-      </section>
-      {/* End Job Categorie Section */}
+    <div
+      className="row"
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-bottom"
+      style={{ marginBottom: '0px' }} // Reduced margin-bottom on row to avoid thin line
+    >
+      {/* <!-- Category Block --> */}
+      <JobCategorie1 />
+    </div>
+  </div>
+</section>
+{/* End Job Category Section */}
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 
+<section className="layout-pt-60 layout-pb-60" style={{ marginTop: '10px', marginBottom: '-30px' }}>
+  <div className="auto-container">
+    <div className="sec-title text-center">
+      <h2>How It Works</h2>
+      <div className="text">
+        The Rotaract 3150 Job Portal connects members with job opportunities and employers seamlessly.
+      </div>
+    </div>
+    {/* End sec-title */}
 
-      <section className="layout-pt-120 layout-pb-120">
-        <div className="auto-container">
-          <div className="sec-title text-center">
-            <h2>How It Works</h2>
-            <div className="text">
-            The Rotaract 3150 Job Portal connects members with job opportunities and employers seamlessly.
-            </div>
-          </div>
-          {/* End sec-title */}
+    <div className="row grid-base pt-50" data-aos="fade-up" style={{ marginTop: '0px', marginBottom: '0px' }}>
+      <Block8 />
+      {/* <!-- Work Block --> */}
+    </div>
+  </div>
+</section>
 
-          <div className="row grid-base pt-50" data-aos="fade-up">
-            <Block8 />
-            {/* <!-- Work Block --> */}
-          </div>
-        </div>
-      </section>
       {/* <!-- End Work Section --> */}
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
@@ -186,7 +187,7 @@ const index = () => {
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 
 
-      <section className="clients-section-two alternate layout-pt-120 layout-pb-60">
+      <section className="clients-section-two alternate layout-pt-60 layout-pb-60">
         <div className="auto-container">
         <div className="row justify-content-center">
             <div className="col-lg-6">
@@ -214,7 +215,7 @@ const index = () => {
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 
-      <Footer />
+      <Footer/>
       {/* <!-- End Main Footer --> */}
     </>
   );

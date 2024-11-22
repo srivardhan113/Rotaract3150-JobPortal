@@ -6,34 +6,20 @@ import Select from "react-select";
 
 const PostBoxForm = () => {
   const specialisms = [
-    { value: "Software Development", label: "Software Development" },
-    { value: "Data Science & Analytics", label: "Data Science & Analytics" },
-    { value: "UI/UX Design", label: "UI/UX Design" },
-    { value: "Hardware Engineering", label: "Hardware Engineering" },
-    { value: "Film Making & Production", label: "Film Making & Production" },
-    { value: "Graphic Design", label: "Graphic Design" },
-    { value: "Digital Marketing", label: "Digital Marketing" },
-    { value: "Business Development", label: "Business Development" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Finance & Accounting", label: "Finance & Accounting" },
-    { value: "Project Management", label: "Project Management" },
-    { value: "Sales & Marketing", label: "Sales & Marketing" },
-    { value: "Content Writing", label: "Content Writing" },
-    { value: "Game Development", label: "Game Development" },
-    { value: "IT Support & Networking", label: "IT Support & Networking" },
-    { value: "Civil Engineering", label: "Civil Engineering" },
-    { value: "Electrical Engineering", label: "Electrical Engineering" },
-    { value: "Mechanical Engineering", label: "Mechanical Engineering" },
-    { value: "Customer Service", label: "Customer Service" },
-    { value: "Education & Training", label: "Education & Training" },
-    { value: "Healthcare", label: "Healthcare" },
-    { value: "Legal", label: "Legal" },
-    { value: "Logistics & Supply Chain", label: "Logistics & Supply Chain" },
-    { value: "Architecture", label: "Architecture" },
-    { value: "Environmental Science", label: "Environmental Science" },
-    { value: "Journalism & Media", label: "Journalism & Media" },
-    { value: "Hospitality & Tourism", label: "Hospitality & Tourism" }
-  ];
+    { value: "Arts, Media, and Entertainment", label: "Arts, Media, and Entertainment" },
+    { value: "Business, Management, and Finance", label: "Business, Management, and Finance" },
+    { value: "Science, Technology, and Engineering", label: "Science, Technology, and Engineering" },
+    { value: "Healthcare, Life Sciences, and Social Work", label: "Healthcare, Life Sciences, and Social Work" },
+    { value: "Education, Research, and Academia", label: "Education, Research, and Academia" },
+    { value: "Law, Governance, and Policy", label: "Law, Governance, and Policy" },
+    { value: "Trades, Skilled Labor, and Logistics", label: "Trades, Skilled Labor, and Logistics" },
+    { value: "Environment, Agriculture, and Natural Sciences", label: "Environment, Agriculture, and Natural Sciences" },
+    { value: "Sports, Fitness, and Recreation", label: "Sports, Fitness, and Recreation" },
+    { value: "Hospitality, Tourism, and Customer Service", label: "Hospitality, Tourism, and Customer Service" },
+    { value: "Gaming, Esports, and Digital Entertainment", label: "Gaming, Esports, and Digital Entertainment" },
+    { value: "Entrepreneurship and Startups", label: "Entrepreneurship and Startups" }
+];
+
 
   return (
     <form className="default-form">

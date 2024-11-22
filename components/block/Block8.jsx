@@ -4,7 +4,7 @@ const Block8 = () => {
           id: 1,
           icon: "icon-drawing",
           title: "Register With Us",
-          text: `Join Rotaract to unlock career opportunities, expand your network, and contribute to meaningful community service.`,
+          text: `Join Rotaract to unlock career opportunities, expand your network, get perfect team and contribute to meaningful community service.`,
         },
         {
           id: 2,
@@ -15,14 +15,14 @@ const Block8 = () => {
         {
           id: 3,
           icon: "icon-task",
-          title: "Upload Your Resume",
-          text: `Share your resume to highlight your professional expertise and Experiences.`,
+          title: "Upload Your Resume (or) Requirements",
+          text: `Share your resume (or) requirements to highlight your professional Expertise, Experiences & Vacancies.`,
         },
         {
           id: 4,
           icon: "icon-one-finger-click",
           title: "Now Take a Rest",
-          text: `Relax while Rotaract connects you with opportunities that match your passion and potential.`,
+          text: `Relax while Rotaract connects you with opportunities that match your passion, potential and requirements.`,
         },
       ];
       

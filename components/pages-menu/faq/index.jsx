@@ -1,9 +1,10 @@
 import Breadcrumb from "../../common/Breadcrumb";
-import LoginPopup from "../../common/form/login/LoginPopup";
-import FooterDefault from "../../footer/common-footer";
-import DefaulHeader from "../../header/DefaulHeader";
+// import LoginPopup from "../../common/form/login/LoginPopup";
+import FooterDefault from "/app/home/Footer";
+import DefaulHeader from "/app/home/Header";
 import MobileMenu from "../../header/MobileMenu";
-import FaqChild from "./FaqChild";
+import Faqrotaract from "./Faq-rotaract";
+import Faqjob from "./Faq-jobportal";
 
 const index = () => {
   return (
@@ -11,7 +12,7 @@ const index = () => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DefaulHeader />
@@ -20,26 +21,26 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <Breadcrumb title="Faq's" meta="Faq's" />
+      <Breadcrumb title="Frequently Asked Questions" meta="Faq's" />
       {/* <!--End Page Title--> */}
 
       <section className="faqs-section">
         <div className="auto-container">
-          <div className="sec-title text-center">
+          {/* <div className="sec-title text-center">
             <h2>Frequently Asked Questions</h2>
             <div className="text">Home / Faq</div>
-          </div>
+          </div> */}
 
-          <h3>Payments</h3>
+          <h3>About Rotaract 3150</h3>
           {/* <!--Accordian Box--> */}
           <ul className="accordion-box">
-            <FaqChild />
+            <Faqrotaract />
           </ul>
 
-          <h3>Suggestions</h3>
+          <h3>About Job Portal</h3>
           {/* <!--Accordian Box--> */}
           <ul className="accordion-box mb-0">
-            <FaqChild />
+            <Faqjob />
           </ul>
         </div>
       </section>

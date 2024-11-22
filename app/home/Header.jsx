@@ -9,13 +9,19 @@ import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
+  const [bgColor, setBgColor] = useState("transparent"); // Initial background color is transparent
+  const [boxShadow, setBoxShadow] = useState("none"); // No box shadow initially
   const pathname = usePathname(); // Used to determine the active route
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);
+      setBgColor("rgba(0, 0, 0, 0.3)"); // Transparent black background on scroll
+      setBoxShadow("0px 4px 6px rgba(0, 0, 0, 0.1)"); // Box shadow on scroll
     } else {
       setNavbar(false);
+      setBgColor("transparent"); // Transparent background when at the top
+      setBoxShadow("none"); // Remove box shadow
     }
   };
 
@@ -24,12 +30,36 @@ const Header = () => {
     return () => window.removeEventListener("scroll", changeBackground); // Cleanup listener
   }, []);
 
+  const shiningPinkStyle = {
+    background: "linear-gradient(90deg, pink, white, silver)", // Gradient colors
+    WebkitBackgroundClip: "text", // Clip gradient to text
+    WebkitTextFillColor: "transparent", // Makes text fill transparent to show the gradient
+    fontWeight: "bold", // Make text bold
+    transition: "0.3s ease", // Smooth transition for hover effects
+  };
+
   return (
-    <header
-      className={`main-header -type-11 ${
-        navbar ? "fixed-header animated slideInDown" : ""
-      }`}
-    >
+<header
+  className={`main-header -type-11 ${navbar ? "fixed-header animated slideInDown" : ""}`}
+  style={{
+    backgroundColor: bgColor, // Dynamic background color
+    backdropFilter: navbar ? "blur(20px)" : "none", // Apply blur on scroll
+    borderRadius: "15px", // Set border radius to 15px
+    paddingTop: "-40px",
+    paddingButton: "-40px", // 20px top padding to float the navbar
+    paddingLeft: "0px", // 30px left padding
+    paddingRight: "0px", // 30px right padding
+    position: "fixed", // Fixed position for floating effect
+    left: "20px", // Ensure it stays aligned to the left
+    right: "20px", // Ensure it stays aligned to the right
+    top: "20px",
+    width: "auto",
+    transition: "background-color 0.3s ease, backdrop-filter 0.3s ease", // Smooth transition
+    zIndex: 1000, // Ensure it stays on top of other content
+  }}
+>
+
+
       <div className="main-box">
         {/* Logo Section */}
         <div className="nav-outer">
@@ -51,28 +81,31 @@ const Header = () => {
             <ul className="navigation" id="navbar">
               {/* Home */}
               <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
-                <Link href="/">Home</Link>
+                <Link href="/" className="underline-animation">
+                  Home
+                </Link>
               </li>
 
               {/* Find Jobs */}
               <li className={`${isActiveLink("/find-jobs", pathname) ? "current" : ""}`}>
-                <Link href="/job-list">Find Jobs</Link>
+                <Link href="/job-list" className="underline-animation">
+                  Find Jobs
+                </Link>
               </li>
 
               {/* Employers */}
               <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
-                <Link href="/employers-dashboard">Job Provider Dashboard</Link>
+                <Link href="/employers-dashboard" className="underline-animation">
+                  Job Provider Dashboard
+                </Link>
               </li>
 
               {/* Candidates */}
               <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
-                <Link href="/candidates-dashboard">Job Seeker Dashboard</Link>
+                <Link href="/candidates-dashboard" className="underline-animation">
+                  Job Seeker Dashboard
+                </Link>
               </li>
-
-              {/* Blog */}
-              {/* <li className={`${isActiveLink("/blog", pathname) ? "current" : ""}`}>
-                <Link href="/blog">Blog</Link>
-              </li> */}
 
               {/* Pages Dropdown */}
               <li
@@ -80,14 +113,16 @@ const Header = () => {
                   isActiveParentChaild(pageItems, pathname) ? "current" : ""
                 } dropdown`}
               >
-                <span>More</span>
+                <span className="">More</span>
                 <ul>
                   {pageItems.map((item, i) => (
                     <li
                       className={isActiveLink(item.routePath, pathname) ? "current" : ""}
                       key={i}
                     >
-                      <Link href={item.routePath}>{item.name}</Link>
+                      <Link href={item.routePath} className="underline-animation">
+                        {item.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -102,8 +137,6 @@ const Header = () => {
             <a
               href="/register"
               className="theme-btn btn-style-three btn-white-10 call-modal"
-              // data-bs-toggle="modal"
-              // data-bs-target="#loginPopupModal"
             >
               Login / Register
             </a>

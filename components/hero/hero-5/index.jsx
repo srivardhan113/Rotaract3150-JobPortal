@@ -15,12 +15,11 @@ const index = () => {
             >
               <div className="title-box">
                 <h3>
-                  There Are <span className="colored">93,178</span> Postings
-                  Here
-                  <br /> For you!
+                ROTARACT 3150 - Careers Portal
+                  <br />  For You !!
                 </h3>
                 <div className="text">
-                  Find Jobs, Employment & Career Opportunities
+                   Find Jobs, Internships, Employment & Career Opportunities
                 </div>
               </div>
 

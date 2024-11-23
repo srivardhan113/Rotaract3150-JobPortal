@@ -13,7 +13,7 @@ const ImageBox = () => {
             <Image
               width={317}
               height={449}
-              src="/images/resource/banner-img-4.png"
+              src="/images/hero/1-hero.jpg"
               alt="resource"
             />
           </figure>
@@ -27,7 +27,7 @@ const ImageBox = () => {
             <Image
               width={317}
               height={302}
-              src="/images/resource/banner-img-5.png"
+              src="/images/hero/2-hero.jpg"
               alt="resource"
             />
           </figure>
@@ -35,7 +35,7 @@ const ImageBox = () => {
             <Image
               width={317}
               height={302}
-              src="/images/resource/banner-img-6.png"
+              src="/images/hero/3-hero.jpg"
               alt="resource"
             />
           </figure>
@@ -46,23 +46,25 @@ const ImageBox = () => {
       <div className="info_block" data-aos-delay="2500" data-aos="fade-in">
         <span className="icon flaticon-email-3"></span>
         <p>
-          Work Inquiry From <br />
-          Ali Tufan
+          Send your Resume!! <br />
+          Get the Chance!!
+          
         </p>
       </div>
 
       {/* <!-- Info BLock Two --> */}
-      <div className="info_block_two" data-aos-delay="3000" data-aos="fade-in">
-        <p>10k+ Candidates</p>
-        <div className="image">
-          <Image
+      {/* <div className="info_block_two" data-aos-delay="3000" data-aos="fade-in">
+      {/* <span className="icon flaticon-email-3"></span> */}
+        {/* <p>A Place for Future and Passion <br /> For you from Rotaract  </p> */}
+        {/* <div className="image"> */}
+          {/* <Image
             width={206}
             height={53}
-            src="/images/resource/multi-peoples.png"
+            // src="/images/resource/multi-peoples.png"
             alt="resource"
-          />
-        </div>
-      </div>
+          /> */}
+        {/* </div> */}
+      {/* </div> */}
     </div>
   );
 };

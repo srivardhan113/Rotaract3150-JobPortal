@@ -5,11 +5,9 @@ import LoginPopup from "@/components/common/form/login/Loginpage";
 import FooterDefault from "/app/home/Footer";
 import DefaulHeader from "/app/home/Header";
 import MobileMenu from "@/components/header/MobileMenu";
-import Contact from "./shared-components/Contact";
 import GalleryBox from "./shared-components/GalleryBox";
 import Social from "./social/Social";
 import JobSkills from "./shared-components/JobSkills";
-import AboutVideo from "./shared-components/AboutVideo";
 import Image from "next/image";
 
 export const metadata = {

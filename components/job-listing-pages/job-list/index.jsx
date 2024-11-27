@@ -1,5 +1,5 @@
-import FooterDefault from "/app/home/footer";
-import DefaulHeader2 from "/app/home/header";
+import FooterDefault from "/app/home/Footer";
+import DefaulHeader2 from "/app/home/Header";
 import MobileMenu from "../../header/MobileMenu";
 import FilterJobsBox from "./FilterJobsBox";
 import JobSearchForm from "./JobSearchForm";

@@ -2,8 +2,8 @@ import dynamic from "next/dynamic";
 import ManageJobs from "@/components/dashboard-pages/employers-dashboard/manage-jobs";
 
 export const metadata = {
-  title: "Manage Jobs || Superio - Job Borad React NextJS Template",
-  description: "Superio - Job Borad React NextJS Template",
+  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
 };
 
 const index = () => {

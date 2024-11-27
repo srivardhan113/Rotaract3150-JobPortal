@@ -2,8 +2,8 @@ import dynamic from "next/dynamic";
 import ResumeAlerts from "@/components/dashboard-pages/employers-dashboard/resume-alerts";
 
 export const metadata = {
-  title: "Resume Alerts || Superio - Job Borad React NextJS Template",
-  description: "Superio - Job Borad React NextJS Template",
+  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
 };
 
 const index = () => {

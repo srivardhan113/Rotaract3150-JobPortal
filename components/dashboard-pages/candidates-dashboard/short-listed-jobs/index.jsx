@@ -4,7 +4,7 @@ import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandi
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import JobFavouriteTable from "./components/JobFavouriteTable";
-import DashboardCandidatesHeader from "/app/home/header";
+import DashboardCandidatesHeader from "/app/home/Header";
 import MenuToggler from "../../MenuToggler";
 
 const index = () => {

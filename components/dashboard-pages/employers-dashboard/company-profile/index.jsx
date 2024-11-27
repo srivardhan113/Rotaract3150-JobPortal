@@ -1,6 +1,6 @@
 import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "/app/home/header";
-import LoginPopup from "../../../common/form/login/LoginPopup";
+import DashboardHeader from "/components/dashboard-pages/dashboardheader";
+import LoginPopup from "../../../common/form/login/Loginpage";
 import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import MyProfile from "./components/my-profile";
@@ -15,7 +15,7 @@ const index = () => {
             <span className="header-span"></span>
             {/* <!-- Header Span for hight --> */}
 
-            <LoginPopup />
+            {/* <LoginPopup /> */}
             {/* End Login Popup Modal */}
 
             <DashboardHeader />

@@ -4,12 +4,12 @@
 
 
 import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
+import LoginPopup from "../../../common/form/login/Loginpage";
 import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import ChatBox from "./components";
-import DashboardCandidatesHeader from "/app/home/Header";
+import DashboardCandidatesHeader from "/components/dashboard-pages/dashboardheader";
 import MenuToggler from "../../MenuToggler";
 import { useSelector } from "react-redux";
 
@@ -21,7 +21,7 @@ const Index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DashboardCandidatesHeader />

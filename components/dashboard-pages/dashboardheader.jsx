@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
+
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);
@@ -54,13 +55,15 @@ const Header = () => {
           </div>
           {/* End nav-outer */}
 
-          <div className="outer-box">
-            {/* <!-- Login/Register --> */}
+          <div className="outer-box flex justify-between items-center">
+            {/* <!-- Left Side (Hi, Sri Vardhan Yeluri) --> */}
+            <div className="welcome-message text-4xl text-gray-800">
+              Hi, Sri Vardhan Yeluri
+            </div>
+
+            {/* <!-- Login/Register Button --> */}
             <div className="btn-box">
-              <Link
-                href="/contact"
-                className="theme-btn btn-style-one"
-              >
+              <Link href="/contact" className="theme-btn btn-style-one">
                 <span className="btn-title">Contact Us!!</span>
               </Link>
             </div>

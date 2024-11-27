@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import shopItems from "@/data/shopItems";
 import Breadcrumb from "@/components/shop/Breadcrumb";
-import LoginPopup from "@/components/common/form/login/LoginPopup";
+import LoginPopup from "@/components/common/form/login/Loginpage";
 
 import MobileMenu from "@/components/header/MobileMenu";
 import FooterDefault from "@/components/footer/common-footer";

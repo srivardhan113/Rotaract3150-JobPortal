@@ -17,14 +17,15 @@ const SidebarFooter = () => {
         <div className="contact-info">
           <span className="phone-num">
             <span>Call us</span>
-            <a href="tel:1234567890">123 456 7890</a>
+            <a href="tel:9347705113">+91 93477 05113</a>
           </span>
           <span className="address">
-            329 Queensberry Street, North Melbourne VIC <br />
-            3051, Australia.
+          Rotaract 3150 - Job Portal <br/>
+          Telangana, Andhra Pradesh <br/>
+          India
           </span>
-          <a href="mailto:support@superio.com" className="email">
-            support@superio.com
+          <a href="mailto:srivardhan.yeluri@gmail.com" className="email">
+            srivardhan.yeluri@gmail.com
           </a>
         </div>
         {/* End .contact-info */}

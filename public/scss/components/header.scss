@@ -22,8 +22,9 @@ Main Header
   position: relative;
   display: block;
   width: 100%;
-  height: 100px;
+  height: 130px;
   z-index: 1;
+  background: #F5F7FC;
 }
 
 .main-header.fixed-header {
@@ -34,7 +35,7 @@ Main Header
 }
 
 .main-header.fixed-header .logo {
-  padding: 15px 0;
+  padding: 5px 0;
 }
 
 .main-header .main-box {

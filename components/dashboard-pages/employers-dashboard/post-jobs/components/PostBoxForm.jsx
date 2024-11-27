@@ -1,7 +1,7 @@
 
 'use client'
 
-import Map from "../../../Map";
+// import Map from "../../../Map";
 import Select from "react-select";
 
 const PostBoxForm = () => {

@@ -1,10 +1,10 @@
 import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
+import LoginPopup from "../../../common/form/login/Loginpage";
 import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import CvUploader from "./components/CvUploader";
-import DashboardCandidatesHeader from "/app/home/header";
+import DashboardCandidatesHeader from "/components/dashboard-pages/dashboardheader";
 import MenuToggler from "../../MenuToggler";
 
 const index = () => {
@@ -13,7 +13,7 @@ const index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DashboardCandidatesHeader />

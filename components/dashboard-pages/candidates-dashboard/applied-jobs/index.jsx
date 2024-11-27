@@ -1,5 +1,5 @@
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardCandidatesHeader from "/app/home/header";
+import MobileMenu from "/components/dashboard-pages/mobileheader";
+import DashboardCandidatesHeader from "/components/dashboard-pages/dashboardheader";
 // import LoginPopup from "../../../common/form/login/LoginPopup";
 import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";

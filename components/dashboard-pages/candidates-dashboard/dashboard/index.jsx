@@ -1,5 +1,5 @@
 import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
+import LoginPopup from "../../../common/form/login/Loginpage";
 import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import TopCardBlock from "./components/TopCardBlock";
@@ -7,7 +7,7 @@ import ProfileChart from "./components/ProfileChart";
 // import Notification from "./components/Notification";
 import CopyrightFooter from "../../CopyrightFooter";
 import JobApplied from "./components/JobApplied";
-import DashboardCandidatesHeader from "/app/home/header";
+import DashboardCandidatesHeader from "/components/dashboard-pages/dashboardheader";
 import MenuToggler from "../../MenuToggler";
 
 const Index = () => {

@@ -3,13 +3,13 @@
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import LoginWithSocial from "./LoginWithSocial";
-import FormContent2 from "./FormContent2";
+import Loginform from "./loginform";
 import Link from "next/link";
 
-const Register2 = () => {
+const Loginpage = () => {
   return (
     <div className="form-inner">
-      <h3>Create a Free Account for Rotaract3150 - Job Portal</h3>
+      <h3>Login to Rotaract3150 - Job Portal</h3>
 
       <Tabs>
         <div className="form-group register-dual">
@@ -30,12 +30,12 @@ const Register2 = () => {
         {/* End .form-group */}
 
         <TabPanel>
-          <FormContent2 />
+          <Loginform />
         </TabPanel>
         {/* End cadidates Form */}
 
         <TabPanel>
-          <FormContent2 />
+          <Loginform />
         </TabPanel>
         {/* End Employer Form */}
       </Tabs>
@@ -43,9 +43,9 @@ const Register2 = () => {
 
       <div className="bottom-box">
         <div className="text">
-          Already have an account?{" "}
-          <Link href="/login" className="call-modal login">
-            LogIn
+          Don't have an account?{" "}
+          <Link href="/register" className="call-modal login">
+            Register
           </Link>
         </div>
         <div className="divider">
@@ -58,4 +58,4 @@ const Register2 = () => {
   );
 };
 
-export default Register2;
+export default Loginpage;

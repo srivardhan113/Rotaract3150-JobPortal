@@ -1,4 +1,4 @@
-import LoginPopup from "../../common/form/login/LoginPopup";
+import LoginPopup from "../../common/form/login/Loginpage";
 import Partner2 from "../../common/partner/Partner2";
 import FooterDefault from "/app/home/Footer";
 import DefaulHeader from "/app/home/Header";
@@ -20,8 +20,9 @@ const index = () => {
     <>
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
+      <span className="header-span"></span>
+      
 
-      <LoginPopup />
       {/* End Login Popup Modal */}
 
       <DefaulHeader />
@@ -49,7 +50,24 @@ const index = () => {
         </div>
       </section>
       {/* <!-- End About Section Three --> */}
+{/* ------------------------------------------------------------------------------------------------ */}
 
+      <section className="contact-section bg-gray-100">
+        <div className="auto-container">
+          <h2 className="text-center text-4xl font-extrabold mb-8 text-gray-800">
+            Contact Details
+          </h2>
+          <div className="upper-box mt-1">
+            <div className="row">
+              <Address />
+            </div>
+            {/* End .row */}
+          </div>
+          {/* End upperbox */}
+        </div>
+      </section>
+
+{/* ------------------------------------------------------------------------------------------------ */}
       <CallToAction2 />
       {/* <!-- End CallToAction2 --> */}
 
@@ -93,25 +111,17 @@ const index = () => {
       </section>
       {/* <!-- End Testimonial Section --> */}
 
-      <section className="map-section">
+      {/* <section className="map-section">
         <div className="map-outer">
           <MapBox />
         </div>
-      </section>
+      </section> */}
       {/* <!-- End Map Section --> */}
 
-      <section className="contact-section">
-        <div className="auto-container">
-          <div className="upper-box">
-            <div className="row">
-              <Address />
-            </div>
-            {/* End .row */}
-          </div>
-          {/* End upperbox */}
+     
 
-        </div>
-      </section>
+
+      
 
         {/* <!-- Contact Form --> */}
           {/* <div className="contact-form default-form">

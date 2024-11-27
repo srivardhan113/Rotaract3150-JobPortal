@@ -1,27 +1,25 @@
 "use client";
 
-import {
-
-  Sidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-} from "react-pro-sidebar";
-
-import mobileMenuData from "../../../data/mobileMenuData";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
-import {
-  isActiveLink,
-  isActiveParentChaild,
-} from "../../../utils/linkActiveChecker";
+import { isActiveLink } from "../../../utils/linkActiveChecker";
 import { usePathname, useRouter } from "next/navigation";
 
+const MobileSidebar = () => {
+  const router = useRouter();
+  const pathname = usePathname(); // Save pathname to avoid multiple calls
 
-const Index = () => {
-
-  const router = useRouter()
-
+  // Define menu data directly within the component
+  const menuData = [
+    { id: 1, label: "Home", routePath: "/" },
+    { id: 2, label: "Jobs List", routePath: "/job-list" },
+    { id: 3, label: "Job Provider Dashboard", routePath: "/employers-dashboard" },
+    { id: 4, label: "Job Seeker Dashboard", routePath: "/candidates-dashboard" },
+    { id: 5, label: "Who are we?", routePath: "/about" },
+    { id: 6, label: "FAQ's", routePath: "/faqs" },
+    { id: 7, label: "Terms", routePath: "/terms" },
+  ];
 
   return (
     <div
@@ -33,43 +31,29 @@ const Index = () => {
       <SidebarHeader />
       {/* End pro-header */}
 
-      
-        <Sidebar>
-          <Menu>
-            {mobileMenuData.map((item) => (
-              <SubMenu
-                className={
-                  isActiveParentChaild(item.items, usePathname())
-                    ? "menu-active"
-                    : ""
-                }
-                label={item.label}
-                key={item.id}
-              >
-                {item.items.map((menuItem, i) => (
-                  <MenuItem
+      <Sidebar className="bg-white flex flex-col justify-between h-full">
+        <Menu>
+          {menuData.map((item) => (
+            <MenuItem
+              key={item.id}
+              onClick={() => router.push(item.routePath)} // Navigate on click
+              className={`rounded-md cursor-pointer  px-3 ${
+                isActiveLink(item.routePath, pathname)
+                  ? "text-pink-600 font-bold" // Active state styling
+                  : "text-gray-700 hover:bg-pink-100 hover:text-pink-600" // Default and hover styling
+              }`}
+              aria-label={item.label} // Accessibility
+            >
+              {item.label}
+            </MenuItem>
+          ))}
+        </Menu>
 
-                  onClick={()=>router.push(menuItem.routePath)}
-                    className={
-                      isActiveLink(menuItem.routePath, usePathname())
-                        ? "menu-active-link"
-                        : ""
-                    }
-                    key={i}
-                    // routerLink={<Link href={menuItem.routePath} />}
-                  >
-                    {menuItem.name}
-                  </MenuItem>
-                ))}
-              </SubMenu>
-            ))}
-          </Menu>
-        </Sidebar>
-
+      </Sidebar>
 
       <SidebarFooter />
     </div>
   );
 };
 
-export default Index;
+export default MobileSidebar;

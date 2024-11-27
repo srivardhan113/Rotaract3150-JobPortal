@@ -3,26 +3,27 @@
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import LoginWithSocial from "./LoginWithSocial";
-import Form from "./FormContent";
+import FormContent1 from "./candiateform";
+import FormContent2 from "./employerform";
 import Link from "next/link";
 
-const Register = () => {
+const Register2 = () => {
   return (
     <div className="form-inner">
-      <h3>Create a Free Superio Account</h3>
+      <h3>Create a Free Account for Rotaract3150 - Job Portal</h3>
 
       <Tabs>
         <div className="form-group register-dual">
           <TabList className="btn-box row">
             <Tab className="col-lg-6 col-md-12">
               <button className="theme-btn btn-style-four">
-                <i className="la la-user"></i> Candidate
+                <i className="la la-user"></i> Candidate (Job Seeker)
               </button>
             </Tab>
 
             <Tab className="col-lg-6 col-md-12">
               <button className="theme-btn btn-style-four">
-                <i className="la la-briefcase"></i> Employer
+                <i className="la la-briefcase"></i> Employer (Job Provider)
               </button>
             </Tab>
           </TabList>
@@ -30,12 +31,12 @@ const Register = () => {
         {/* End .form-group */}
 
         <TabPanel>
-          <Form />
+          <FormContent1 />
         </TabPanel>
         {/* End cadidates Form */}
 
         <TabPanel>
-          <Form />
+          <FormContent2 />
         </TabPanel>
         {/* End Employer Form */}
       </Tabs>
@@ -44,13 +45,7 @@ const Register = () => {
       <div className="bottom-box">
         <div className="text">
           Already have an account?{" "}
-          <Link
-            href="#"
-            className="call-modal login"
-            data-bs-toggle="modal"
-            data-bs-dismiss="modal"
-            data-bs-target="#loginPopupModal"
-          >
+          <Link href="/login" className="call-modal login">
             LogIn
           </Link>
         </div>
@@ -64,4 +59,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Register2;

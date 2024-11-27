@@ -1,5 +1,5 @@
 import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
+import LoginPopup from "../../../common/form/login/Loginpage";
 import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";

@@ -4,7 +4,7 @@ import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandi
 import BreadCrumb from "../../BreadCrumb";
 import MyProfile from "./components/my-profile";
 import CopyrightFooter from "../../CopyrightFooter";
-import DashboardCandidatesHeader from "/app/home/header";
+import DashboardCandidatesHeader from "/components/dashboard-pages/dashboardheader";
 import MenuToggler from "../../MenuToggler";
 import Achievements from "./components/career-data/Achievements";
 import Social from "./components/my-profile/SocialNetworkBox";

@@ -1,4 +1,4 @@
-import Register2 from "../../common/form/register/Register2";
+import Register2 from "../../common/form/register/Register";
 import MobileMenu from "../../header/MobileMenu";
 import Header from "./Header";
 
@@ -8,7 +8,7 @@ const index = () => {
       <Header />
       {/* <!--End Main Header -->  */}
 
-      <MobileMenu />
+      {/* <MobileMenu /> */}
       {/* End MobileMenu */}
 
       <div className="login-section">

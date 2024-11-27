@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import MobileSidebar from "./mobile-sidebar";
 import Image from "next/image";
@@ -5,42 +7,57 @@ import Image from "next/image";
 const MobileMenu = () => {
   return (
     // <!-- Main Header-->
-    <header className="main-header main-header-mobile">
+    <header
+      className="main-header main-header-mobile"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.4)", // Transparent black background
+        backdropFilter: "blur(20px)", // Apply blur for glass effect
+        borderRadius: "15px",
+        padding: "0px 0px", // Padding for inner spacing
+        position: "fixed", // Make it floating
+        top: "10px", // Floating from top
+        left: "20px", // Floating from left
+        right: "20px", // Floating from right
+        zIndex: 1000, // Ensure it stays on top
+        width: "auto",
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Shadow for elevation
+        transition: "background-color 0.3s ease, backdrop-filter 0.3s ease", // Smooth transitions
+      }}
+    >
       <div className="auto-container">
-        {/* <!-- Main box --> */}
+        {/* Main box */}
         <div className="inner-box">
           <div className="nav-outer">
             <div className="logo-box">
               <div className="logo">
                 <Link href="/">
                   <Image
-                    width={154}
+                    width={120}
                     height={50}
-                    src="/images/logo.svg"
-                    alt="brand"
+                    src="/images-rotaract/ri3150-logo.png"
+                    alt="ROTARACT3150 || SRIPTO"
+                    className="h-auto mx-auto" // Tailwind for logo alignment and scaling
                   />
                 </Link>
               </div>
             </div>
-            {/* End .logo-box */}
+            {/* End logo-box */}
 
+            {/* Mobile sidebar */}
             <MobileSidebar />
-            {/* <!-- Main Menu End--> */}
           </div>
-          {/* End .nav-outer */}
+          {/* End nav-outer */}
 
           <div className="outer-box">
             <div className="login-box">
               <a
-                href="#"
+                href="/register"
                 className="call-modal"
-                data-bs-toggle="modal"
-                data-bs-target="#loginPopupModal"
               >
                 <span className="icon icon-user"></span>
               </a>
             </div>
-            {/* login popup end */}
+            {/* Login popup end */}
 
             <a
               href="#"
@@ -50,7 +67,7 @@ const MobileMenu = () => {
             >
               <span className="flaticon-menu-1"></span>
             </a>
-            {/* right humberger menu */}
+            {/* Right hamburger menu */}
           </div>
         </div>
       </div>

@@ -199,17 +199,23 @@
 }
 
 .mobile-nav-toggler .flaticon-menu-1:before {
+  font-size: 18px; /* Set desired font size */
+  line-height: 30px; /* Set desired line height */
+  display: block;
+  color: #ffffff; /* White color */
   -webkit-transition: all 100ms ease;
   -o-transition: all 100ms ease;
   transition: all 100ms ease;
 }
 
 .mm-wrapper_opened .mobile-nav-toggler .flaticon-menu-1:before {
-  content: "\f175";
+  content: "\f175"; /* New content for opened state */
   font-size: 18px;
   line-height: 30px;
   display: block;
+  color: #ffffff; /* White color for opened state */
 }
+
 
 .mm-add-listing {
   margin-top: 87px;

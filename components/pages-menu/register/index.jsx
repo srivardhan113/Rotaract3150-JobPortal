@@ -14,7 +14,7 @@ const index = () => {
       <div className="login-section">
         <div
           className="image-layer"
-          style={{ backgroundImage: "url(/images/background/12.jpg)" }}
+          style={{ backgroundImage: "url(/images-rotaract/login.jpg)" }}
         ></div>
         <div className="outer-box">
           {/* <!-- Login Form --> */}

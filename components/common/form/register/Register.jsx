@@ -9,8 +9,9 @@ import Link from "next/link";
 
 const Register2 = () => {
   return (
-    <div className="form-inner">
-      <h3>Create a Free Account for Rotaract3150 - Job Portal</h3>
+    <div className="form-inner r">
+      
+       <h3 className="text-center pt-4">Create a Free Account for Rotaract3150 - Job Portal</h3>
 
       <Tabs>
         <div className="form-group register-dual">

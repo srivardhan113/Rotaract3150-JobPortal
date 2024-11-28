@@ -217,7 +217,7 @@ Login Section
 
 .login-section {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -228,7 +228,7 @@ Login Section
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 100px 0 50px;
+  // padding: 100px 0 50px;
   overflow: auto;
 }
 

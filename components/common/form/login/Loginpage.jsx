@@ -9,7 +9,7 @@ import Link from "next/link";
 const Loginpage = () => {
   return (
     <div className="form-inner">
-      <h3>Login to Rotaract3150 - Job Portal</h3>
+      <h3 className="text-center pt-4">Login to Rotaract3150 - Job Portal</h3>
 
       <Tabs>
         <div className="form-group register-dual">

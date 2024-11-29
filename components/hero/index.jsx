@@ -1,6 +1,6 @@
-import SearchForm from "../../common/job-search/SearchForm";
+import SearchForm from "../common/job-search/SearchForm";
 import ImageBox from "./ImageBox";
-import PopularSearch from "../PopularSearch";
+import PopularSearch from "./PopularSearch";
 
 const index = () => {
   return (

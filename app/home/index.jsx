@@ -6,7 +6,7 @@ import RegBanner from "/components/block/RegBanner";
 import CallToAction6 from "/components/call-to-action/CallToAction6";
 import Partner2 from "/components/common/partner/Partner2";
 import MobileMenu from "/components/header/MobileMenu";
-import Hero from "/components/hero/hero-5";
+import Hero from "/components/hero";
 import JobCategorie1 from "/components/job-categories/JobCategorie1";
 import JobFeatured9 from "/components/job-featured/JobFeatured9";
 // import Pricing3 from "../pricing/Pricing3";

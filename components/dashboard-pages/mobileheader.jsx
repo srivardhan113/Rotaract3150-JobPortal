@@ -22,11 +22,11 @@ const MobileMenu = () => {
         </div>
 
         {/* Right side - Name and Contact Us Button */}
-        <div className="flex items-center space-x-4 ml-auto">
+        {/* <div className="flex items-center space-x-4 ml-auto">
           <div className="welcome-message text-lg font-bold text-gray-800">
             Hi, Sri Vardhan Yeluri
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   );

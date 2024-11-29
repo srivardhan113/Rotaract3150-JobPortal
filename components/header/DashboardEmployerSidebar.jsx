@@ -21,29 +21,12 @@ const DashboardEmployerSidebar = () => {
 
     return (
         <div className={`user-sidebar ${menu ? "sidebar_open" : ""}`}>
-            {/* Sidebar Logo */}
-            <div className="pro-header">
-                {/* Logo Section */}
-                <Link href="/">
-                    <Image
-                        width={154}
-                        height={50}
-                        src="/images-rotaract/ri3150-logo.png"
-                        alt="ROTARACT3150 || SRIPTO"
-                    />
-                </Link>
-                {/* End logo */}
-
-                {/* Close Icon */}
-                <button
-                    className="fix-icon"
-                    onClick={menuToggleHandler}
-                    aria-label="Close Sidebar"
-                >
-                    <span className="flaticon-close"></span>
-                </button>
-                {/* End close icon */}
-            </div>
+        {/* Start sidebar close icon */}
+        <div className="pro-header text-end pb-0 mb-0 show-1023">
+          <div className="fix-icon" onClick={menuToggleHandler}>
+            <span className="flaticon-close"></span>
+          </div>
+        </div>
 
             {/* Sidebar Navigation */}
             <div className="sidebar-inner">

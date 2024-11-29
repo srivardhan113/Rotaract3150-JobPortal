@@ -186,6 +186,31 @@ const index = () => {
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 
+{/* ----------------------------------------------------------------------------------------------------------------- */}
+
+      <section className="clients-section-two alternate layout-pt-60 layout-pb-60">
+        <div className="auto-container">
+        <div className="row justify-content-center">
+            <div className="col-lg-6">
+              <div className="sec-title -type-2 text-center">
+                <h2>Initiated by</h2>
+                <div className="text">
+                Explore career opportunities with top recruiters partnered with Rotaract 3150, connecting talent with impactful organizations.
+                </div>
+              </div>
+            </div>
+          </div> 
+          <div className="sponsors-outer wow fadeInUp">
+            <div className="sponsors-carousel">
+              <Partner2 />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+{/* ----------------------------------------------------------------------------------------------------------------- */}
+
 
       <section className="clients-section-two alternate layout-pt-60 layout-pb-60">
         <div className="auto-container">

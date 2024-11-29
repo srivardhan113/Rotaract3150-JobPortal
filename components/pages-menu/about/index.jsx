@@ -1,9 +1,11 @@
+"use client"
+
 import LoginPopup from "../../common/form/login/Loginpage";
 import Partner2 from "../../common/partner/Partner2";
 import FooterDefault from "/app/home/Footer";
 import DefaulHeader from "/app/home/Header";
 import MobileMenu from "../../header/MobileMenu";
-// import Funfact from "../../fun-fact-counter/Funfact";
+import Funfact from "../../fun-fact-counter/Funfact2";
 import ImgBox from "./ImgBox";
 import IntroDescriptions from "./IntroDescriptions";
 import CallToAction2 from "../../call-to-action/CallToAction3";
@@ -13,7 +15,7 @@ import Breadcrumb from "../../common/Breadcrumb";
 import Image from "next/image";
 import Address from "./Address";
 // import ContactForm from "./ContactForm";
-import MapBox from "./MapBox";
+import Ui from "/components/ui/Gallery";
 
 const index = () => {
   return (
@@ -29,6 +31,7 @@ const index = () => {
       {/* <!--End Main Header --> */}
 
       <MobileMenu />
+      
       {/* End MobileMenu */}
 
       <Breadcrumb title="About Us" meta="About Us" />
@@ -36,22 +39,22 @@ const index = () => {
 
       <section className="about-section-three">
         <div className="auto-container">
-          <ImgBox />
-
+          {/* <ImgBox /> */}
+          <IntroDescriptions />
           {/* <!-- Fun Fact Section --> */}
-          {/* <div className="fun-fact-section">
+          <div className="fun-fact-section">
             <div className="row">
               <Funfact />
             </div>
-          </div> */}
+          </div>
           {/* <!-- Fun Fact Section --> */}
 
-          <IntroDescriptions />
+          
         </div>
       </section>
       {/* <!-- End About Section Three --> */}
 {/* ------------------------------------------------------------------------------------------------ */}
-
+{/* 
       <section className="contact-section bg-gray-100">
         <div className="auto-container">
           <h2 className="text-center text-4xl font-extrabold mb-8 text-gray-800">
@@ -61,11 +64,14 @@ const index = () => {
             <div className="row">
               <Address />
             </div>
-            {/* End .row */}
+            
           </div>
-          {/* End upperbox */}
+          
         </div>
-      </section>
+      </section> */}
+    <div>
+      <Ui />
+    </div>
 
 {/* ------------------------------------------------------------------------------------------------ */}
       <CallToAction2 />

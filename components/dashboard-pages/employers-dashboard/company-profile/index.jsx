@@ -13,7 +13,7 @@ const index = () => {
     return (
         <div className="page-wrapper dashboard">
             <span className="header-span"></span>
-            {/* <!-- Header Span for hight --> */}
+            {/* <!-- Header Span for height --> */}
 
             {/* <LoginPopup /> */}
             {/* End Login Popup Modal */}
@@ -38,42 +38,44 @@ const index = () => {
 
                     <div className="row">
                         <div className="col-lg-12">
+                            {/* Consolidated Form */}
                             <div className="ls-widget">
                                 <div className="tabs-box">
                                     <div className="widget-title">
                                         <h4>My Profile</h4>
                                     </div>
                                     <MyProfile />
-                                </div>
-                            </div>
-                            {/* <!-- Ls widget --> */}
-
-                            <div className="ls-widget">
-                                <div className="tabs-box">
+                                    {/* My Profile Content */}
+                                  
+                           
                                     <div className="widget-title">
                                         <h4>Social Network</h4>
                                     </div>
-                                    {/* End .widget-title */}
+                                    {/* Social Network Content */}
                                     <div className="widget-content">
                                         <SocialNetworkBox />
                                     </div>
-                                </div>
-                            </div>
-                            {/* <!-- Ls widget --> */}
-
-                            <div className="ls-widget">
-                                <div className="tabs-box">
+        
                                     <div className="widget-title">
-                                        <h4>Contact Information</h4>
+                                        <h4>Address</h4>
                                     </div>
-                                    {/* End .widget-title */}
-
+                                    {/* Contact Information Content */}
                                     <div className="widget-content">
                                         <ContactInfoBox />
                                     </div>
                                 </div>
                             </div>
-                            {/* <!-- Ls widget --> */}
+                            {/* End Contact Information */}
+
+                            {/* Save Button */}
+                            <div className="text-center mt-4">
+                                <button className="theme-btn btn-style-one">
+                                    Save
+                                </button>
+                            </div>
+
+
+                            
                         </div>
                     </div>
                     {/* End .row */}

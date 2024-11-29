@@ -4,7 +4,7 @@ import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandi
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import JobFavouriteTable from "./components/JobFavouriteTable";
-import DashboardCandidatesHeader from "/app/home/Header";
+import DashboardCandidatesHeader from "/components/dashboard-pages/dashboardheader";
 import MenuToggler from "../../MenuToggler";
 
 const index = () => {
@@ -13,7 +13,7 @@ const index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
+      {/* <LoginPopup /> */}
       {/* End Login Popup Modal */}
 
       <DashboardCandidatesHeader />

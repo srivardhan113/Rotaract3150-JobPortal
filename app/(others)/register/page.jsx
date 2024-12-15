@@ -1,12 +1,10 @@
+"use client"
+
 import dynamic from "next/dynamic";
 
 import RegisterForm from "@/components/pages-menu/register";
 
-export const metadata = {
-  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  
-}
+
 
 
 

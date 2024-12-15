@@ -9,10 +9,13 @@ import MobileMenu from "/components/header/MobileMenu";
 import Hero from "/components/hero";
 import JobCategorie1 from "/components/job-categories/JobCategorie1";
 import JobFeatured9 from "/components/job-featured/JobFeatured9";
+import Initiated from "/components/Initiated";
 // import Pricing3 from "../pricing/Pricing3";
 // import TopCompany from "../top-company/TopCompany";
 import Header from "./Header";
 import Footer from "./Footer";
+import React from 'react';
+import { FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 
 const index = () => {
   return (
@@ -187,13 +190,12 @@ const index = () => {
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
-
-      <section className="clients-section-two alternate layout-pt-60 layout-pb-60">
+<section className="clients-section-two alternate layout-pt-60 layout-pb-60">
         <div className="auto-container">
         <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="sec-title -type-2 text-center">
-                <h2>Initiated by</h2>
+                <h2>Initiated By</h2>
                 <div className="text">
                 Explore career opportunities with top recruiters partnered with Rotaract 3150, connecting talent with impactful organizations.
                 </div>
@@ -202,12 +204,14 @@ const index = () => {
           </div> 
           <div className="sponsors-outer wow fadeInUp">
             <div className="sponsors-carousel">
-              <Partner2 />
+              <Initiated />
             </div>
           </div>
         </div>
       </section>
-      
+
+
+
 
 {/* ----------------------------------------------------------------------------------------------------------------- */}
 

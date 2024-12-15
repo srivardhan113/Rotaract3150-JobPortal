@@ -1,0 +1,82 @@
+/* styles.css */
+
+/* Animation for hover effect */
+.team-member {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.team-member img {
+  width: 100%;
+  height: 24rem; /* Adjust based on your image size */
+  object-fit: cover;
+}
+
+.team-member:hover {
+  transform: scale(1.05);
+}
+
+/* Caption style for team member details */
+.team-member-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  color: white; /* Set default text color to white */
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.team-member:hover .team-member-caption {
+  opacity: 1;
+}
+
+.team-member-caption h3,
+.team-member-caption p {
+  margin: 0;
+  color: white; /* Ensure text is white */
+}
+
+.team-member-caption p.bio {
+  margin-top: 1rem;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+}
+
+.team-member:hover .team-member-caption p.bio {
+  opacity: 1;
+  max-height: 5rem; /* Adjust based on content */
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.team-member:hover .social-icons {
+  opacity: 1;
+}
+
+.social-icons .icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.social-icons .icon:hover {
+  color: #007bff;
+}

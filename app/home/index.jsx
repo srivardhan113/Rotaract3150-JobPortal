@@ -1,3 +1,4 @@
+"use client";
 import About9 from "/components/about/About9";
 // import AppSection3 from "../app-section/AppSection3";
 import Block8 from "/components/block/Block8";
@@ -14,8 +15,9 @@ import Initiated from "/components/Initiated";
 // import TopCompany from "../top-company/TopCompany";
 import Header from "./Header";
 import Footer from "./Footer";
-import React from 'react';
-import { FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import React from "react";
+import { FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
+import "../../styles/styles.css";
 
 const index = () => {
   return (
@@ -32,52 +34,61 @@ const index = () => {
       <Hero />
       {/* End Hero Section */}
 
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
+      <section
+        className="job-categories style-two"
+        style={{ backgroundColor: "#ffffff", paddingBottom: "50px" }}
+      >
+        <div className="auto-container">
+          <div className="sec-title text-center">
+            <h2>Popular Job Categories - Jobs Live</h2>
+            <div className="text">Rotaract 3150</div>
+          </div>
 
+          <div
+            className="row"
+            data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
+            style={{ marginBottom: "0px" }} // Reduced margin-bottom on row to avoid thin line
+          >
+            {/* <!-- Category Block --> */}
+            <JobCategorie1 />
+          </div>
+        </div>
+      </section>
+      {/* End Job Category Section */}
 
-<section className="job-categories style-two" style={{ backgroundColor: '#ffffff',paddingBottom: '50px' }}>
-  <div className="auto-container">
-    <div className="sec-title text-center">
-      <h2>Popular Job Categories - Jobs Live</h2>
-      <div className="text">Rotaract 3150</div>
-    </div>
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
-    <div
-      className="row"
-      data-aos="fade-up"
-      data-aos-anchor-placement="top-bottom"
-      style={{ marginBottom: '0px' }} // Reduced margin-bottom on row to avoid thin line
-    >
-      {/* <!-- Category Block --> */}
-      <JobCategorie1 />
-    </div>
-  </div>
-</section>
-{/* End Job Category Section */}
+      <section
+        className="layout-pt-60 layout-pb-60"
+        style={{ marginTop: "10px", marginBottom: "-30px" }}
+      >
+        <div className="auto-container">
+          <div className="sec-title text-center">
+            <h2>How It Works</h2>
+            <div className="text">
+              The Rotaract 3150 Job Portal connects members with job
+              opportunities and employers seamlessly.
+            </div>
+          </div>
+          {/* End sec-title */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
-
-<section className="layout-pt-60 layout-pb-60" style={{ marginTop: '10px', marginBottom: '-30px' }}>
-  <div className="auto-container">
-    <div className="sec-title text-center">
-      <h2>How It Works</h2>
-      <div className="text">
-        The Rotaract 3150 Job Portal connects members with job opportunities and employers seamlessly.
-      </div>
-    </div>
-    {/* End sec-title */}
-
-    <div className="row grid-base pt-50" data-aos="fade-up" style={{ marginTop: '0px', marginBottom: '0px' }}>
-      <Block8 />
-      {/* <!-- Work Block --> */}
-    </div>
-  </div>
-</section>
+          <div
+            className="row grid-base pt-50"
+            data-aos="fade-up"
+            style={{ marginTop: "0px", marginBottom: "0px" }}
+          >
+            <Block8 />
+            {/* <!-- Work Block --> */}
+          </div>
+        </div>
+      </section>
 
       {/* <!-- End Work Section --> */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
       <section className="layout-pt-60 layout-pb-60">
         <div className="auto-container">
@@ -103,13 +114,12 @@ const index = () => {
       </section>
       {/* <!-- End Job Section --> */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
-
-<About9 />
+      <About9 />
       {/* <!-- End About Section --> */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
       <section className="layout-pt-60 layout-pb-60">
         <div className="auto-container">
@@ -120,10 +130,9 @@ const index = () => {
       </section>
       {/* <!-- End Registeration Banners --> */}
 
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
- {/* ----------------------------------------------------------------------------------------------------------------- */}
-      
-{/* 
+      {/* 
       <section className="ayout-pt-60 layout-pb-60">
         <div className="auto-container">
           <div className="row justify-content-between align-items-end">
@@ -140,7 +149,7 @@ const index = () => {
             </div>
             {/* End .col */}
 
-            {/* <div className="col-auto">
+      {/* <div className="col-auto">
               <a href="#" className="button -arrow text-dark-blue">
                 Browse
                 <span className="fa fa-angle-right ms-1"></span>
@@ -149,7 +158,7 @@ const index = () => {
           </div>
           {/* End .row */}
 
-          {/* <div className="carousel-outer pt-50" data-aos="fade-up">
+      {/* <div className="carousel-outer pt-50" data-aos="fade-up">
             <div className="companies-carousel">
               <TopCompany />
             </div>
@@ -157,7 +166,7 @@ const index = () => {
         </div>
       </section> */}
       {/* <!-- End Top Companies --> */}
-{/* 
+      {/* 
       <section className="layout-pt-60 layout-pb-120">
         <div className="auto-container">
           <div className="row justify-content-center">
@@ -171,37 +180,38 @@ const index = () => {
               </div>
             </div>
           </div> */}
-          {/* End .row */}
+      {/* End .row */}
 
-          {/* <div className="row grid-base pricing3_hover" data-aos="fade-up">
+      {/* <div className="row grid-base pricing3_hover" data-aos="fade-up">
             <Pricing3 />
           </div> */}
-          {/* End .row */}
-        {/* </div>
+      {/* End .row */}
+      {/* </div>
       </section> */}
       {/* <!-- End Pricing Section --> */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
-
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
       {/* <AppSection3 /> */}
       {/* <!-- End App Section --> */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
-<section className="clients-section-two alternate layout-pt-60 layout-pb-60">
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
+      <section className="clients-section-two alternate layout-pt-60 layout-pb-60">
         <div className="auto-container">
-        <div className="row justify-content-center">
+          <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="sec-title -type-2 text-center">
                 <h2>Initiated By</h2>
                 <div className="text">
-                Explore career opportunities with top recruiters partnered with Rotaract 3150, connecting talent with impactful organizations.
+                  Explore career opportunities with top recruiters partnered
+                  with Rotaract 3150, connecting talent with impactful
+                  organizations.
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
           <div className="sponsors-outer wow fadeInUp">
             <div className="sponsors-carousel">
               <Initiated />
@@ -210,24 +220,22 @@ const index = () => {
         </div>
       </section>
 
-
-
-
-{/* ----------------------------------------------------------------------------------------------------------------- */}
-
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
       <section className="clients-section-two alternate layout-pt-60 layout-pb-60">
         <div className="auto-container">
-        <div className="row justify-content-center">
+          <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="sec-title -type-2 text-center">
                 <h2>Top Recruiters of Rotaract 3150</h2>
                 <div className="text">
-                Explore career opportunities with top recruiters partnered with Rotaract 3150, connecting talent with impactful organizations.
+                  Explore career opportunities with top recruiters partnered
+                  with Rotaract 3150, connecting talent with impactful
+                  organizations.
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
           <div className="sponsors-outer wow fadeInUp">
             <div className="sponsors-carousel">
               <Partner2 />
@@ -237,17 +245,14 @@ const index = () => {
       </section>
       {/* <!-- End Clients Section --> */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
       <CallToAction6 />
 
+      {/* ----------------------------------------------------------------------------------------------------------------- */}
 
-{/* ----------------------------------------------------------------------------------------------------------------- */}
-
-      <Footer/>
+      <Footer />
       {/* <!-- End Main Footer --> */}
-
-    
     </>
   );
 };

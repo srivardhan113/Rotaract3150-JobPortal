@@ -16,7 +16,7 @@ const index = () => {
           className="image-layer"
           style={{ backgroundImage: "url(/images-rotaract/login.jpg)" }}
         >
-          <div className="text-center pt-120">
+          <div className="text-center ">
             <img
               width={400}
               height={180}

@@ -198,27 +198,27 @@ const index = () => {
       {/* ----------------------------------------------------------------------------------------------------------------- */}
 
       {/* ----------------------------------------------------------------------------------------------------------------- */}
-      <section className="clients-section-two alternate layout-pt-60 layout-pb-60">
-        <div className="auto-container">
-          <div className="row justify-content-center">
-            <div className="col-lg-6">
-              <div className="sec-title -type-2 text-center">
-                <h2>Initiated By</h2>
-                <div className="text">
-                  Explore career opportunities with top recruiters partnered
-                  with Rotaract 3150, connecting talent with impactful
-                  organizations.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="sponsors-outer wow fadeInUp">
-            <div className="sponsors-carousel">
-              <Initiated />
-            </div>
+      <section className="clients-section-two alternate ">
+  <div className="auto-container">
+    <div className="row justify-content-center">
+      <div className="col-lg-8">
+        <div className="sec-title -type-2 text-center">
+          <h2>Initiated By</h2>
+          <div className="text">
+          Meet the visionary leaders behind Rotaract 3150’s - Career's Hub initiative, dedicated to connecting talent with top opportunities. Discover how their commitment shapes the future of career growth and community impact
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+    <div className="sponsors-outer wow fadeInUp">
+      <div className="sponsors-carousel">
+        <Initiated />
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
       {/* ----------------------------------------------------------------------------------------------------------------- */}
 

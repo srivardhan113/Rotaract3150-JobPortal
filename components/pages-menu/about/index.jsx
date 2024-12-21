@@ -15,7 +15,7 @@ import Breadcrumb from "../../common/Breadcrumb";
 import Image from "next/image";
 import Address from "./Address";
 // import ContactForm from "./ContactForm";
-import Ui from "/components/ui/Gallery";
+
 
 const index = () => {
   return (
@@ -69,9 +69,6 @@ const index = () => {
           
         </div>
       </section> */}
-    <div>
-      <Ui />
-    </div>
 
 {/* ------------------------------------------------------------------------------------------------ */}
       <CallToAction2 />

@@ -1,3 +1,5 @@
+
+
 import dynamic from "next/dynamic";
 
 import About from "@/components/pages-menu/about";
@@ -18,4 +20,4 @@ const index = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(index), { ssr: false });
+export default dynamic(() => Promise.resolve(index));

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import LoginPopup from "../../common/form/login/Loginpage";
 import Partner2 from "../../common/partner/Partner2";
@@ -16,14 +16,12 @@ import Image from "next/image";
 import Address from "./Address";
 // import ContactForm from "./ContactForm";
 
-
 const index = () => {
   return (
     <>
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
       <span className="header-span"></span>
-      
 
       {/* End Login Popup Modal */}
 
@@ -31,11 +29,13 @@ const index = () => {
       {/* <!--End Main Header --> */}
 
       <MobileMenu />
-      
+
       {/* End MobileMenu */}
 
       <Breadcrumb title="About Us" meta="About Us" />
       {/* <!--End Page Title--> */}
+
+      <ImgBox />
 
       <section className="about-section-three">
         <div className="auto-container">
@@ -48,13 +48,11 @@ const index = () => {
             </div>
           </div>
           {/* <!-- Fun Fact Section --> */}
-
-          
         </div>
       </section>
       {/* <!-- End About Section Three --> */}
-{/* ------------------------------------------------------------------------------------------------ */}
-{/* 
+      {/* ------------------------------------------------------------------------------------------------ */}
+      {/* 
       <section className="contact-section bg-gray-100">
         <div className="auto-container">
           <h2 className="text-center text-4xl font-extrabold mb-8 text-gray-800">
@@ -70,7 +68,7 @@ const index = () => {
         </div>
       </section> */}
 
-{/* ------------------------------------------------------------------------------------------------ */}
+      {/* ------------------------------------------------------------------------------------------------ */}
       <CallToAction2 />
       {/* <!-- End CallToAction2 --> */}
 
@@ -121,18 +119,12 @@ const index = () => {
       </section> */}
       {/* <!-- End Map Section --> */}
 
-     
-
-
-      
-
-        {/* <!-- Contact Form --> */}
-          {/* <div className="contact-form default-form">
+      {/* <!-- Contact Form --> */}
+      {/* <div className="contact-form default-form">
             <h3>Leave A Message</h3>
             <ContactForm />
           </div> */}
-          {/* <!--End Contact Form --> */}
-
+      {/* <!--End Contact Form --> */}
 
       <FooterDefault />
       {/* <!-- End Main Footer --> */}

@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 import candidates from "@/data/candidates";
 import candidateResume from "@/data/candidateResume";
@@ -16,7 +17,7 @@ export const metadata = {
 
 const CandidateSingleDynamicV1 = ({ params }) => {
   const id = params.id;
-  
+
   // Find candidate based on id, or fall back to the first candidate in the list if not found
   const candidate = candidates.find((item) => item.id == id) || candidates[0];
 

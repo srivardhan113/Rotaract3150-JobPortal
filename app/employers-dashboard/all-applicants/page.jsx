@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 import AllApplicants from "@/components/dashboard-pages/employers-dashboard/all-applicants";
 

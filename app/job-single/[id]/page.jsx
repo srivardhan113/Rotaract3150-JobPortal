@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 import jobs from "@/data/job-featured";
 // import LoginPopup from "@/components/common/form/login/LoginPopup";

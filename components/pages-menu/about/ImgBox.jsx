@@ -21,7 +21,7 @@ const ImgBox = () => {
   ];
 
   return (
-    <div className="images-box">
+    <div className="images-box  d-flex justify-content-center mt-4">
       <div className="row">
         {imgContent.map((item) => (
           <div className="column col-lg-3 col-md-6 col-sm-6" key={item.id}>

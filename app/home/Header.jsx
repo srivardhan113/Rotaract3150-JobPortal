@@ -1,17 +1,31 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { pageItems } from "../../data/mainMenuData";
-import { isActiveParent, isActiveLink, isActiveParentChaild } from "../../utils/linkActiveChecker";
+import {
+  isActiveParent,
+  isActiveLink,
+  isActiveParentChaild,
+} from "../../utils/linkActiveChecker";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
   const [bgColor, setBgColor] = useState("rgba(0, 0, 0, 0.3)"); // Initial background color is transparent
   const [scrollProgress, setScrollProgress] = useState(0); // Scroll progress percentage
   const pathname = usePathname(); // Used to determine the active route
+  const isLoggedIn = !!sessionStorage.getItem("authToken");
+  const router = useRouter();
+  const type = sessionStorage.getItem("type");
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem("authToken");
+    router.push("/login");
+  };
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -53,7 +67,9 @@ const Header = () => {
 
   return (
     <header
-      className={`main-header -type-11 ${navbar ? "fixed-header animated slideInDown" : ""}`}
+      className={`main-header -type-11 ${
+        navbar ? "fixed-header animated slideInDown" : ""
+      }`}
       style={{
         backgroundColor: bgColor, // Dynamic background color
         backdropFilter: navbar ? "blur(20px)" : "none", // Apply blur on scroll
@@ -99,25 +115,43 @@ const Header = () => {
               </li>
 
               {/* Find Jobs */}
-              <li className={`${isActiveLink("/find-jobs", pathname) ? "current" : ""}`}>
+              <li
+                className={`${
+                  isActiveLink("/find-jobs", pathname) ? "current" : ""
+                }`}
+              >
                 <Link href="/job-list" className="underline-animation">
                   Find Jobs
                 </Link>
               </li>
 
               {/* Employers */}
-              <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
-                <Link href="/employers-dashboard" className="underline-animation">
-                  Job Provider Dashboard
-                </Link>
-              </li>
+              {type === "Company" && (
+                <li
+                  className={`${isActiveLink("/", pathname) ? "current" : ""}`}
+                >
+                  <Link
+                    href="/employers-dashboard"
+                    className="underline-animation"
+                  >
+                    Job Provider Dashboard
+                  </Link>
+                </li>
+              )}
 
               {/* Candidates */}
-              <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
-                <Link href="/candidates-dashboard" className="underline-animation">
-                  Job Seeker Dashboard
-                </Link>
-              </li>
+              {type === "Applicant" && (
+                <li
+                  className={`${isActiveLink("/", pathname) ? "current" : ""}`}
+                >
+                  <Link
+                    href="/candidates-dashboard"
+                    className="underline-animation"
+                  >
+                    Job Seeker Dashboard
+                  </Link>
+                </li>
+              )}
 
               {/* Pages Dropdown */}
               <li
@@ -129,10 +163,15 @@ const Header = () => {
                 <ul>
                   {pageItems.map((item, i) => (
                     <li
-                      className={isActiveLink(item.routePath, pathname) ? "current" : ""}
+                      className={
+                        isActiveLink(item.routePath, pathname) ? "current" : ""
+                      }
                       key={i}
                     >
-                      <Link href={item.routePath} className="underline-animation">
+                      <Link
+                        href={item.routePath}
+                        className="underline-animation"
+                      >
                         {item.name}
                       </Link>
                     </li>
@@ -145,20 +184,31 @@ const Header = () => {
 
         {/* Login/Register and Job Post Buttons */}
         <div className="outer-box">
-          <div className="btn-box">
-            <a
-              href="/register"
-              className="theme-btn btn-style-three btn-white-10 call-modal"
-            >
-              Login / Register
-            </a>
-            <Link
-              href="/employers-dashboard/post-jobs"
-              className="theme-btn btn-style-one btn-white"
-            >
-              Job Post
-            </Link>
-          </div>
+          {!isLoggedIn ? (
+            <div className="btn-box">
+              <a
+                href="/register"
+                className="theme-btn btn-style-three btn-white-10 call-modal"
+              >
+                Login / Register
+              </a>
+              <Link
+                href="/employers-dashboard/post-jobs"
+                className="theme-btn btn-style-one btn-white"
+              >
+                Job Post
+              </Link>
+            </div>
+          ) : (
+            <div className="btn-box">
+              <button
+                className="theme-btn btn-style-three btn-white-10 call-modal"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -170,13 +220,12 @@ const Header = () => {
           width: `calc(${scrollProgress}% - 18px)`, // Adjust width by subtracting the gap on both sides
           position: "absolute",
           bottom: "1px",
-          borderRadius: "5px", 
+          borderRadius: "5px",
           left: "9px", // Start 8px from the left
           right: "9px", // End 8px from the right
           transition: "width 0.2s ease", // Smooth transition for the progress bar
         }}
       ></div>
-
     </header>
   );
 };

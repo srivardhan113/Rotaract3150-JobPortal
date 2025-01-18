@@ -31,10 +31,12 @@ const FormContent = () => {
 
       if (response.status === 200) {
         // Assuming the API returns a token or relevant user data
-        const { token } = response.data.token;
-        console.log(response.data);
+        const { token } = response.data;
+        const type = response.data.usertype;
+        console.log("token : ", response.data.token, "userType : ", type);
         // Save the token in sessionStorage for the current session
         sessionStorage.setItem("authToken", token);
+        sessionStorage.setItem("type", type);
 
         // Optionally, save user information if provided in the response
         // Example:

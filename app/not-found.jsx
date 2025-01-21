@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-};
+// export const metadata = {
+//   title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+//   description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+// };
 
 const index = () => {
   return (

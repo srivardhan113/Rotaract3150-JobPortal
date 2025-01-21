@@ -24,6 +24,7 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("type");
     router.push("/login");
   };
 
@@ -126,6 +127,7 @@ const Header = () => {
               </li>
 
               {/* Employers */}
+
               {type === "Company" && (
                 <li
                   className={`${isActiveLink("/", pathname) ? "current" : ""}`}
@@ -140,6 +142,7 @@ const Header = () => {
               )}
 
               {/* Candidates */}
+
               {type === "Applicant" && (
                 <li
                   className={`${isActiveLink("/", pathname) ? "current" : ""}`}

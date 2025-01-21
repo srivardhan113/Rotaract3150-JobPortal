@@ -1,25 +1,59 @@
-
-'use client'
+"use client";
 
 // import Map from "../../../Map";
 import Select from "react-select";
 
 const PostBoxForm = () => {
   const specialisms = [
-    { value: "Arts, Media, and Entertainment", label: "Arts, Media, and Entertainment" },
-    { value: "Business, Management, and Finance", label: "Business, Management, and Finance" },
-    { value: "Science, Technology, and Engineering", label: "Science, Technology, and Engineering" },
-    { value: "Healthcare, Life Sciences, and Social Work", label: "Healthcare, Life Sciences, and Social Work" },
-    { value: "Education, Research, and Academia", label: "Education, Research, and Academia" },
-    { value: "Law, Governance, and Policy", label: "Law, Governance, and Policy" },
-    { value: "Trades, Skilled Labor, and Logistics", label: "Trades, Skilled Labor, and Logistics" },
-    { value: "Environment, Agriculture, and Natural Sciences", label: "Environment, Agriculture, and Natural Sciences" },
-    { value: "Sports, Fitness, and Recreation", label: "Sports, Fitness, and Recreation" },
-    { value: "Hospitality, Tourism, and Customer Service", label: "Hospitality, Tourism, and Customer Service" },
-    { value: "Gaming, Esports, and Digital Entertainment", label: "Gaming, Esports, and Digital Entertainment" },
-    { value: "Entrepreneurship and Startups", label: "Entrepreneurship and Startups" }
-];
-
+    {
+      value: "Arts, Media, and Entertainment",
+      label: "Arts, Media, and Entertainment",
+    },
+    {
+      value: "Business, Management, and Finance",
+      label: "Business, Management, and Finance",
+    },
+    {
+      value: "Science, Technology, and Engineering",
+      label: "Science, Technology, and Engineering",
+    },
+    {
+      value: "Healthcare, Life Sciences, and Social Work",
+      label: "Healthcare, Life Sciences, and Social Work",
+    },
+    {
+      value: "Education, Research, and Academia",
+      label: "Education, Research, and Academia",
+    },
+    {
+      value: "Law, Governance, and Policy",
+      label: "Law, Governance, and Policy",
+    },
+    {
+      value: "Trades, Skilled Labor, and Logistics",
+      label: "Trades, Skilled Labor, and Logistics",
+    },
+    {
+      value: "Environment, Agriculture, and Natural Sciences",
+      label: "Environment, Agriculture, and Natural Sciences",
+    },
+    {
+      value: "Sports, Fitness, and Recreation",
+      label: "Sports, Fitness, and Recreation",
+    },
+    {
+      value: "Hospitality, Tourism, and Customer Service",
+      label: "Hospitality, Tourism, and Customer Service",
+    },
+    {
+      value: "Gaming, Esports, and Digital Entertainment",
+      label: "Gaming, Esports, and Digital Entertainment",
+    },
+    {
+      value: "Entrepreneurship and Startups",
+      label: "Entrepreneurship and Startups",
+    },
+  ];
 
   return (
     <form className="default-form">
@@ -61,7 +95,7 @@ const PostBoxForm = () => {
         </div> */}
 
         {/* <!-- Search Select --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Specialisms </label>
           <Select
             defaultValue={[specialisms[2]]}
@@ -71,7 +105,7 @@ const PostBoxForm = () => {
             className="basic-multi-select"
             classNamePrefix="select"
           />
-        </div>
+        </div> */}
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Job Type</label>
@@ -85,16 +119,15 @@ const PostBoxForm = () => {
           </select>
         </div>
 
-
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Offered Salary</label>
-          <input 
-            type="number" 
-            className="form-control" 
-            placeholder="Enter Offered Salary" 
-            min="0" 
-            step="999999999" 
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Enter Offered Salary"
+            min="0"
+            step="999999999"
           />
         </div>
 
@@ -111,7 +144,6 @@ const PostBoxForm = () => {
           </select>
         </div>
 
-
         <div className="form-group col-lg-6 col-md-12">
           <label>Experience</label>
           <select className="chosen-single form-select">
@@ -125,7 +157,6 @@ const PostBoxForm = () => {
           </select>
         </div>
 
-
         <div className="form-group col-lg-6 col-md-12">
           <label>Gender</label>
           <select className="chosen-single form-select">
@@ -137,25 +168,16 @@ const PostBoxForm = () => {
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>Industry</label>
-          <select className="chosen-single form-select">
-            <option>Select</option>
-            <option>Information Technology</option>
-            <option>Creative Arts & Media</option>
-            <option>Engineering & Manufacturing</option>
-            <option>Marketing & Advertising</option>
-            <option>Finance & Banking</option>
-            <option>Healthcare & Life Sciences</option>
-            <option>Retail & Consumer Goods</option>
-            <option>Education & Training</option>
-            <option>Entertainment & Film</option>
-            <option>Hospitality & Tourism</option>
-            <option>Logistics & Supply Chain</option>
-            <option>Others</option>
-
-          </select>
+          <label>Category</label>
+          <Select
+            defaultValue={[specialisms[2]]}
+            isMulti
+            name="colors"
+            options={specialisms}
+            className="basic-multi-select"
+            classNamePrefix="select"
+          />
         </div>
-
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Qualification</label>
@@ -171,7 +193,6 @@ const PostBoxForm = () => {
             <option>Professional Degree</option>
           </select>
         </div>
-
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12">

@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -7,7 +8,7 @@ const FormContent2 = () => {
     emailAddress: "",
     name: "",
     password: "",
-    type: "Applicant",
+    type: "Company",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -65,7 +66,7 @@ const FormContent2 = () => {
   };
 
   return (
-    <form method="post" action="add-parcel.html">
+    <form method="post" onSubmit={handleSubmit}>
       <div className="form-group">
         <label>Name</label>
         <input
@@ -81,7 +82,7 @@ const FormContent2 = () => {
         <label>Email Address</label>
         <input
           type="email"
-          name="username"
+          name="emailAddress"
           placeholder="Enter your Email Address"
           required
           value={formData.emailAddress}

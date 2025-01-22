@@ -15,10 +15,10 @@ import JobDetailsDescriptions from "@/components/job-single-pages/shared-compone
 import ApplyJobModalContent from "@/components/job-single-pages/shared-components/ApplyJobModalContent";
 import Image from "next/image";
 
-export const metadata = {
-  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-};
+// export const metadata = {
+//   title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+//   description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+// };
 
 const JobSingleDynamicV1 = ({ params }) => {
   const id = params.id;

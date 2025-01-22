@@ -10,10 +10,10 @@ import Social from "@/app/candidates-single/social/Social";
 import JobSkills from "@/app/candidates-single/shared-components/JobSkills";
 import Image from "next/image";
 
-export const metadata = {
-  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-};
+// export const metadata = {
+//   title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+//   description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+// };
 
 const CandidateSingleDynamicV1 = ({ params }) => {
   const id = params.id;

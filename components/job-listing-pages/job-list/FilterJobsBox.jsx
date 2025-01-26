@@ -1,9 +1,8 @@
-
-
 'use client'
 
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
-import jobs from "../../../data/job-featured";
+import axios from 'axios';
 import Pagination from "../components/Pagination";
 import JobSelect from "../components/JobSelect";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,187 +17,160 @@ import {
   addSalary,
   addSort,
 } from "../../../features/filter/filterSlice";
-import Image from "next/image";
 
 const FilterJobBox = () => {
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const { jobList, jobSort } = useSelector((state) => state.filter);
-  const {
-    keyword,
-    location,
-    destination,
-    category,
-    datePosted,
-    jobTypeSelect,
-    experienceSelect,
-    salary,
-  } = jobList || {};
+  const { keyword, location, category, jobTypeSelect, experienceSelect, salary ,datePosted} = jobList || {};
+  const [currentPage, setCurrentPage] = useState(1);
+const [totalPages, setTotalPages] = useState(1); // Default 1, to be updated by the API
 
   const { sort, perPage } = jobSort;
-
   const dispatch = useDispatch();
 
-  // keyword filter on title
+  // Fetch jobs from API
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://backend.rotaracthub.in/api/jobs/filter/v2?page=${currentPage}`
+        );
+        setJobs(response.data.data);
+        setTotalPages(response.data.totalPages || 1); // Update total pages if the API provides it
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+  
+    fetchJobs();
+  }, [currentPage]);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+    
+
+  // Filter functions
   const keywordFilter = (item) =>
-    keyword !== ""
-      ? item.jobTitle.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
-      : item;
+    keyword !== "" ? item.jobRoleTitle.toLowerCase().includes(keyword.toLowerCase()) : true;
 
-  // location filter
   const locationFilter = (item) =>
-    location !== ""
-      ? item?.location
-          ?.toLocaleLowerCase()
-          .includes(location?.toLocaleLowerCase())
-      : item;
+    location !== "" ? item.city.toLowerCase().includes(location.toLowerCase()) : true;
 
-  // location filter
-  const destinationFilter = (item) =>
-    item?.destination?.min >= destination?.min &&
-    item?.destination?.max <= destination?.max;
-
-  // category filter
   const categoryFilter = (item) =>
-    category !== ""
-      ? item?.category?.toLocaleLowerCase() === category?.toLocaleLowerCase()
-      : item;
+    category !== "" ? item.industry.toLowerCase() === category.toLowerCase() : true;
 
-  // job-type filter
-  const jobTypeFilter = (item) =>
-    item.jobType !== undefined && jobTypeSelect !== ""
-      ? item?.jobType[0]?.type.toLocaleLowerCase().split(" ").join("-") ===
-          jobTypeSelect && item
-      : item;
+  const jobTypeFilter = (item) => {
+    // Normalize both values to be lowercase and replace spaces with hyphens
+    const normalize = (str) =>
+      str?.trim().toLowerCase().replace(/\s+/g, "-");
+  
+    const selectedJobType = normalize(jobTypeSelect);
+    const itemJobType = normalize(item.jobType);
+  
+    return selectedJobType ? itemJobType === selectedJobType : true;
+  };
+  
+  const experienceFilter = (item) => {
+    console.log("Original Item Experience:", item.experience, "Selected Experience:", experienceSelect);
+  
+    if (experienceSelect === "") return true; // If no selection, include all items
+  
+    // Extract the first number from `item.experience`
+    const minExperience = parseInt(item.experience.match(/\d+/)?.[0], 10);
+  
+    // Extract the first number from `experienceSelect`
+    const selectedExperience = parseInt(experienceSelect.match(/\d+/)?.[0], 10);
+  
+    console.log("Min Experience:", minExperience, "Selected Experience:", selectedExperience);
+  
+    // Compare the two numbers
+    return minExperience === selectedExperience;
+  };
+  
 
-  // date-posted filter
-  const datePostedFilter = (item) =>
-    datePosted !== "all" && datePosted !== ""
-      ? item?.created_at
-          ?.toLocaleLowerCase()
-          .split(" ")
-          .join("-")
-          .includes(datePosted)
-      : item;
+  // const salaryFilter = (item) =>
+  //   (!salary?.min || item.offeredSalary >= salary.min) &&
+  //   (!salary?.max || item.offeredSalary <= salary.max);
 
-  // experience level filter
-  const experienceFilter = (item) =>
-    experienceSelect !== ""
-      ? item?.experience?.split(" ").join("-").toLocaleLowerCase() ===
-          experienceSelect && item
-      : item;
+  const sortFilter = (a, b) => (sort === "des" ? b.id - a.id : a.id - b.id);
 
-  // salary filter
-  const salaryFilter = (item) =>
-    item?.totalSalary?.min >= salary?.min &&
-    item?.totalSalary?.max <= salary?.max;
-
-  // sort filter
-  const sortFilter = (a, b) =>
-    sort === "des" ? a.id > b.id && -1 : a.id < b.id && -1;
-
-  let content = jobs
-    ?.filter(keywordFilter)
-    ?.filter(locationFilter)
-    ?.filter(destinationFilter)
-    ?.filter(categoryFilter)
-    ?.filter(jobTypeFilter)
-    ?.filter(datePostedFilter)
-    ?.filter(experienceFilter)
-    ?.filter(salaryFilter)
-    ?.sort(sortFilter)
-    .slice(perPage.start, perPage.end !== 0 ? perPage.end : 16)
-    ?.map((item) => (
-      <div className="job-block col-lg-6 col-md-12 col-sm-12" key={item.id}>
-        <div className="inner-box">
-          <div className="content">
-            <span className="company-logo">
-              <Image width={50} height={49} src={item.logo} alt="item brand" />
-            </span>
-            <h4>
-              <Link href={`/job-single/${item.id}`}>{item.jobTitle}</Link>
-            </h4>
-
-            <ul className="job-info">
-              <li>
-                <span className="icon flaticon-briefcase"></span>
-                {item.company}
-              </li>
-              {/* compnay info */}
-              <li>
-                <span className="icon flaticon-map-locator"></span>
-                {item.location}
-              </li>
-              {/* location info */}
-              <li>
-                <span className="icon flaticon-clock-3"></span> {item.time}
-              </li>
-              {/* time info */}
-              <li>
-                <span className="icon flaticon-money"></span> {item.salary}
-              </li>
-              {/* salary info */}
-            </ul>
-            {/* End .job-info */}
-
-            <ul className="job-other-info">
-              {item?.jobType?.map((val, i) => (
-                <li key={i} className={`${val.styleClass}`}>
-                  {val.type}
-                </li>
-              ))}
-            </ul>
-            {/* End .job-other-info */}
-
-            <button className="bookmark-btn">
-              <span className="flaticon-bookmark"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-      // End all jobs
-    ));
-
-  // sort handler
+  // Handlers
   const sortHandler = (e) => {
     dispatch(addSort(e.target.value));
   };
 
-  // per page handler
   const perPageHandler = (e) => {
-    const pageData = JSON.parse(e.target.value);
-    dispatch(addPerPage(pageData));
+    const value = JSON.parse(e.target.value);
+    dispatch(addPerPage(value));
   };
 
-  // clear all filters
   const clearAll = () => {
     dispatch(addKeyword(""));
     dispatch(addLocation(""));
     dispatch(addCategory(""));
     dispatch(addJobTypeSelect(""));
-    dispatch(addDatePosted(""));
     dispatch(addExperienceSelect(""));
     dispatch(addSalary({ min: 0, max: 20000 }));
     dispatch(addSort(""));
-    dispatch(addPerPage({ start: 0, end: 0 }));
+    dispatch(addPerPage({ start: 0, end: 16 }));
   };
+
+  // Apply filters and sort
+  let content = jobs
+    .filter(keywordFilter)
+    .filter(locationFilter)
+    .filter(categoryFilter)
+    .filter(jobTypeFilter)
+    .filter(experienceFilter)
+    .sort(sortFilter)
+    .slice(perPage.start, perPage.end || 16)
+    .map((item) => (
+      <div key={item.id} className="job-block col-lg-6 col-md-12 col-sm-12">
+        <div className="inner-box">
+          <div className="content">
+            <h4>
+              <Link href={`/job-single/${item.id}`}>{item.jobRoleTitle}</Link>
+            </h4>
+            <ul className="job-info">
+              <li>
+                <span className="icon flaticon-briefcase"></span>
+                {item.specialisms}
+              </li>
+              <li>
+                <span className="icon flaticon-map-locator"></span>
+                {item.city}, {item.country}
+              </li>
+              <li>
+                <span className="icon flaticon-money"></span> ${item.offeredSalary}
+              </li>
+              <li>
+                <span className="icon flaticon-clock-3"></span> {item.careerLevel}
+              </li>
+              <li className={`${item.jobType.toLowerCase().replace(' ', '-')}`}>
+                {item.jobType}
+              </li>
+            </ul>
+         
+          </div>
+        </div>
+      </div>
+    ));
+
+  if (loading) return <div>Loading jobs...</div>;
+  if (error) return <div>Error loading jobs: {error.message}</div>;
 
   return (
     <>
       <div className="ls-switcher">
         <JobSelect />
-        {/* End .showing-result */}
-
         <div className="sort-by">
-          {keyword !== "" ||
-          location !== "" ||
-          category !== "" ||
-          jobTypeSelect !== "" ||
-          datePosted !== "" ||
-          experienceSelect !== "" ||
-          salary?.min !== 0 ||
-          salary?.max !== 20000 ||
-          sort !== "" ||
-          perPage.start !== 0 ||
-          perPage.end !== 0 ? (
+          {(keyword || location || category || jobTypeSelect || experienceSelect || salary?.min || salary?.max || sort || perPage.start || perPage.end) && (
             <button
               onClick={clearAll}
               className="btn btn-danger text-nowrap me-2"
@@ -206,7 +178,7 @@ const FilterJobBox = () => {
             >
               Clear All
             </button>
-          ) : undefined}
+          )}
 
           <select
             value={sort}
@@ -217,57 +189,21 @@ const FilterJobBox = () => {
             <option value="asc">Newest</option>
             <option value="des">Oldest</option>
           </select>
-          {/* End select */}
 
           <select
-            onChange={perPageHandler}
-            className="chosen-single form-select ms-3 "
+            className="chosen-single form-select ms-3"
             value={JSON.stringify(perPage)}
+            onChange={perPageHandler}
           >
-            <option
-              value={JSON.stringify({
-                start: 0,
-                end: 0,
-              })}
-            >
-              All
-            </option>
-            <option
-              value={JSON.stringify({
-                start: 0,
-                end: 10,
-              })}
-            >
-              10 per page
-            </option>
-            <option
-              value={JSON.stringify({
-                start: 0,
-                end: 20,
-              })}
-            >
-              20 per page
-            </option>
-            <option
-              value={JSON.stringify({
-                start: 0,
-                end: 30,
-              })}
-            >
-              30 per page
-            </option>
+            <option value={JSON.stringify({ start: 0, end: 0 })}>All</option>
+            <option value={JSON.stringify({ start: 0, end: 10 })}>10 per page</option>
+            <option value={JSON.stringify({ start: 0, end: 20 })}>20 per page</option>
+            <option value={JSON.stringify({ start: 0, end: 30 })}>30 per page</option>
           </select>
-          {/* End select */}
         </div>
-        {/* End sort by filter */}
       </div>
-      {/* <!-- ls Switcher --> */}
-
       <div className="row">{content}</div>
-      {/* End .row with jobs */}
-
-      <Pagination />
-      {/* <!-- End Pagination --> */}
+      <Pagination/>
     </>
   );
 };

@@ -32,10 +32,10 @@ export default function JobSelect() {
     };
 
     // salary handler
-    const salaryHandler = (e) => {
-        const data = JSON.parse(e.target.value);
-        dispatch(addSalary(data));
-    };
+    // const salaryHandler = (e) => {
+    //     const data = JSON.parse(e.target.value);
+    //     dispatch(addSalary(data));
+    // };
 
     return (
         <>
@@ -88,7 +88,7 @@ export default function JobSelect() {
                     </div>
                     {/* End ecperience level filter */}
 
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <select
                             onChange={salaryHandler}
                             className="chosen-single form-select"
@@ -135,7 +135,7 @@ export default function JobSelect() {
                                 15000 - 20000
                             </option>
                         </select>
-                    </div>
+                    </div> */}
                     {/* End salary estimate filter */}
                 </div>
             </div>

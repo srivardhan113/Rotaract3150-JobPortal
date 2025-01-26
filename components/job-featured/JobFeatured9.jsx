@@ -11,9 +11,9 @@ const JobFeatured = () => {
   const { latestJob } = useSelector((state) => state.job);
   const [jobSlider, setJobSlider] = useState([
     { id: 1, name: "Freelancer", value: "Freelancer", isChecked: false },
-    { id: 2, name: "Full Time", value: "Full-time", isChecked: false },
+    { id: 2, name: "Full-Time", value: "Full Time", isChecked: false },
     { id: 3, name: "Internship", value: "Internship", isChecked: false },
-    { id: 4, name: "Part-time", value: "Part-time", isChecked: false },
+    { id: 4, name: "Part-time", value: "Part Time", isChecked: false },
   ]);
   const [jobFeatured, setJobFeatured] = useState([]);
   const [loading, setLoading] = useState(true);

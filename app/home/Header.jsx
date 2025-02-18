@@ -23,9 +23,15 @@ const Header = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    sessionStorage.removeItem("authToken");
-    sessionStorage.removeItem("type");
-    router.push("/login");
+    sessionStorage.clear();
+  
+  // Clear cookies
+  document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  document.cookie = 'companyId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  
+  router.push('/login');
   };
 
   const changeBackground = () => {

@@ -2,6 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     latestJob: ["full-time"],
+    // Add this to your initialState
+salaryRanges: [
+    { id: 1, value: { min: 0, max: 5000 }, label: "Salary estimate", isChecked: false },
+    { id: 2, value: { min: 0, max: 5000 }, label: "0 - 5000", isChecked: false },
+    { id: 3, value: { min: 5000, max: 10000 }, label: "5000 - 10000", isChecked: false },
+    { id: 4, value: { min: 10000, max: 15000 }, label: "10000 - 15000", isChecked: false },
+    { id: 5, value: { min: 15000, max: 20000 }, label: "15000 - 20000", isChecked: false },
+],
     category: [
         {
             id: 1,
@@ -28,25 +36,25 @@ const initialState = {
         {
             id: 1,
             name: "Freelancer",
-            value: "freelancer",
+            value: "Freelancer",
             isChecked: false,
         },
         {
             id: 2,
             name: "Full Time",
-            value: "full-time",
+            value: "Full Time",
             isChecked: false,
         },
         {
             id: 3,
             name: "Part Time",
-            value: "part-time",
+            value: "Part Time",
             isChecked: false,
         },
         {
             id: 4,
             name: "Temporary",
-            value: "temporary",
+            value: "Temporary",
             isChecked: false,
         },
     ],
@@ -74,16 +82,21 @@ const initialState = {
         },
     ],
     experienceLavel: [
-        { id: 1, name: "Fresh", value: "fresh", isChecked: false },
-        { id: 2, name: "1 Year", value: "1-year", isChecked: false },
-        { id: 3, name: "2 Year", value: "2-year", isChecked: false },
-        { id: 4, name: "3 Year", value: "3-year", isChecked: false },
+        { id: 1, name: "Fresh", value: "No Experience", isChecked: false },
+        { id: 2, name: "Less than 1 Year", value: "Less than 1 year", isChecked: false },
+        { id: 3, name: "1-2 Years", value: "1-2 years", isChecked: false },
+        { id: 4, name: "3-5 Years", value: "3-5 years", isChecked: false },
         {
             id: 5,
-            name: "4 Year",
-            value: "4-year",
+            name: "5-10 Years",
+            value: "5-10 years",
             isChecked: false,
-        },
+        },{
+            id:6,
+            name:"10+ Years",
+            value:"10+ years",
+            isChecked:false,
+        }
     ],
     tags: [
         {
@@ -123,6 +136,26 @@ export const jobSlice = createSlice({
     name: "job",
     initialState,
     reducers: {
+        // Add these to your reducers
+            salaryRangeCheck: (state, { payload }) => {
+                state?.salaryRanges?.map((item) => {
+                    item.isChecked = false;
+                    if (item.id === payload) {
+                        item.isChecked = true;
+                    }
+                    return {
+                        ...item,
+                    };
+                });
+            },
+            clearSalaryRangeToggle: (state) => {
+                state?.salaryRanges?.map((item) => {
+                    item.isChecked = false;
+                    return {
+                        ...item,
+                    };
+                });
+            },
         addLatestJob: (state, { payload }) => {
             const isExist = state.latestJob?.includes(payload);
             if (isExist) {
@@ -206,6 +239,8 @@ export const {
     datePostCheck,
     clearDatePostToggle,
     experienceLavelCheck,
+    salaryRangeCheck,          // Add these
+    clearSalaryRangeToggle,    
     clearExperienceToggle,
 } = jobSlice.actions;
 export default jobSlice.reducer;

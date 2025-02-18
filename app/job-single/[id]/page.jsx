@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
-import jobs from "@/data/job-featured";
-// import LoginPopup from "@/components/common/form/login/LoginPopup";
+import { useState, useEffect ,use} from "react";
+import axios from "axios";
 import FooterDefault from "@/app/home/Footer";
 import DefaulHeader from "@/app/home/Header";
 import MobileMenu from "@/components/header/MobileMenu";
@@ -9,28 +9,97 @@ import RelatedJobs from "@/components/job-single-pages/related-jobs/RelatedJobs"
 import JobOverView from "@/components/job-single-pages/job-overview/JobOverView";
 import JobSkills from "@/components/job-single-pages/shared-components/JobSkills";
 import CompnayInfo from "@/components/job-single-pages/shared-components/CompanyInfo";
-// import MapJobFinder from "@/components/job-listing-pages/components/MapJobFinder";
-// import SocialTwo from "@/components/job-single-pages/social/SocialTwo";
 import JobDetailsDescriptions from "@/components/job-single-pages/shared-components/JobDetailsDescriptions";
 import ApplyJobModalContent from "@/components/job-single-pages/shared-components/ApplyJobModalContent";
 import Image from "next/image";
 
-// export const metadata = {
-//   title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-//   description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-// };
-
 const JobSingleDynamicV1 = ({ params }) => {
-  const id = params.id;
-  const company = jobs.find((item) => item.id == id) || jobs[0];
+ const resolvedParams = use(params);
+  const [jobData, setJobData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const fetchJobData = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/get-job?id=${resolvedParams.id}`);
+        console.log(response.data);
+        setJobData(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchJobData();
+  }, [resolvedParams.id]);
+
+  if (loading) {
+    return <div className="text-center py-10">Loading job details...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-10 text-red-500">Error loading job: {error}</div>;
+  }
+
+  if (!jobData) {
+    return <div className="text-center py-10">Job not found</div>;
+  }
+
+  // Construct job type array for UI
+
+  const jobTypeArray = [{ type: jobData.jobType, styleClass: 'type-remote' }];
+  
+  // Convert responsibilities string to array of items
+  const responsibilitiesList = jobData.keyResponsibilities
+    .split('.')
+    .map(item => item.trim())
+    .filter(item => item.length > 0);
+    const skillsandwork = jobData.skillsAndExperience
+    .split('.')
+    .map(item => item.trim())
+    .filter(item => item.length > 0);
+    const socialLinks = jobData.company?.socialLinks || [];
+
+// You can place this component definition outside your main component
+const SocialMediaLinks = ({ socialLinks }) => {
+  // Helper function to get URL by platform name
+  const getLinkByPlatform = (platform) => {
+    const link = socialLinks.find(item => item.platform === platform);
+    return link ? link.url : "#";
+  };
+
+  // Add http/https if missing from URL
+  const formatUrl = (url) => {
+    if (!url || url === "#") return "#";
+    return url.startsWith("http") ? url : `https://${url}`;
+  };
+  
+  return (
+    <li>
+      Social media:
+      <div className="social-links">
+        <a href={formatUrl(getLinkByPlatform("facebook"))} target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-facebook-f"></i>
+        </a>
+        <a href={formatUrl(getLinkByPlatform("twitter"))} target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-twitter"></i>
+        </a>
+        <a href={formatUrl(getLinkByPlatform("instagram"))} target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-instagram"></i>
+        </a>
+        <a href={formatUrl(getLinkByPlatform("linkedin"))} target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </li>
+  );
+};
   return (
     <>
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
-
-      {/* <LoginPopup /> */}
-      {/* End Login Popup Modal */}
 
       <DefaulHeader />
       {/* <!--End Main Header --> */}
@@ -49,43 +118,52 @@ const JobSingleDynamicV1 = ({ params }) => {
                     <Image
                       width={100}
                       height={98}
-                      src={company?.logo}
-                      alt="logo"
+                      src={`https://backend.rotaracthub.in/api/companies/get-image?companyId=${jobData.companyId}`}
+                      className="rounded"
+                      alt="company logo"
                     />
                   </span>
-                  <h4>{company?.jobTitle}</h4>
+                  <h4>{jobData.jobRoleTitle}</h4>
 
                   <ul className="job-info">
                     <li>
                       <span className="icon flaticon-briefcase"></span>
-                      {company?.company}
+                      {jobData.company.name}
                     </li>
-                    {/* compnay info */}
+                    {/* company info */}
                     <li>
                       <span className="icon flaticon-map-locator"></span>
-                      {company?.location}
+                      {`${jobData.city}, ${jobData.country}`}
                     </li>
                     {/* location info */}
                     <li>
                       <span className="icon flaticon-clock-3"></span>{" "}
-                      {company?.time}
+                      {new Date(jobData.posteddate).toLocaleDateString()}
                     </li>
                     {/* time info */}
                     <li>
                       <span className="icon flaticon-money"></span>{" "}
-                      {company?.salary}
+                      {`₹${jobData.offeredSalary}`}
                     </li>
                     {/* salary info */}
                   </ul>
                   {/* End .job-info */}
 
                   <ul className="job-other-info">
-                    {company?.jobType?.map((val, i) => (
-                      <li key={i} className={`${val.styleClass}`}>
-                        {val.type}
-                      </li>
-                    ))}
-                  </ul>
+  {jobData.company.industry.split(',').map((val, i) => (
+    <li
+      key={i}
+      className="btn btn-light px-3 py-1 rounded-pill"
+      style={{
+        backgroundColor: i === 0 ? "#b7d2f4d2" : i % 2 === 0 ? "#b7f4c2d2" : "#f0e1a8d2",
+        color: i === 0 ? "#004085" : i % 2 === 0 ? "#155724" : "#856404", // Adjusted text colors
+      }}
+    >
+      {val.trim()} {/* Trim removes extra spaces */}
+    </li>
+  ))}
+</ul>
+
                   {/* End .job-other-info */}
                 </div>
                 {/* End .content */}
@@ -99,9 +177,6 @@ const JobSingleDynamicV1 = ({ params }) => {
                   >
                     Apply For Job
                   </a>
-                  {/* <button className="bookmark-btn">
-                    <i className="flaticon-bookmark"></i>
-                  </button> */}
                 </div>
                 {/* End apply for job btn */}
 
@@ -125,7 +200,7 @@ const JobSingleDynamicV1 = ({ params }) => {
                       </div>
                       {/* End modal-header */}
 
-                      <ApplyJobModalContent />
+                      <ApplyJobModalContent jobId={resolvedParams.id}/>
                       {/* End PrivateMessageBox */}
                     </div>
                     {/* End .send-private-message-wrapper */}
@@ -143,16 +218,25 @@ const JobSingleDynamicV1 = ({ params }) => {
           <div className="auto-container">
             <div className="row">
               <div className="content-column col-lg-8 col-md-12 col-sm-12">
-                <JobDetailsDescriptions />
+                <div className="job-detail">
+                  <h4>Job Description</h4>
+                  <p>{jobData.jobDescription}</p>
+                  
+                  <h4>Key Responsibilities</h4>
+                  <ul className="list-style-three">
+                    {responsibilitiesList.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                  
+                  <h4>Skills & Experience</h4>
+                  <ul className="list-style-three">
+                    {skillsandwork.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
                 {/* End jobdetails content */}
-
-                {/* <div className="other-options">
-                  <div className="social-share">
-                    <h5>Share this job</h5>
-                    <SocialTwo />
-                  </div>
-                </div> */}
-                {/* <!-- Other Options --> */}
 
                 <div className="related-jobs">
                   <div className="title-box">
@@ -174,22 +258,58 @@ const JobSingleDynamicV1 = ({ params }) => {
                   <div className="sidebar-widget">
                     {/* <!-- Job Overview --> */}
                     <h4 className="widget-title">Job Overview</h4>
-                    <JobOverView />
-
-                    {/* <!-- Map Widget --> */}
-                    {/* <h4 className="widget-title mt-5">Job Location</h4>
                     <div className="widget-content">
-                      <div className="map-outer">
-                        <div style={{ height: "300px", width: "100%" }}>
-                          <MapJobFinder />
-                        </div>
-                      </div>
-                    </div> */}
-                    {/* <!--  Map Widget --> */}
+                      <ul className="job-overview">
+                        <li>
+                          <i className="icon icon-calendar"></i>
+                          <h5>Date Posted:</h5>
+                          <span>{new Date(jobData.posteddate).toLocaleDateString()}</span>
+                        </li>
+                        <li>
+                          <i className="icon icon-expiry"></i>
+                          <h5>Expiration date:</h5>
+                          <span>{new Date(jobData.applicationDeadline).toLocaleDateString()}</span>
+                        </li>
+                        <li>
+                          <i className="icon icon-location"></i>
+                          <h5>Location:</h5>
+                          <span>{jobData.completeAddress}</span>
+                        </li>
+                        <li>
+                          <i className="icon icon-user-2"></i>
+                          <h5>Career Level:</h5>
+                          <span>{jobData.careerLevel}</span>
+                        </li>
+                        <li>
+                          <i className="icon icon-clock"></i>
+                          <h5>Experience:</h5>
+                          <span>{jobData.experience}</span>
+                        </li>
+                        <li>
+                          <i className="icon icon-rate"></i>
+                          <h5>Salary:</h5>
+                          <span>₹{jobData.offeredSalary}</span>
+                        </li>
+                        {/* <li>
+                          <i className="icon icon-tag"></i>
+                          <h5>Industry:</h5>
+                          <span>{jobData.industry}</span>
+                        </li> */}
+                        <li>
+                          <i className="icon icon-degree"></i>
+                          <h5>Qualification:</h5>
+                          <span>{jobData.qualification}</span>
+                        </li>
+                      </ul>
+                    </div>
 
-                    <h4 className="widget-title">Job Skills</h4>
+                    <h4 className="widget-title mt-4 ">Job Skills</h4>
                     <div className="widget-content">
-                      <JobSkills />
+                      <ul className="job-skills">
+                        {jobData.skillsAndExperience.split(',').map((skill, index) => (
+                          <li key={index}><a href="#">{skill.trim()}</a></li>
+                        ))}
+                      </ul>
                     </div>
                     {/* <!-- Job Skills --> */}
                   </div>
@@ -202,27 +322,54 @@ const JobSingleDynamicV1 = ({ params }) => {
                           <Image
                             width={54}
                             height={53}
-                            src={company.logo}
+                            src={`https://backend.rotaracthub.in/api/companies/get-image?companyId=${jobData.companyId}`}
+                            className="rounded"
                             alt="resource"
                           />
                         </div>
-                        <h5 className="company-name">{company.company}</h5>
+                        <h5 className="company-name">{jobData.company.name}</h5>
                         <a href="#" className="profile-link">
                           View company profile
                         </a>
                       </div>
                       {/* End company title */}
 
-                      <CompnayInfo />
+                      <div className="company-info">
+                        <ul>
+                          <li>Primary industry: <span>{jobData.company.industry.split(',').slice(0,1)}</span></li>
+                          <li>Company size: <span>{jobData.company.teamSize}</span></li>
+                          <li>Founded in: <span>{jobData.company.establishedSince}</span></li>
+                          <li>Phone: <span>{jobData.company.phone}</span></li>
+                          <li>Email: <span>{jobData.company.user.emailAddress}</span></li>
+                          <li>Location: <span>{`${jobData.city}, ${jobData.country}`}</span></li>
+
+                          <ul>
+                        {/* other list items... */}
+                        {socialLinks.length > 0 ? 
+                          <SocialMediaLinks socialLinks={socialLinks} /> :
+                          <li>
+                            Social media:
+                            <div className="social-links">
+                              <a href="#"><i className="fab fa-facebook-f"></i></a>
+                              <a href="#"><i className="fab fa-twitter"></i></a>
+                              <a href="#"><i className="fab fa-instagram"></i></a>
+                              <a href="#"><i className="fab fa-linkedin-in"></i></a>
+                            </div>
+                          </li>
+                        }
+                      </ul>
+                       
+                        </ul>
+                      </div>
 
                       <div className="btn-box">
                         <a
-                          href="#"
+                          href={`mailto:${jobData.company.user.emailAddress}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="theme-btn btn-style-three"
                         >
-                          {company?.link}
+                          Contact Employer
                         </a>
                       </div>
                       {/* End btn-box */}

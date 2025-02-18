@@ -1,4 +1,3 @@
-
 'use client'
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,7 +6,7 @@ import {
     addJobTypeSelect,
     addSalary,
 } from "../../../features/filter/filterSlice";
-
+import { salaryRangeCheck } from "../../../features/job/jobSlice"; 
 export default function JobSelect() {
     const { jobList } = useSelector((state) => state.filter);
     const { jobTypeList, datePost, experienceLavel } = useSelector(
@@ -15,6 +14,11 @@ export default function JobSelect() {
     );
 
     const dispatch = useDispatch();
+    const salaryHandler = (e) => {
+        const data = JSON.parse(e.target.value);
+        dispatch(addSalary(data));
+        dispatch(salaryRangeCheck(data.id));
+    };
 
     // job type handler
     const jobTypeHandler = (e) => {
@@ -30,12 +34,16 @@ export default function JobSelect() {
     const experienceHandler = (e) => {
         dispatch(addExperienceSelect(e.target.value));
     };
+ 
 
-    // salary handler
-    // const salaryHandler = (e) => {
-    //     const data = JSON.parse(e.target.value);
-    //     dispatch(addSalary(data));
-    // };
+
+    const salaryRanges = [
+        { id: 1, value: { min:0,max:5000 }, label: "Salary estimate" },
+        { id: 2, value: { min: 0, max: 5000 }, label: "0 - 5000" },
+        { id: 3, value: { min: 5000, max: 10000 }, label: "5000 - 10000" },
+        { id: 4, value: { min: 10000, max: 15000 }, label: "10000 - 15000" },
+        { id: 5, value: { min: 15000, max: 20000 }, label: "15000 - 20000" },
+    ];
 
     return (
         <>
@@ -86,57 +94,28 @@ export default function JobSelect() {
                             ))}
                         </select>
                     </div>
-                    {/* End ecperience level filter */}
+                    {/* End experience filter */}
 
-                    {/* <div className="form-group">
-                        <select
-                            onChange={salaryHandler}
-                            className="chosen-single form-select"
-                            value={JSON.stringify(jobList.salary)}
-                        >
-                            <option
-                                value={JSON.stringify({
-                                    min: 0,
-                                    max: 20000,
-                                })}
-                            >
-                                Salary estimate
-                            </option>
-                            <option
-                                value={JSON.stringify({
-                                    min: 0,
-                                    max: 5000,
-                                })}
-                            >
-                                0 - 5000
-                            </option>
-                            <option
-                                value={JSON.stringify({
-                                    min: 5000,
-                                    max: 10000,
-                                })}
-                            >
-                                5000 - 10000
-                            </option>
-                            <option
-                                value={JSON.stringify({
-                                    min: 10000,
-                                    max: 15000,
-                                })}
-                            >
-                                10000 - 15000
-                            </option>
-                            <option
-                                value={JSON.stringify({
-                                    min: 15000,
-                                    max: 20000,
-                                })}
-                            >
-                                15000 - 20000
-                            </option>
-                        </select>
-                    </div> */}
-                    {/* End salary estimate filter */}
+                    <div className="form-group">
+            <select
+                onChange={salaryHandler}
+                className="chosen-single form-select"
+                value={JSON.stringify(jobList?.salary)}
+            >
+                {salaryRanges?.map((range) => (
+                    <option
+                        key={range.id}
+                        value={JSON.stringify({
+                            id: range.id,
+                            ...range.value
+                        })}
+                    >
+                        {range.label}
+                    </option>
+                ))}
+            </select>
+        </div>
+                    {/* End salary filter */}
                 </div>
             </div>
         </>

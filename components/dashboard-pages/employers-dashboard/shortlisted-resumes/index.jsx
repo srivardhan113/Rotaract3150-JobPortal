@@ -7,6 +7,7 @@ import CopyrightFooter from "../../CopyrightFooter";
 import WidgetToFilterBox from "./components/WidgetToFilterBox";
 import WidgetContentBox from "./components/WidgetContentBox";
 import MenuToggler from "../../MenuToggler";
+import Applicants from "./components/Applicants";
 
 const index = () => {
   return (
@@ -39,11 +40,16 @@ const index = () => {
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
+                  
                   <h4>Shorlist Resumes</h4>
-                  <WidgetToFilterBox />
-                </div>
+                  {/* <WidgetToFilterBox /> */}
+                 
+                  
                 {/* End widget top filter box */}
-                <WidgetContentBox />
+                <Applicants />
+                
+              
+                </div>
               </div>
               {/* <!-- applicants Widget --> */}
             </div>

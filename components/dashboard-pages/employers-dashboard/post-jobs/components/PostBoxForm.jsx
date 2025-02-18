@@ -1,9 +1,35 @@
 "use client";
 
-// import Map from "../../../Map";
+import { useState } from "react";
 import Select from "react-select";
+import axios from "axios";
 
 const PostBoxForm = () => {
+  const [formData, setFormData] = useState({
+    companyId: "",
+    jobRoleTitle: "",
+    jobDescription: "",
+    keyResponsibilities: "",
+    skillsAndExperience: "",
+    emailAddress: "",
+    specialisms: "",
+    jobType: "",
+    offeredSalary: "",
+    careerLevel: "",
+    experience: "",
+    gender: "",
+    industry: "",
+    qualification: "",
+    applicationDeadline: "",
+    country: "",
+    city: "",
+    completeAddress: ""
+  });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const specialisms = [
     {
       value: "Arts, Media, and Entertainment",
@@ -55,223 +81,340 @@ const PostBoxForm = () => {
     },
   ];
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (selectedOptions, actionMeta) => {
+    if (actionMeta.name === "specialisms" || actionMeta.name === "industry") {
+      const values = selectedOptions.map(option => option.value).join(", ");
+      setFormData(prev => ({
+        ...prev,
+        [actionMeta.name]: values
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setIsLoading(true);
+
+    try {
+      // Validate all required fields are present
+      const requiredFields = [
+        "companyId", "jobRoleTitle", "jobDescription", "keyResponsibilities",
+        "skillsAndExperience", "emailAddress", "specialisms", "jobType",
+        "offeredSalary", "careerLevel", "experience", "gender", "industry",
+        "qualification", "applicationDeadline", "country", "city", "completeAddress"
+      ];
+
+      const missingFields = requiredFields.filter(field => !formData[field]);
+      if (missingFields.length > 0) {
+        setError(`Missing required fields: ${missingFields.join(", ")}`);
+        return;
+      }
+
+      // Format the data as needed
+      const submitData = {
+        ...formData,
+        companyId: parseInt(formData.companyId),
+        offeredSalary: parseFloat(formData.offeredSalary),
+      };
+
+      // Make the API call
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/postJob`, submitData);
+      console.log(response);
+      setSuccess("Job posted successfully!");
+      // Optionally reset form
+      setFormData({
+        companyId: "",
+        jobRoleTitle: "",
+        jobDescription: "",
+        keyResponsibilities: "",
+        skillsAndExperience: "",
+        emailAddress: "",
+        specialisms: "",
+        jobType: "",
+        offeredSalary: "",
+        careerLevel: "",
+        experience: "",
+        gender: "",
+        industry: "",
+        qualification: "",
+        applicationDeadline: "",
+        country: "",
+        city: "",
+        completeAddress: ""
+      });
+
+    } catch (err) {
+      setError(err.response?.data?.error || "Failed to create job posting");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <form className="default-form">
+    <form className="default-form" onSubmit={handleSubmit}>
+      {error && <div className="alert alert-danger">{error}</div>}
+      {success && <div className="alert alert-success">{success}</div>}
+      
       <div className="row">
-        {/* <!-- Input --> */}
+        <div className="form-group col-lg-12 col-md-12">
+          <label>Company ID</label>
+          <input 
+            type="text" 
+            name="companyId" 
+            value={formData.companyId}
+            onChange={handleInputChange}
+            placeholder="Enter Company ID" 
+          />
+        </div>
+
         <div className="form-group col-lg-12 col-md-12">
           <label>Job Role Title</label>
-          <input type="text" name="name" placeholder="Title" />
+          <input 
+            type="text" 
+            name="jobRoleTitle" 
+            value={formData.jobRoleTitle}
+            onChange={handleInputChange}
+            placeholder="Title" 
+          />
         </div>
 
-        {/* <!-- About Company --> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Job Description</label>
-          <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
+          <textarea 
+            name="jobDescription"
+            value={formData.jobDescription}
+            onChange={handleInputChange}
+            placeholder="Enter job description"
+          ></textarea>
         </div>
 
-        {/* <!-- About Company --> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Key Responsibilities</label>
-          <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
+          <textarea 
+            name="keyResponsibilities"
+            value={formData.keyResponsibilities}
+            onChange={handleInputChange}
+            placeholder="Enter key responsibilities"
+          ></textarea>
         </div>
 
-        {/* <!-- About Company --> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Skill & Experience</label>
-          <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
+          <textarea 
+            name="skillsAndExperience"
+            value={formData.skillsAndExperience}
+            onChange={handleInputChange}
+            placeholder="Enter required skills and experience"
+          ></textarea>
         </div>
 
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Email Address</label>
-          <input type="text" name="name" placeholder="" />
+          <input 
+            type="email" 
+            name="emailAddress"
+            value={formData.emailAddress}
+            onChange={handleInputChange}
+            placeholder="Enter email address" 
+          />
         </div>
 
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Username</label>
-          <input type="text" name="name" placeholder="" />
-        </div> */}
-
-        {/* <!-- Search Select --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Specialisms </label>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Specialisms</label>
           <Select
-            defaultValue={[specialisms[2]]}
             isMulti
-            name="colors"
+            name="specialisms"
             options={specialisms}
             className="basic-multi-select"
             classNamePrefix="select"
+            onChange={handleSelectChange}
+            value={specialisms.filter(option => 
+              formData.specialisms.includes(option.value)
+            )}
           />
-        </div> */}
+        </div>
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Job Type</label>
-          <select className="chosen-single form-select">
-            <option>Select</option>
-            <option>Freelancer</option>
-            <option>Full Time</option>
-            <option>Part Time</option>
-            <option>Passion</option>
-            <option>Temporary</option>
+          <select 
+            className="chosen-single form-select"
+            name="jobType"
+            value={formData.jobType}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="Freelancer">Freelancer</option>
+            <option value="Full Time">Full Time</option>
+            <option value="Part Time">Part Time</option>
+            <option value="Temporary">Temporary</option>
           </select>
         </div>
 
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Offered Salary</label>
           <input
             type="number"
+            name="offeredSalary"
+            value={formData.offeredSalary}
+            onChange={handleInputChange}
             className="form-control"
             placeholder="Enter Offered Salary"
             min="0"
-            step="999999999"
           />
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Career Level</label>
-          <select className="chosen-single form-select">
-            <option>Select</option>
-            <option>Entry Level</option>
-            <option>Intern</option>
-            <option>Junior</option>
-            <option>Mid Level</option>
-            <option>Senior</option>
-            <option>Super Expert</option>
+          <select 
+            className="chosen-single form-select"
+            name="careerLevel"
+            value={formData.careerLevel}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="Entry Level">Entry Level</option>
+            <option value="Intern">Intern</option>
+            <option value="Junior">Junior</option>
+            <option value="Mid Level">Mid Level</option>
+            <option value="Senior">Senior</option>
           </select>
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Experience</label>
-          <select className="chosen-single form-select">
-            <option>Select</option>
-            <option>No Experience</option>
-            <option>Less than 1 Year</option>
-            <option>1-2 Years</option>
-            <option>2-5 Years</option>
-            <option>5-10 Years</option>
-            <option>10+ Years</option>
+          <select 
+            className="chosen-single form-select"
+            name="experience"
+            value={formData.experience}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="No Experience">No Experience</option>
+            <option value="1-2 Years">1-2 Years</option>
+            <option value="2-5 Years">2-5 Years</option>
+            <option value="5-10 Years">5-10 Years</option>
+            <option value="10+ Years">10+ Years</option>
           </select>
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Gender</label>
-          <select className="chosen-single form-select">
-            <option>Select</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
+          <select 
+            className="chosen-single form-select"
+            name="gender"
+            value={formData.gender}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>Category</label>
+          <label>Industry</label>
           <Select
-            defaultValue={[specialisms[2]]}
             isMulti
-            name="colors"
-            options={specialisms}
+            name="industry"
+            options={specialisms}  // Using same options as specialisms
             className="basic-multi-select"
             classNamePrefix="select"
+            onChange={handleSelectChange}
+            value={specialisms.filter(option => 
+              formData.industry.includes(option.value)
+            )}
           />
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Qualification</label>
-          <select className="chosen-single form-select">
-            <option>Select</option>
-            <option>High School</option>
-            <option>Associate Degree</option>
-            <option>Bachelor's Degree</option>
-            <option>Master's Degree</option>
-            <option>Doctorate (PhD)</option>
-            <option>Diploma</option>
-            <option>Certification</option>
-            <option>Professional Degree</option>
+          <select 
+            className="chosen-single form-select"
+            name="qualification"
+            value={formData.qualification}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="High School">High School</option>
+            <option value="Bachelor's Degree">Bachelor's Degree</option>
+            <option value="Master's Degree">Master's Degree</option>
+            <option value="Doctorate">Doctorate</option>
           </select>
         </div>
 
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Application Deadline Date</label>
-          <input type="text" name="name" placeholder="06.04.2020" />
+          <input 
+            type="date" 
+            name="applicationDeadline"
+            value={formData.applicationDeadline}
+            onChange={handleInputChange}
+          />
         </div>
 
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
-          <select className="chosen-single form-select">
-            <option>Australia</option>
-            <option>Pakistan</option>
-            <option>Chaina</option>
-            <option>Japan</option>
-            <option>India</option>
+          <select 
+            className="chosen-single form-select"
+            name="country"
+            value={formData.country}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="Australia">Australia</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="China">China</option>
+            <option value="Japan">Japan</option>
+            <option value="India">India</option>
           </select>
         </div>
 
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
-          <select className="chosen-single form-select">
-            <option>Melbourne</option>
-            <option>Pakistan</option>
-            <option>Chaina</option>
-            <option>Japan</option>
-            <option>India</option>
+          <select 
+            className="chosen-single form-select"
+            name="city"
+            value={formData.city}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="Melbourne">Melbourne</option>
+            <option value="Sydney">Sydney</option>
+            <option value="Brisbane">Brisbane</option>
+            <option value="Perth">Perth</option>
           </select>
         </div>
 
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Complete Address</label>
           <input
             type="text"
-            name="name"
-            placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia."
+            name="completeAddress"
+            value={formData.completeAddress}
+            onChange={handleInputChange}
+            placeholder="Enter complete address"
           />
         </div>
 
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Find On Map</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia."
-          />
-        </div> */}
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-3 col-md-12">
-          <label>Latitude</label>
-          <input type="text" name="name" placeholder="Melbourne" />
-        </div> */}
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-3 col-md-12">
-          <label>Longitude</label>
-          <input type="text" name="name" placeholder="Melbourne" />
-        </div> */}
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-12 col-md-12">
-          <button className="theme-btn btn-style-three">Search Location</button>
-        </div> */}
-
-        {/* <div className="form-group col-lg-12 col-md-12">
-          <div className="map-outer">
-            <div style={{ height: "420px", width: "100%" }}>
-              <Map />
-            </div>
-          </div>
-        </div> */}
-
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12 text-right">
-          <button className="theme-btn btn-style-one">Next</button>
+          <button 
+            type="submit" 
+            className="theme-btn btn-style-one"
+            disabled={isLoading}
+          >
+            {isLoading ? "Posting..." : "Post Job"}
+          </button>
         </div>
       </div>
     </form>

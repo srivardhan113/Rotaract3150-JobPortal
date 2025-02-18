@@ -1,67 +1,102 @@
-import Link from "next/link";
-import jobs from "../../../data/job-featured";
-import Image from "next/image";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import axios from 'axios';
 
-const RelatedJobs = () => {
+const JobListings = () => {
+  const [jobs, setJobs] = useState([]);
+  const [filters, setFilters] = useState({
+    jobType: '',
+    datePosted: 'All',
+    experienceLevel: '',
+    minSalary: '',
+    maxSalary: '',
+    tags: '',
+    city: '',
+    searchbar: '',
+    page: 1,
+    limit:6,
+    sortField: 'applicationDeadline',
+    sortOrder: 'asc'
+  });
+
+  const fetchJobs = async () => {
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/filterjobs`, filters);
+      if (response.data.success) {
+        setJobs(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching jobs:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  }, [filters]);
+
+  const formatSalary = (salary) => {
+    return `₹${salary.toLocaleString()}`;
+  };
+
   return (
     <>
-      {jobs.slice(3, 7).map((item) => (
+      {jobs.map((item) => (
         <div className="job-block" key={item.id}>
           <div className="inner-box">
             <div className="content">
               <span className="company-logo">
-                <Image
+                <img
+                  className='rounded'
                   width={50}
                   height={49}
-                  src={item.logo}
-                  alt="item brand"
+                  src={`https://backend.rotaracthub.in/api/companies/get-image?companyId=${item.company.id}`}
+                  alt="company logo"
                 />
               </span>
+
               <h4>
-                <Link href={`/job-single/${item.id}`}>{item.jobTitle}</Link>
+                <Link href={`/job-single/${item.id}`}>{item.jobRoleTitle}</Link>
               </h4>
 
               <ul className="job-info">
                 <li>
                   <span className="icon flaticon-briefcase"></span>
-                  {item.company}
+                  {item.company.name}
                 </li>
-                {/* compnay info */}
                 <li>
                   <span className="icon flaticon-map-locator"></span>
-                  {item.location}
+                  {item.city}, {item.country}
                 </li>
-                {/* location info */}
                 <li>
-                  <span className="icon flaticon-clock-3"></span> {item.time}
+                  <span className="icon flaticon-clock-3"></span>
+                  {new Date(item.posteddate).toLocaleDateString()}
                 </li>
-                {/* time info */}
                 <li>
-                  <span className="icon flaticon-money"></span> {item.salary}
+                  <span className="icon flaticon-money"></span>
+                  {formatSalary(item.offeredSalary)}
                 </li>
-                {/* salary info */}
               </ul>
-              {/* End .job-info */}
 
               <ul className="job-other-info">
-                {item.jobType.map((val, i) => (
-                  <li key={i} className={`${val.styleClass}`}>
-                    {val.type}
+                <li className="time">
+                  {item.jobType}
+                </li>
+                {item.specialisms.split(', ').map((specialism, index) => (
+                  <li key={index} className="required">
+                    {specialism}
                   </li>
                 ))}
               </ul>
-              {/* End .job-other-info */}
 
-              <button className="bookmark-btn">
+              {/* <button className="bookmark-btn">
                 <span className="flaticon-bookmark"></span>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
-        // End job-block
       ))}
     </>
   );
 };
 
-export default RelatedJobs;
+export default JobListings;

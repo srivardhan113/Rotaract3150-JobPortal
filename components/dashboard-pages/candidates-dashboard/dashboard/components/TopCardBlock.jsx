@@ -1,30 +1,48 @@
+'use client'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 const TopCardBlock = () => {
+  const [data, setData] = useState({
+    totalappliedjobs: 0,
+    totalJobs: 0,
+    totalshortedlistedjobs: 0
+  });
+
+  useEffect(() => {
+    const fetchJobCounts = async () => {
+      try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/gettotaljobscount`, {
+          userId: sessionStorage.getItem('userId') // Replace this with dynamic userId when integrating with authentication
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching job counts:', error);
+      }
+    };
+
+    fetchJobCounts();
+  }, []);
+
   const cardContent = [
     {
       id: 1,
       icon: "flaticon-briefcase",
-      countNumber: "22",
+      countNumber: data.totalappliedjobs,
       metaName: "Applied Jobs",
       uiClass: "ui-blue",
     },
     {
       id: 2,
       icon: "la-file-invoice",
-      countNumber: "9382",
+      countNumber: data.totalJobs,
       metaName: "Job Alerts",
       uiClass: "ui-red",
     },
-    // {
-    //   id: 3,
-    //   icon: "la-comment-o",
-    //   countNumber: "74",
-    //   metaName: "Messages",
-    //   uiClass: "ui-yellow",
-    // },
     {
       id: 4,
       icon: "la-bookmark-o",
-      countNumber: "32",
+      countNumber: data.totalshortedlistedjobs,
       metaName: "Shortlist",
       uiClass: "ui-green",
     },

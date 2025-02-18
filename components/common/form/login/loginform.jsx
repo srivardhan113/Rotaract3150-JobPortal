@@ -3,13 +3,13 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const FormContent = () => {
+const FormContent = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
-  const URL = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`;
+  const URL = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login-cp`;
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -27,16 +27,26 @@ const FormContent = () => {
       const response = await axios.post(URL, {
         emailAddress: email,
         password: password,
+        type:props.userType
       });
 
       if (response.status === 200) {
         // Assuming the API returns a token or relevant user data
         const { token } = response.data;
-        const type = response.data.usertype;
+        const type = response.data.userType;
+        const userId= response.data.id;
+        const companyId=response.data.companyId;
         console.log("token : ", response.data.token, "userType : ", type);
         // Save the token in sessionStorage for the current session
         sessionStorage.setItem("authToken", token);
+        // In your handleSubmit function, after setting sessionStorage:
+        document.cookie = `authToken=${token}; path=/`;
+        document.cookie = `type=${type}; path=/`;
+        document.cookie = `userId=${userId}; path=/`;
+        document.cookie = `companyId=${companyId}; path=/`;
         sessionStorage.setItem("type", type);
+        sessionStorage.setItem("userId",userId);
+        sessionStorage.setItem("companyId",companyId);
 
         // Optionally, save user information if provided in the response
         // Example:
@@ -47,9 +57,11 @@ const FormContent = () => {
       }
     } catch (error) {
       if (error.response && error.response.data) {
+        console.log(error);
         // API error response
         setErrorMessage(error.response.data.message || "Login failed");
       } else {
+        console.log(error)
         // Other errors
         setErrorMessage("Something went wrong. Please try again.");
       }

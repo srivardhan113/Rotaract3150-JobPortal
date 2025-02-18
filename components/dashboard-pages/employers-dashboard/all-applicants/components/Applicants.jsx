@@ -10,7 +10,7 @@ const Applicants = () => {
           className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
           key={candidate.id}
         >
-          <div className="inner-box">
+          <div className="inner-box shadow-lg ">
             <div className="content">
               <figure className="image">
                 <Image
@@ -34,12 +34,12 @@ const Applicants = () => {
                 </li>
                 <li>
                   <span className="icon flaticon-money"></span> $
-                  {candidate.hourlyRate} / hour
+                  {candidate.hourlyRate} 
                 </li>
               </ul>
               {/* End candidate-info */}
 
-              <ul className="post-tags">
+              <ul className="post-tags ">
                 {candidate.tags.map((val, i) => (
                   <li key={i}>
                     <a href="#">{val}</a>

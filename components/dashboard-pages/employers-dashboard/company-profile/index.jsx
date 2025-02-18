@@ -48,31 +48,31 @@ const index = () => {
                                     {/* My Profile Content */}
                                   
                            
-                                    <div className="widget-title">
+                                    {/* <div className="widget-title">
                                         <h4>Social Network</h4>
-                                    </div>
+                                    </div> */}
                                     {/* Social Network Content */}
-                                    <div className="widget-content">
+                                    {/* <div className="widget-content">
                                         <SocialNetworkBox />
-                                    </div>
+                                    </div> */}
         
-                                    <div className="widget-title">
+                                    {/* <div className="widget-title">
                                         <h4>Address</h4>
-                                    </div>
+                                    </div> */}
                                     {/* Contact Information Content */}
-                                    <div className="widget-content">
+                                    {/* <div className="widget-content">
                                         <ContactInfoBox />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             {/* End Contact Information */}
 
                             {/* Save Button */}
-                            <div className="text-center mt-4">
+                            {/* <div className="text-center mt-4">
                                 <button className="theme-btn btn-style-one">
                                     Save
                                 </button>
-                            </div>
+                            </div> */}
 
 
                             

@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 
+// G/UUU
+
 import About from "@/components/pages-menu/about";
 
 export const metadata = {

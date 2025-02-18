@@ -21,23 +21,23 @@ const JobFeatured = () => {
 
   const dispatch = useDispatch();
 
-  // Fetch jobs dynamically based on selected types
-  const fetchJobs = async (selectedTypes) => {
+  // Fetch jobs based on selected type
+  const fetchJobs = async (selectedType) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await axios.get(
-        `https://backend.rotaracthub.in/api/jobs/filter/v2`,
-        {
-          params: {
-            jobType: selectedTypes.join(","),
-            page: 1,
-            limit: 5,
-            sortField: "offeredSalary",
-            sortOrder: "desc",
-          },
-        }
+      const requestBody = {
+        jobType: selectedType,
+        page: 1,
+        limit: 5,
+        sortField: "offeredSalary",
+        sortOrder: "desc",
+      };
+      
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/filterjobs`,
+        requestBody
       );
 
       if (response.data.success && response.data.data.length > 0) {
@@ -53,32 +53,26 @@ const JobFeatured = () => {
     }
   };
 
-  // Update slider state and trigger job fetch
+  // Handle job type selection
   const slideHandler = (id) => {
-    const updatedSliders = jobSlider.map((slide) => {
-      if (slide.id === id) {
-        return { ...slide, isChecked: !slide.isChecked };
-      }
-      return slide;
-    });
+    const updatedSliders = jobSlider.map((slide) => ({
+      ...slide,
+      isChecked: slide.id === id ? !slide.isChecked : false
+    }));
 
     setJobSlider(updatedSliders);
 
-    const selectedTypes = updatedSliders
-      .filter((slide) => slide.isChecked)
-      .map((slide) => slide.value);
+    // Find the selected type, if any
+    const selectedSlide = updatedSliders.find(slide => slide.isChecked);
+    const selectedType = selectedSlide ? selectedSlide.value : '';
 
-    dispatch(addLatestJob(selectedTypes));
-    fetchJobs(selectedTypes);
+    dispatch(addLatestJob(selectedType ? [selectedType] : []));
+    fetchJobs(selectedType);
   };
 
-  // Fetch jobs on initial load (with default selections)
+  // Fetch jobs on initial load
   useEffect(() => {
-    const initialSelectedTypes = jobSlider
-      .filter((slide) => slide.isChecked)
-      .map((slide) => slide.value);
-
-    fetchJobs(initialSelectedTypes);
+    fetchJobs(''); // Initial fetch with no type filter
   }, []);
 
   return (
@@ -109,21 +103,24 @@ const JobFeatured = () => {
           <div className="job-block-five" key={item.id}>
             <div className="inner-box">
               <div className="content">
-                <span className="company-logo">
+                <span className="company-logo rounded">
                   <Image
-                    width={54}
-                    height={53}
-                    src={item.logo}
-                    alt="item brand"
+                    width={50}
+                    height={49}
+                    src={`https://backend.rotaracthub.in/api/companies/get-image?companyId=${item.companyId}`}
+                    alt="logo"
+                    className="rounded"
                   />
                 </span>
                 <h4>
-                  <Link href={`/job-single/${item.id}`}>{item.jobRoleTitle}</Link>
+                  <Link href={`/job-single/${item.id}`}>
+                    {item.jobRoleTitle}
+                  </Link>
                 </h4>
                 <ul className="job-info">
                   <li>
                     <span className="icon flaticon-briefcase"></span>
-                    {item.companyId}
+                    {item.company.name}
                   </li>
                   <li>
                     <span className="icon flaticon-map-locator"></span>
@@ -134,17 +131,18 @@ const JobFeatured = () => {
                     {item.applicationDeadline.slice(0, 10)}
                   </li>
                   <li>
-                    <span className="icon flaticon-money"></span> {item.offeredSalary}
+                    <span className="icon flaticon-money"></span> ₹
+                    {item.offeredSalary}
                   </li>
                 </ul>
               </div>
               <ul className="job-other-info">
-                <li className="job-type">{item.jobType}</li>
+                <li className="btn btn-light text-danger px-3 py-1 rounded-pill" style={{backgroundColor:"#b7d2f4d2"}}>{item.jobType}</li>
               </ul>
 
-              <a href="#" className="theme-btn btn-dark-blue">
+              <Link href={`/job-single/${item.id}`} className="theme-btn btn-dark-blue">
                 Apply Job
-              </a>
+              </Link>
             </div>
           </div>
         ))

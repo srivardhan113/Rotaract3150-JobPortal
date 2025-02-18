@@ -5,20 +5,34 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import candidatesuData from "/app/candidates-dashboard/candidatesMenuData";
 import { isActiveLink } from "../../utils/linkActiveChecker";
-
 import { useDispatch, useSelector } from "react-redux";
 import { menuToggle } from "../../features/toggle/toggleSlice";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const DashboardCandidatesSidebar = () => {
   const { menu } = useSelector((state) => state.toggle);
   const percentage = 30;
-
-
   const dispatch = useDispatch();
-  // menu togggle handler
+  const router = useRouter();
+
+  // menu toggle handler
   const menuToggleHandler = () => {
     dispatch(menuToggle());
+  };
+
+  // handle logout
+  const handleLogout = () => {
+    // Clear sessionStorage
+    sessionStorage.clear();
+    
+    // Clear cookies
+    document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'companyId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    
+    // Redirect to login page
+    router.push('/login');
   };
 
   return (
@@ -39,38 +53,28 @@ const DashboardCandidatesSidebar = () => {
                 isActiveLink(item.routePath, usePathname()) ? "active" : ""
               } mb-1`}
               key={item.id}
-              onClick={menuToggleHandler}
+              onClick={() => {
+                menuToggleHandler();
+                // If this is the logout item, handle logout
+                if (item.name === "Logout") {
+                  handleLogout();
+                }
+              }}
             >
-              <Link href={item.routePath}>
-                <i className={`la ${item.icon}`}></i> {item.name}
-              </Link>
+              {item.name === "Logout" ? (
+                // For logout, use a button styled as a link
+                <a href="#" onClick={(e) => e.preventDefault()}>
+                  <i className={`la ${item.icon}`}></i> {item.name}
+                </a>
+              ) : (
+                // For other items, use Next.js Link
+                <Link href={item.routePath}>
+                  <i className={`la ${item.icon}`}></i> {item.name}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
-        {/* End navigation */}
-
-        {/* <div className="skills-percentage">
-          <h4>Skills Percentage</h4>
-          <p>
-            `Put value for <strong>Cover Image</strong> field to increase your
-            skill up to <strong>85%</strong>`
-          </p>
-          <div style={{ width: 200, height: 200, margin: "auto" }}>
-            <CircularProgressbar
-              background
-              backgroundPadding={6}
-              styles={buildStyles({
-                backgroundColor: "#7367F0",
-                textColor: "#fff",
-                pathColor: "#fff",
-                trailColor: "transparent",
-              })}
-              value={percentage}
-              text={`${percentage}%`}
-            />
-          </div>{" "}
-          {/* <!-- Pie Graph --> */}
-        {/* </div> */}
       </div>
     </div>
   );

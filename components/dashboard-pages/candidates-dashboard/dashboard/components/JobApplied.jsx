@@ -13,11 +13,17 @@ const JobApplied = () => {
     const fetchAppliedJobs = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/get-applied-jobs`, {
+          userId:sessionStorage.getItem("userId"),
           applicantid:sessionStorage.getItem("userId"),  // Change to dynamic user ID
           page: 1,
           limit: 6,
           orderBy: "desc",
-        });
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},);
 
         setJobs(response.data.data || []);
       } catch (err) {

@@ -444,7 +444,12 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
     const fetchProfile = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${sessionStorage.getItem('userId')}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${sessionStorage.getItem('userId')}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},);
         
         // Transform skills string to array of objects for react-select
         const skillsArray = response.data.applicantProfile.skills
@@ -517,7 +522,12 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
         {
           userId,
           ...submitData
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
   
       if (response.data) {

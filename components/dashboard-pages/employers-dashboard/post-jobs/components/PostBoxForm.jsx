@@ -6,7 +6,6 @@ import axios from "axios";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
-    companyId: "",
     jobRoleTitle: "",
     jobDescription: "",
     keyResponsibilities: "",
@@ -108,7 +107,7 @@ const PostBoxForm = () => {
     try {
       // Validate all required fields are present
       const requiredFields = [
-        "companyId", "jobRoleTitle", "jobDescription", "keyResponsibilities",
+         "jobRoleTitle", "jobDescription", "keyResponsibilities",
         "skillsAndExperience", "emailAddress", "specialisms", "jobType",
         "offeredSalary", "careerLevel", "experience", "gender", "industry",
         "qualification", "applicationDeadline", "country", "city", "completeAddress"
@@ -123,17 +122,21 @@ const PostBoxForm = () => {
       // Format the data as needed
       const submitData = {
         ...formData,
-        companyId: parseInt(formData.companyId),
+        companyId: parseInt(sessionStorage.getItem("companyId")),
         offeredSalary: parseFloat(formData.offeredSalary),
       };
 
       // Make the API call
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/postJob`, submitData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/postJob?userId=${sessionStorage.getItem("userId")}`, submitData,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},);
       console.log(response);
       setSuccess("Job posted successfully!");
       // Optionally reset form
       setFormData({
-        companyId: "",
         jobRoleTitle: "",
         jobDescription: "",
         keyResponsibilities: "",
@@ -141,7 +144,7 @@ const PostBoxForm = () => {
         emailAddress: "",
         specialisms: "",
         jobType: "",
-        offeredSalary: "",
+        offeredSalary: "0",
         careerLevel: "",
         experience: "",
         gender: "",
@@ -166,16 +169,6 @@ const PostBoxForm = () => {
       {success && <div className="alert alert-success">{success}</div>}
       
       <div className="row">
-        <div className="form-group col-lg-12 col-md-12">
-          <label>Company ID</label>
-          <input 
-            type="text" 
-            name="companyId" 
-            value={formData.companyId}
-            onChange={handleInputChange}
-            placeholder="Enter Company ID" 
-          />
-        </div>
 
         <div className="form-group col-lg-12 col-md-12">
           <label>Job Role Title</label>
@@ -354,7 +347,7 @@ const PostBoxForm = () => {
         </div>
 
         <div className="form-group col-lg-12 col-md-12">
-          <label>Application Deadline Date</label>
+          <label className="me-2">Application Deadline Date</label>
           <input 
             type="date" 
             name="applicationDeadline"

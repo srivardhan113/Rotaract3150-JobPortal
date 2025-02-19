@@ -2,15 +2,17 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+// import LoginPopup from "../login/LoginPopup";
 
-const FormContent = () => {
+const FormContent = ({onClose}) => {
   const [formData, setFormData] = useState({
     emailAddress: "",
     name: "",
     password: "",
     type: "Applicant",
   });
-
+  // const [isRegister, setIsRegister] = useState(false);
+  // const [showLoginPopup, setShowLoginPopup] = useState(false); 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
@@ -51,9 +53,10 @@ const FormContent = () => {
         password: "",
         type: "Applicant",
       });
-
-      // Redirect to login
-      router.push("/login");
+      onClose();
+      // setShowLoginPopup(true)
+      //       setIsRegister(false)
+      
     } catch (error) {
       // On failure
       console.error("Registration failed:", error);
@@ -65,7 +68,7 @@ const FormContent = () => {
     }
   };
 
-  return (
+  return (<>
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label>Name</label>
@@ -119,6 +122,8 @@ const FormContent = () => {
         </button>
       </div>
     </form>
+    {/* <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister}/> */}
+    </>
   );
 };
 

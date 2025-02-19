@@ -47,10 +47,16 @@ const WidgetContentBox = () => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/findapplicants`,
         {
+          userId:sessionStorage.getItem("userId"),
           companyId: sessionStorage.getItem("companyId"),
           limit: 6,
           period: selectedJob,
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
   
       console.log(response.data);

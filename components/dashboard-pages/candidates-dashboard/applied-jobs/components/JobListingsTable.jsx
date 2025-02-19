@@ -26,11 +26,17 @@ const JobListingsTable = () => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/get-applied-jobs`,
         {
+          userId:sessionStorage.getItem("userId"),
           applicantid: sessionStorage.getItem('userId'),
           page: currentPage,
           limit: 5,
           period
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
 
       // Debug log to check response

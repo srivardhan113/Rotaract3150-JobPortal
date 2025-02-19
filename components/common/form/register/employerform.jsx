@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const FormContent2 = () => {
+const FormContent2 = ({onClose}) => {
   const [formData, setFormData] = useState({
     emailAddress: "",
     name: "",
@@ -53,7 +53,7 @@ const FormContent2 = () => {
       });
 
       // Redirect to login
-      router.push("/login");
+      onClose();
     } catch (error) {
       // On failure
       console.error("Registration failed:", error);

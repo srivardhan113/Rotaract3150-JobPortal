@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import axios from 'axios';
+import Pagination from '@/components/job-listing-pages/components/Pagination';
 
 const JobFavouriteTable = () => {
   const [jobsData, setJobsData] = useState({
@@ -19,6 +20,7 @@ const JobFavouriteTable = () => {
       day: 'numeric'
     });
   };
+  
   const [timeFilter, setTimeFilter] = useState('6');
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,17 +41,24 @@ const JobFavouriteTable = () => {
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/get-short-listed-jobs`,
           {
+            userId:sessionStorage.getItem("userId"),
             applicantid: userId,
             period: timeFilter,
             page: currentPage,
             limit: 4
-          }
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+              "Content-Type": "application/json",
+            }},
         );
         
         if (response.data.data) {
           setJobsData({
             data: response.data.data,
-            pagination: response.data.pagination
+            pagination: response.data.pagination,
+            totalPages:response.data.pagination.totalPages
           });
         }
       } catch (err) {
@@ -173,46 +182,13 @@ const JobFavouriteTable = () => {
         </div>
 
         {/* Pagination */}
-        {jobsData.pagination.totalPages > 1 && (
-          <div className="pagination-box">
-            <nav className="ls-pagination">
-              <ul>
-                {currentPage > 1 && (
-                  <li>
-                    <button 
-                      onClick={() => setCurrentPage(prev => prev - 1)}
-                      className="prev"
-                    >
-                      <span className="la la-arrow-left"></span>
-                    </button>
-                  </li>
-                )}
-
-                {Array.from({ length: jobsData.pagination.totalPages }, (_, i) => i + 1).map(page => (
-                  <li key={page}>
-                    <button
-                      onClick={() => setCurrentPage(page)}
-                      className={currentPage === page ? 'current-page' : ''}
-                    >
-                      {page}
-                    </button>
-                  </li>
-                ))}
-
-                {currentPage < jobsData.pagination.totalPages && (
-                  <li>
-                    <button 
-                      onClick={() => setCurrentPage(prev => prev + 1)}
-                      className="next"
-                    >
-                      <span className="la la-arrow-right"></span>
-                    </button>
-                  </li>
-                )}
-              </ul>
-            </nav>
-          </div>
-        )}
+       
+        <Pagination 
+  currentPage={currentPage}
+  totalPages={jobsData.pagination.totalPages}
+  onPageChange={setCurrentPage}
+/>
+         
       </div>
     </div>
   );

@@ -35,7 +35,12 @@ const CompanyProfileForm = () => {
         const fetchCompanyProfile = async () => {
             try {
                 const companyId = sessionStorage.getItem('companyId');
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/companies/get-company-profile?companyId=${companyId}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/companies/get-company-profile?companyId=${companyId}&userId=${sessionStorage.getItem("userId")}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+                    "Content-Type": "application/json",
+                  }},);
               
                 if (response.data.company) {
                     const { company } = response.data;
@@ -167,7 +172,12 @@ const CompanyProfileForm = () => {
                 userId,
                 ...formData,
                 socialLinks: socialLinksArray
-            });
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+                "Content-Type": "application/json",
+              }},);
 
             if (response.data) {
                 window.location.reload;

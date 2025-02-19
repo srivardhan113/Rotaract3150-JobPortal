@@ -28,11 +28,17 @@ const JobListingsTable = ({ companyId }) => {
       
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/findjobsandapplicants`,
          {
+          userId:sessionStorage.getItem("userId"),
           companyId:sessionStorage.getItem('companyId'),
           period:period,
           page,
           limit: 10
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
       
       setJobs(response.data.data);
@@ -131,11 +137,13 @@ const JobListingsTable = ({ companyId }) => {
                         </div>
                       </div>
                     </td>
-                    <Link href={`manage-jobs/${job.id}`}>
                     <td className="applied">
-                      <a href="#">{job._count.ApplicationStatus}+ Applied</a>
-                    </td>
+                    <Link href={`manage-jobs/${job.id}`}>
+                    
+                      {job._count.ApplicationStatus}+ Applied
+                   
                     </Link>
+                    </td>
                     <td>
                     
                       {formatDate(job.posteddate)} <br />

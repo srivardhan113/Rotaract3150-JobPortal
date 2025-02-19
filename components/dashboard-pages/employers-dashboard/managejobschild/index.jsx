@@ -75,13 +75,19 @@ const index = ({params}) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://backend.rotaracthub.in/api/jobs/companyjob/find-applications-based-on-job-id",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/find-applications-based-on-job-id`,
         {
+          userId: sessionStorage.getItem("userId"),
           jobId: resolvedParams.id, // Replace with actual jobId
           period: selectedPeriod,
           page: currentPage,
           limit: 6
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
 
       setApplications(response.data.applications);

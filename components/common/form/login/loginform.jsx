@@ -53,7 +53,7 @@ const FormContent = (props) => {
         // sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
         // Redirect the user to a dashboard or home page
-        router.push("/");
+        props.onClose();
       }
     } catch (error) {
       if (error.response && error.response.data) {

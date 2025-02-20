@@ -35,11 +35,13 @@ const FormContent = (props) => {
       });
 
       if (response.status === 200) {
+        console.log(response.data)
         // Assuming the API returns a token or relevant user data
         const { token } = response.data;
         const type = response.data.userType;
         const userId= response.data.id;
         const companyId=response.data.companyId;
+        const username=response.data.username;
         console.log("token : ", response.data.token, "userType : ", type);
         // Save the token in sessionStorage for the current session
         sessionStorage.setItem("authToken", token);
@@ -51,7 +53,7 @@ const FormContent = (props) => {
         sessionStorage.setItem("type", type);
         sessionStorage.setItem("userId",userId);
         sessionStorage.setItem("companyId",companyId);
-
+        sessionStorage.setItem("username",username);
         // Optionally, save user information if provided in the response
         // Example:
         // sessionStorage.setItem("user", JSON.stringify(response.data.user));

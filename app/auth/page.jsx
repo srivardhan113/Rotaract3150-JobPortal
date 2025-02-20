@@ -73,7 +73,7 @@ export default function AuthPage() {
           {/* Debug info - remove in production */}
           <div className="text-sm text-gray-500 mt-4">
             Auth Token: {sessionStorage.getItem("authToken") ? "Set ✓" : "Not set ✗"}<br />
-            User Type: {sessionStorage.getItem("userType") ? "Set ✓" : "Not set ✗"}<br />
+            User Type: {sessionStorage.getItem("type") ? "Set ✓" : "Not set ✗"}<br />
             User ID: {sessionStorage.getItem("userId") ? "Set ✓" : "Not set ✗"}
           </div>
         </div>

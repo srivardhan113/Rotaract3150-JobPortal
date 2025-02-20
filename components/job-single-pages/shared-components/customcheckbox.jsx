@@ -13,7 +13,7 @@ const CustomCheckbox = ({ accepted, onChange }) => {
           onChange={onChange}
           className="custom-checkbox-input mt-2"
         />
-        <label htmlFor="rememberMe" className="remember ps-5">
+        <label htmlFor="rememberMe" className="remember">
           <span className="custom-checkbox"></span> Please accept our{" "}
           <span data-bs-dismiss="modal">
             <Link href="/terms" className='ps-1'>  terms and conditions </Link>
@@ -37,7 +37,7 @@ const CustomCheckbox = ({ accepted, onChange }) => {
           display: flex;
           align-items: center;
           user-select: none;
-          font-size: 14px;
+          font-size: 16px;
         }
 
         .custom-checkbox {

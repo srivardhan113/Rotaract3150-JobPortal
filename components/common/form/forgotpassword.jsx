@@ -44,7 +44,7 @@ const[errormessage,seterrormessage]=useState(false);
         <div className="forgot-password-form default-form">
           {step === 1 ? (
             <form onSubmit={handleEmailSubmit}>
-              <h2 className="text-bold text-center text-md fs-3">Forgot Password</h2>
+              <h2 className="fw-semibold text-center fs-4 mb-2">Forgot Password</h2>
               <div className="form-group">
                 <label>Email:</label>
                 <input
@@ -59,7 +59,7 @@ const[errormessage,seterrormessage]=useState(false);
             </form>
           ) : (
             <form onSubmit={handleOtpSubmit}>
-              <h2 className="text-bold text-center text-md fs-3">Enter OTP and New Password</h2>
+              <h2 className="fw-semibold text-center  fs-4 mb-2">Enter OTP and New Password</h2>
               <div className="form-group">
                 <label>OTP:</label>
                 <input

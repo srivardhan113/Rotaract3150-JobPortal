@@ -1,4 +1,8 @@
+"use client"
+import { useState } from "react";
+
 const FaqChild = () => {
+  const [area,setarea]=useState(true);
   return (
     <>
       <div className="accordion" id="accordionExample">
@@ -9,7 +13,8 @@ const FaqChild = () => {
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseOne"
-              aria-expanded="true"
+              aria-expanded={`${area}`}
+           
             >
               What is Rotaract 3150?
             </button>

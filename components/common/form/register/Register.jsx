@@ -11,12 +11,13 @@ import LoginPopup from "../login/LoginPopup";
 const Register2 = ({onClose}) => {
     const [isRegister, setIsRegister] = useState(false);
     const [showLoginPopup, setShowLoginPopup] = useState(false); 
+    const [userType, setUserType] = useState("Applicant");
   return (
-    <div className="form-inner r">
+    <div className="form-inner ">
       
-       <h3 className="text-center">Rotaract3150 - Job Portal</h3>
+       <h3 className="text-center">Register to Rotaract3150 - Job Portal</h3>
 
-      <Tabs>
+       <Tabs selectedIndex={userType === "Applicant" ? 0 : 1} onSelect={(index) => setUserType(index === 0 ? "Applicant" : "Company")}>
         <div className="form-group register-dual">
           <TabList className="btn-box row">
             <Tab className="col-lg-6 col-md-12">
@@ -53,10 +54,11 @@ const Register2 = ({onClose}) => {
             LogIn
             </button>
         </div>
-        <div className="divider">
+        <div className="divider ">
           <span>or</span>
         </div>
-        <LoginWithSocial />
+        {/* <LoginWithSocial /> */}
+        <LoginWithSocial userType={userType} />
       </div>
       {/* End bottom-box LoginWithSocial */}
       <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister}/>

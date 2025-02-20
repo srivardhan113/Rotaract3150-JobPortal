@@ -1,9 +1,8 @@
 import React from 'react';
-import Loginpage from './Loginpage';
-import Register2 from '../register/Register';
 import ForgotPassword from '../forgotpassword';
+ // Import the ForgotPassword component
 
-const LoginPopup = ({ show, onClose, isRegister,isForgotPassword }) => {
+const ForgotPasswordPopup = ({ show, onClose }) => {
   if (!show) return null; // Don't render if not visible
 
   return (
@@ -28,7 +27,6 @@ const LoginPopup = ({ show, onClose, isRegister,isForgotPassword }) => {
         style={{ 
           display: 'block',
           position: 'fixed',
-   
           zIndex: 1050,
           overflow: 'auto'
         }} 
@@ -47,14 +45,9 @@ const LoginPopup = ({ show, onClose, isRegister,isForgotPassword }) => {
             </button>
 
             <div className="modal-body">
-            <div id="login-modal">
+              <div id="login-modal">
                 <div className="login-form default-form">
-                  {isRegister ? (
-                    <Register2 onClose={onClose} />
-                  ) 
-                   : (
-                    <Loginpage onClose={onClose} ForgotPassword={isForgotPassword} />
-                  )}
+                  <ForgotPassword onClose={onClose} /> {/* Only show ForgotPassword */}
                 </div>
               </div>
             </div>
@@ -65,4 +58,4 @@ const LoginPopup = ({ show, onClose, isRegister,isForgotPassword }) => {
   );
 };
 
-export default LoginPopup;
+export default ForgotPasswordPopup;

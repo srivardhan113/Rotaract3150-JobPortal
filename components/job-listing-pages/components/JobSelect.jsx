@@ -9,7 +9,7 @@ import {
 import { salaryRangeCheck } from "../../../features/job/jobSlice"; 
 export default function JobSelect() {
     const { jobList } = useSelector((state) => state.filter);
-    const { jobTypeList, datePost, experienceLavel } = useSelector(
+    const { jobTypeList, datePost, experienceLavel,salaryRanges } = useSelector(
         (state) => state.job
     );
 
@@ -37,13 +37,14 @@ export default function JobSelect() {
  
 
 
-    const salaryRanges = [
-        { id: 1, value: { min:0,max:5000 }, label: "Salary estimate" },
-        { id: 2, value: { min: 0, max: 5000 }, label: "0 - 5000" },
-        { id: 3, value: { min: 5000, max: 10000 }, label: "5000 - 10000" },
-        { id: 4, value: { min: 10000, max: 15000 }, label: "10000 - 15000" },
-        { id: 5, value: { min: 15000, max: 20000 }, label: "15000 - 20000" },
-    ];
+    // const salaryRanges = [
+    //     { id: 1, value: { min:0,max:5000 }, label: "Salary estimate" },
+    //     { id: 2, value: { min: 0, max: 5000 }, label: "0 - 5000" },
+    //     { id: 3, value: { min: 5000, max: 10000 }, label: "5000 - 10000" },
+    //     { id: 4, value: { min: 10000, max: 15000 }, label: "10000 - 15000" },
+    //     { id: 5, value: { min: 15000, max: 20000 }, label: "15000 - 20000" },
+    //     { id: 6, value: { min: 20000, max: 200000000000 }, label: "beyond 20000", isChecked: false },
+    // ];
 
     return (
         <>

@@ -12,6 +12,7 @@ import {
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import LoginPopup from "@/components/common/form/login/LoginPopup";
+import ForgotPasswordPopup from "@/components/common/form/login/forgotpasswordpopup";
 // Adjust the import path accordingly
 
 const Header = () => {
@@ -63,7 +64,7 @@ const Header = () => {
       window.removeEventListener("scroll", updateScrollProgress);
     };
   }, []);
-
+  const [showForgetPasswordPopup, setShowForgotPasswordPopup] = useState(false);
   const shiningPinkStyle = {
     background: "linear-gradient(90deg, pink, white, silver)",
     WebkitBackgroundClip: "text",
@@ -198,7 +199,8 @@ const Header = () => {
       </header>
 
       {/* Render the LoginPopup modal */}
-      <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister}/>
+      <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister} isForgotPassword={setShowForgotPasswordPopup}/>
+      <ForgotPasswordPopup show={showForgetPasswordPopup} onClose={()=> setShowForgotPasswordPopup(false)} />
     </>
   );
 };

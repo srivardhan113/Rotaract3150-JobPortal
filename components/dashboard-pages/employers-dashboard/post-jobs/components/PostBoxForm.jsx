@@ -249,7 +249,7 @@ const PostBoxForm = () => {
             <option value="Freelancer">Freelancer</option>
             <option value="Full Time">Full Time</option>
             <option value="Part Time">Part Time</option>
-            <option value="Temporary">Temporary</option>
+            <option value="Internship">Internship</option>
           </select>
         </div>
 
@@ -292,7 +292,8 @@ const PostBoxForm = () => {
             onChange={handleInputChange}
           >
             <option value="">Select</option>
-            <option value="No Experience">No Experience</option>
+            <option value="0 years">No Experience</option>
+            <option value="0-1 years">0-1 Years</option>
             <option value="1-2 Years">1-2 Years</option>
             <option value="2-5 Years">2-5 Years</option>
             <option value="5-10 Years">5-10 Years</option>

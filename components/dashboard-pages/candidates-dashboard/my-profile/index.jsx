@@ -118,14 +118,14 @@ export const ExperienceForm = ({ onAdd, onCancel }) => {
               <div className="flex gap-3">
                 <button 
                   type="submit" 
-                  className="theme-btn btn-style-one"
+                  className="theme-btn btn-style-one m-2"
                 >
                   Add Experience
                 </button>
                 <button 
                   type="button" 
                   onClick={onCancel}
-                  className="theme-btn btn-style-three"
+                  className="theme-btn btn-style-three m-2"
                 >
                   Cancel
                 </button>
@@ -207,14 +207,14 @@ export const AchievementForm = ({ onAdd, onCancel }) => {
               <div className="flex gap-3">
                 <button 
                   type="submit" 
-                  className="theme-btn btn-style-one"
+                  className="theme-btn btn-style-one m-2"
                 >
                   Add Achievement
                 </button>
                 <button 
                   type="button" 
                   onClick={onCancel}
-                  className="theme-btn btn-style-three"
+                  className="theme-btn btn-style-three m-2"
                 >
                   Cancel
                 </button>
@@ -326,14 +326,14 @@ const EducationForm = ({ onAdd, onCancel }) => {
               <div className="flex gap-3">
                 <button 
                   type="submit" 
-                  className="theme-btn btn-style-one"
+                  className="theme-btn btn-style-one m-2"
                 >
                   Add Education
                 </button>
                 <button 
                   type="button" 
                   onClick={onCancel}
-                  className="theme-btn btn-style-three"
+                  className="theme-btn btn-style-three m-2"
                 >
                   Cancel
                 </button>
@@ -351,6 +351,7 @@ const index = () => {
       const [converImg, setCoverImg] = useState("");
       const [logoPreview, setLogoPreview] = useState("");
       const [showEducationForm, setShowEducationForm] = useState(false);
+      const [pshow,setpshow]=useState(false);
 
   const [input, setInput] = useState('');
 
@@ -391,8 +392,7 @@ const index = () => {
     
             if (response.data.data) {
                 setLogoImg(file);
-                // Optionally show success message
-                alert("Logo uploaded successfully!");
+               setpshow(true);
             }
         } catch (err) {
             console.error("Error uploading logo:", err);
@@ -531,7 +531,7 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
       );
   
       if (response.data) {
-        alert('Profile updated successfully!');
+        // alert('Profile updated successfully!');
       }
     } catch (err) {
       setError('Failed to update profile');
@@ -731,7 +731,13 @@ const handleSocialLinkChange = (e, index) => {
                 <div className="text">
                     Max file size is 1MB, Minimum dimension: 330x300 And
                     Suitable files are .jpg 
+                    {
+                  pshow&&<div className="text">
+                    <p className="text-danger">Profile updated succefuly</p>
+                    </div>
+                }
                 </div>
+                
             </div>
       {/* End logo and cover photo components */}
 

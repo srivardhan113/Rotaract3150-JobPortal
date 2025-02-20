@@ -1,10 +1,11 @@
 import Link from "next/link";
 import axios from "axios";
 import { useState } from "react";
+import CustomCheckbox from "./customcheckbox";
 
 const ApplyJobModalContent = (props) => {
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("Upload CV (doc, docx, pdf)");
+  const [fileName, setFileName] = useState("Upload CV (pdf)");
   const [message, setMessage] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,7 +34,7 @@ const ApplyJobModalContent = (props) => {
     }
 
     setFile(selectedFile);
-    setFileName(selectedFile ? selectedFile.name : "Upload CV (doc, docx, pdf)");
+    setFileName(selectedFile ? selectedFile.name : "Upload CV ( pdf)");
   };
 
   const handleCheckbox = () => setAccepted(!accepted);
@@ -153,27 +154,14 @@ const ApplyJobModalContent = (props) => {
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
         </div>
-
-        <div className="col-lg-12 col-md-12 col-sm-12 form-group">
-          <div className="input-group checkboxes square">
-            <input 
-              type="checkbox" 
-              id="rememberMe" 
-              checked={accepted}
-              onChange={handleCheckbox} 
-            />
-            <label htmlFor="rememberMe" className="remember">
-              <span className="custom-checkbox"></span> You accept our{" "}
-              <span data-bs-dismiss="modal">
-                <Link href="/terms">Terms and Conditions and Privacy Policy</Link>
-              </span>
-            </label>
-          </div>
-        </div>
+        <CustomCheckbox
+        accepted={accepted}
+        onChange={handleCheckbox}
+      />
 
         <div className="col-lg-12 col-md-12 col-sm-12 form-group">
           <button 
-            className="theme-btn btn-style-one w-100" 
+            className="theme-btn btn-style-one w-100"
             type="submit"
             disabled={isSubmitting}
           >

@@ -157,9 +157,8 @@ const index = ({params}) => {
                                         <div className="content">
                                           <figure className="image">
                                             <Image
-                                              className="rounded-full object-cover"
-                                              width={90}
-                                              height={90}
+                                              width={100}
+                                              height={100}
                                               src={`https://backend.rotaracthub.in/api/users/get-user-image?userId=${application.applicantId}`}
                                               alt="applicant"
                                             />

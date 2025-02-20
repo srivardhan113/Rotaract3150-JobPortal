@@ -143,9 +143,8 @@ const Applicants = ({ companyId }) => {
             <div className="content">
               <figure className="image">
                 <Image
-                  className='rounded-full'
-                  width={120}
-                  height={90}
+                  width={100}
+                  height={100}
                   src={candidate.avatar}
                   alt="candidates"
                 />

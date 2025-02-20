@@ -2,6 +2,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import LoginPopup from "./LoginPopup";
+import ForgotPasswordPopup from "./forgotpasswordpopup";
 
 const FormContent = (props) => {
   const [email, setEmail] = useState("");
@@ -10,7 +12,9 @@ const FormContent = (props) => {
   const router = useRouter();
 
   const URL = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login-cp`;
-
+  const [isForgotPassword, setisForgotPassword] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+   
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -69,6 +73,7 @@ const FormContent = (props) => {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label>Email Address</label>
@@ -93,8 +98,28 @@ const FormContent = (props) => {
           value={password}
           onChange={handlePasswordChange}
         />
-      </div>
+        <div className="text" style={{ display: "flex", justifyContent: "flex-end" }}>
+  <button
+    onClick={(e) => {
+      e.preventDefault(); // Prevent any unintended form submission
+      props.Forgot(true);
+        props.onClose();
 
+    }}
+    style={{
+      display: "flex",
+      textAlign: "right",
+      marginLeft: "6px",
+      marginTop: "5px",
+      color: "#585050",
+    }}
+  >
+    Forgot password ?
+  </button>
+</div>
+
+      </div>
+   
       {errorMessage && (
         <div className="form-group">
           <p style={{ color: "red" }}>{errorMessage}</p>
@@ -107,6 +132,7 @@ const FormContent = (props) => {
         </button>
       </div>
     </form>
+    </>
   );
 };
 

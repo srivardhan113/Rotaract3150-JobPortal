@@ -8,9 +8,9 @@ import Link from "next/link";
 
 import LoginPopup from "./LoginPopup";
 
-const Loginpage = ({onClose}) => {
+const Loginpage = ({onClose,ForgotPassword}) => {
   const [userType, setUserType] = useState("Applicant");
-  const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+ 
   const [isRegister, setIsRegister] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false); 
   return (
@@ -36,12 +36,12 @@ const Loginpage = ({onClose}) => {
         {/* End .form-group */}
 
         <TabPanel>
-          <Loginform userType={userType} onClose={onClose} />
+          <Loginform userType={userType} onClose={onClose} Forgot={ForgotPassword} />
         </TabPanel>
         {/* End candidates Form */}
 
         <TabPanel>
-          <Loginform userType={userType} onClose={onClose}/>
+          <Loginform userType={userType} onClose={onClose}  Forgot={ForgotPassword}/>
         </TabPanel>
         {/* End Employer Form */}
       </Tabs>
@@ -59,7 +59,7 @@ const Loginpage = ({onClose}) => {
         <div className="divider">
           <span>or</span>
         </div>
-        <LoginWithSocial />
+        <LoginWithSocial userType={userType} />
       </div>
       
       <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister}/>

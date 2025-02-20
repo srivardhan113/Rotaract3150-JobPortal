@@ -9,6 +9,7 @@ salaryRanges: [
     { id: 3, value: { min: 5000, max: 10000 }, label: "5000 - 10000", isChecked: false },
     { id: 4, value: { min: 10000, max: 15000 }, label: "10000 - 15000", isChecked: false },
     { id: 5, value: { min: 15000, max: 20000 }, label: "15000 - 20000", isChecked: false },
+    { id: 6, value: { min: 20000, max: 200000000000 }, label: "beyond 20000", isChecked: false },
 ],
     category: [
         {
@@ -53,8 +54,8 @@ salaryRanges: [
         },
         {
             id: 4,
-            name: "Temporary",
-            value: "Temporary",
+            name: "Internship",
+            value: "Internship",
             isChecked: false,
         },
     ],
@@ -82,8 +83,8 @@ salaryRanges: [
         },
     ],
     experienceLavel: [
-        { id: 1, name: "Fresh", value: "No Experience", isChecked: false },
-        { id: 2, name: "Less than 1 Year", value: "Less than 1 year", isChecked: false },
+        { id: 1, name: "Fresh", value: "0 years", isChecked: false },
+        { id: 2, name: "Less than 1 Year", value: "0-1 years", isChecked: false },
         { id: 3, name: "1-2 Years", value: "1-2 years", isChecked: false },
         { id: 4, name: "3-5 Years", value: "3-5 years", isChecked: false },
         {

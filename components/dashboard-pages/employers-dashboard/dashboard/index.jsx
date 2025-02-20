@@ -120,9 +120,9 @@ const [state, setState] = useState({
                             <div className="content">
                               <figure className="image ">
                                 <Image
-                                className="rounded-full"
-                                  width={90}
-                                  height={90}
+                                
+                                  width={100}
+                                  height={100}
                                   src={`https://backend.rotaracthub.in/api/users/get-user-image?userId=${candidate.applicantId}`}
                                   alt="candidates"
                                 />

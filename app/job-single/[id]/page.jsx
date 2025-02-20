@@ -118,7 +118,7 @@ const SocialMediaLinks = ({ socialLinks }) => {
                     <Image
                       width={100}
                       height={98}
-                      src={`https://backend.rotaracthub.in/api/companies/get-image?companyId=${jobData.companyId}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/api/companies/get-image?companyId=${jobData.companyId}`}
                       className="rounded"
                       alt="company logo"
                     />
@@ -241,9 +241,9 @@ const SocialMediaLinks = ({ socialLinks }) => {
                 <div className="related-jobs">
                   <div className="title-box">
                     <h3>Related Jobs</h3>
-                    <div className="text">
+                    {/* <div className="text">
                       2020 jobs live - 293 added today.
-                    </div>
+                    </div> */}
                   </div>
                   {/* End title box */}
 

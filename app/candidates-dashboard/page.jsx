@@ -3,7 +3,7 @@ import DashboadHome from "@/components/dashboard-pages/candidates-dashboard/dash
 
 export const metadata = {
   title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+  description: "Rotaract3150 || Job portal || SRIPTO",
 };
 
 const index = () => {

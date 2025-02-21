@@ -108,7 +108,7 @@ const JobApplicationsWidget = ({ jobId }) => {
                                   className="rounded-full object-cover"
                                   width={90}
                                   height={90}
-                                  src={`https://backend.rotaracthub.in/api/users/get-user-image?userId=${application.applicantId}`}
+                                  src={`${process.env.NEXT_PUBLIC_API_URL}/api/users/get-user-image?userId=${application.applicantId}`}
                                   alt="applicant"
                                 />
                               </figure>

@@ -46,7 +46,7 @@ const Applicants = ({ companyId }) => {
         id: app.id,
         applicantId: app.applicantId,
         name: app.applicant.name,
-        avatar: `https:backend.rotaracthub.in/api/users/get-user-image?userId=${app.applicantId}`,
+        avatar: `${process.env.NEXT_PUBLIC_API_URL}/api/users/get-user-image?userId=${app.applicantId}`,
         designation: app.job.jobRoleTitle,
         location: `${app.job.city}, ${app.job.country}`,
         hourlyRate: app.job.offeredSalary,

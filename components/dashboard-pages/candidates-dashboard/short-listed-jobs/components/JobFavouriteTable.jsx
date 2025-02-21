@@ -134,7 +134,7 @@ const JobFavouriteTable = () => {
                             <Image
                                 width={50}
                                 height={49}
-                                src={`https://backend.rotaracthub.in/api/companies/get-image?companyId=${item.job.companyId}`}
+                                src={`${process.env.NEXT_PUBLIC_API_URL}/api/companies/get-image?companyId=${item.job.companyId}`}
                                 alt="company logo"
                               />
                             </span>

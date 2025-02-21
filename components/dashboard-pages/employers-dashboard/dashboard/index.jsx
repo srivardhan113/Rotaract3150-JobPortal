@@ -127,7 +127,7 @@ const [state, setState] = useState({
                                 
                                   width={100}
                                   height={100}
-                                  src={`https://backend.rotaracthub.in/api/users/get-user-image?userId=${candidate.applicantId}`}
+                                  src={`${process.env.NEXT_PUBLIC_API_URL}/api/users/get-user-image?userId=${candidate.applicantId}`}
                                   alt="candidates"
                                 />
                               </figure>

@@ -30,6 +30,8 @@ const CompanyProfileForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+  
+
     // Fetch company profile on component mount
     useEffect(() => {
         const fetchCompanyProfile = async () => {
@@ -81,7 +83,38 @@ const CompanyProfileForm = () => {
 
         fetchCompanyProfile();
     }, []);
-
+    const [countries, setCountries] = useState([]);
+const [states, setStates] = useState([]);
+const [cities, setCities] = useState([]);
+const API_KEY = "NkxnUTNTUk91U3JHTHk0T0s4WlcyaHRZaEdWRkg0NE1JQ1hwa3Y1SA==";
+// Fetch Countries
+useEffect(() => {
+    fetch("https://api.countrystatecity.in/v1/countries", {
+      headers: {
+        "X-CSCAPI-KEY": API_KEY,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setCountries(data))
+      .catch((err) => console.error("Error fetching countries:", err));
+  }, []);
+  
+  // Fetch States when country changes
+  useEffect(() => {
+    if (formData.country) {
+      fetch(`https://api.countrystatecity.in/v1/countries/${formData.country}/states`, {
+        headers: {
+          "X-CSCAPI-KEY": API_KEY,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setStates(data))
+        .catch((err) => console.error("Error fetching states:", err));
+    } else {
+      setStates([]);
+    }
+  }, [formData.country]);
+  console.log(states)
     // Handle logo upload
     const logoHandler = async (file) => {
         try {
@@ -135,6 +168,11 @@ const CompanyProfileForm = () => {
             ...prev,
             [name]: value
         }));
+        if (name === "country") {
+            setFormData(prev => ({ ...prev, country: value,  city: "" }));
+          } else if (name === "state") {
+            setFormData(prev => ({ ...prev, city: value}));
+          } 
     };
 
     // Handle social links changes
@@ -428,16 +466,17 @@ const CompanyProfileForm = () => {
                             onChange={handleInputChange}
                             required
                         >
-                            <option>Australia</option>
-                            <option>Pakistan</option>
-                            <option>China</option>
-                            <option>Japan</option>
-                            <option>India</option>
+                                <option value="">Select your country</option>
+    {countries.map((country) => (
+      <option key={country.iso2} value={country.iso2}>
+        {country.name}
+      </option>
+    ))}
                         </select>
                     </div>
 
                     <div className="form-group col-lg-6 col-md-12">
-                        <label>City</label>
+                        <label>State</label>
                         <select 
                             className="chosen-single form-select"
                             name="city"
@@ -445,11 +484,12 @@ const CompanyProfileForm = () => {
                             onChange={handleInputChange}
                             required
                         >
-                            <option>Melbourne</option>
-                            <option>Islamabad</option>
-                            <option>Bejing</option>
-                            <option>Tokyo</option>
-                            <option>New Delhi</option>
+                                           <option value="">Select your state</option>
+                                           {Array.isArray(states) && states.map((state) => (
+                            <option key={state.iso2} value={state.iso2}>
+                                {state.name}
+                            </option>
+                        ))}
                         </select>
                     </div>
 

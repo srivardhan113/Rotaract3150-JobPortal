@@ -3,9 +3,9 @@ module.exports = [
     id: 1,
     title: "For Candidates",
     menuList: [
-      { name: "Browse Jobs", route: "/job-list-v11" },
-      { name: "Browse Categories", route: "/job-list-v3" },
-      { name: "Candidate Dashboard", route: "/candidates-dashboard/dashboard" },
+      { name: "Browse Jobs", route: "/job-list" },
+      { name: "Browse Categories", route: "/job-list" },
+      { name: "Candidate Dashboard", route: "/candidates-dashboard" },
       { name: "Job Alerts", route: "/candidates-dashboard/job-alerts" },
       {
         name: "My Bookmarks",
@@ -19,11 +19,11 @@ module.exports = [
     menuList: [
       {
         name: "Browse Candidates",
-        route: "/candidates-list-v1",
+        route: "/employers-dashboard",
       },
       { name: "Employer Dashboard", route: "/employers-dashboard/dashboard" },
       { name: "Add Job", route: "/employers-dashboard/post-jobs" },
-      { name: "Job Packages", route: "/employers-dashboard/packages" },
+      // { name: "Job Packages", route: "/employers-dashboard/packages" },
     ],
   },
   {

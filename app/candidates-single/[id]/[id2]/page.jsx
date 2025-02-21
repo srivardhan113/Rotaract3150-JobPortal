@@ -16,7 +16,12 @@ const CandidateSingleDynamicV1 = ({ params }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${resolvedParams.id2}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?id=${resolvedParams.id2}&userId=${sessionStorage.getItem("userId")}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+            "Content-Type": "application/json",
+          }
+        });
         setProfile(response.data);
         setLoading(false);
       } catch (err) {

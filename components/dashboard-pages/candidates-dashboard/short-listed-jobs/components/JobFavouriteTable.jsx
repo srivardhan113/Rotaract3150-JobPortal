@@ -62,8 +62,8 @@ const JobFavouriteTable = () => {
           });
         }
       } catch (err) {
-        console.error('Error fetching jobs:', err);
-        setError(err.response?.data?.message || 'Failed to fetch jobs. Please try again later.');
+        // console.error('Error fetching jobs:', err);
+        // setError(err.response?.data?.message || 'Failed to fetch jobs. Please try again later.');
       } finally {
         setIsLoading(false);
       }

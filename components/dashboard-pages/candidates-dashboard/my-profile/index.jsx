@@ -137,7 +137,6 @@ export const ExperienceForm = ({ onAdd, onCancel }) => {
     </div>
   );
 };
-
 // Achievement Form Component
 export const AchievementForm = ({ onAdd, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -352,7 +351,7 @@ const index = () => {
       const [logoPreview, setLogoPreview] = useState("");
       const [showEducationForm, setShowEducationForm] = useState(false);
       const [pshow,setpshow]=useState(false);
-
+      
   const [input, setInput] = useState('');
 
       // Handle logo upload
@@ -444,7 +443,7 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
     const fetchProfile = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${sessionStorage.getItem('userId')}`,
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${sessionStorage.getItem('userId')}&id=${sessionStorage.getItem('userId')}`,
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
@@ -465,8 +464,8 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
           }
         });
       } catch (err) {
-        setError('Failed to load profile data');
-        console.error(err);
+        // setError('Failed to load profile data');
+        // console.error(err);
       } finally {
         setLoading(false);
       }

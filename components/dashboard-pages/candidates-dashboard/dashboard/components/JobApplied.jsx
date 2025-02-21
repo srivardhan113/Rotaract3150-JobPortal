@@ -16,7 +16,7 @@ const JobApplied = () => {
           userId:sessionStorage.getItem("userId"),
           applicantid:sessionStorage.getItem("userId"),  // Change to dynamic user ID
           page: 1,
-          limit: 6,
+          limit: 4,
           orderBy: "desc",
         },
         {
@@ -61,14 +61,15 @@ const JobApplied = () => {
                   <span className="icon flaticon-map-locator"></span>
                   {item.job.city}, {item.job.country}
                 </li>
-                <li>
-                  <span className="icon flaticon-clock-3"></span> {new Date(item.appliedAt).toLocaleDateString()}
-                </li>
+                
                 {/* <li>
                   <span className="icon flaticon-money"></span>₹{item.job.offeredSalary || "Not Disclosed"}
                 </li> */}
               </ul>
-              <ul className="job-info">
+              <ul className="job-info p-0 mb-2">
+              <li>
+                  <span className="icon flaticon-clock-3"></span> {new Date(item.appliedAt).toLocaleDateString()}
+                </li>
               <li>
                   <span className="icon flaticon-money"></span>₹{item.job.offeredSalary || "Not Disclosed"}
                 </li>

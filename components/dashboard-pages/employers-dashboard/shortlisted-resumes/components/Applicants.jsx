@@ -30,7 +30,7 @@ const Applicants = ({ companyId }) => {
           companyId: sessionStorage.getItem("companyId"),
           userId:sessionStorage.getItem("userId"),
           page: state.page,
-          limit: 6,
+          limit: 4,
           status: "Shortlisted",
           search: state.searchQuery,
           sortBy: state.sortBy

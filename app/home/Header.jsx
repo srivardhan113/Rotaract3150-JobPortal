@@ -165,9 +165,7 @@ const Header = () => {
                 >
                   Login / Register
                 </button>
-                <Link href="/employers-dashboard/post-jobs" className="theme-btn btn-style-one btn-white">
-                  Job Post
-                </Link>
+             
               </div>
             ) : (
               <div className="btn-box">
@@ -177,6 +175,10 @@ const Header = () => {
                 >
                   Logout
                 </button>
+                {type === "Company" && (
+                <Link href="/employers-dashboard/post-jobs" className="theme-btn btn-style-one btn-white">
+                  Job Post
+                </Link>)}
               </div>
             )}
           </div>

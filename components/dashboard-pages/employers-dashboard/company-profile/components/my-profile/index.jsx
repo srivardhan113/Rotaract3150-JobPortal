@@ -120,7 +120,7 @@ const CompanyProfileForm = () => {
             if (response.data.data) {
                 setLogoImg(file);
                 // Optionally show success message
-                // alert("Logo uploaded successfully!");
+                 alert("Logo uploaded successfully!");
             }
         } catch (err) {
             console.error("Error uploading logo:", err);
@@ -181,7 +181,7 @@ const CompanyProfileForm = () => {
 
             if (response.data) {
                 window.location.reload;
-                // alert("Profile updated successfully!");
+                 alert("Profile updated successfully!");
             }
         } catch (err) {
             console.error("Error updating profile:", err);

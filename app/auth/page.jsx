@@ -18,7 +18,7 @@ export default function AuthPage() {
         console.log(userId);
         const userType = params.get("type");
         const companyId = params.get("companyId");
-
+        const name= params.get("name");
         if (!token || !userId || !userType) {
           throw new Error("Missing auth parameters");
         }
@@ -33,6 +33,7 @@ export default function AuthPage() {
         }
 
         // Set session storage
+        sessionStorage.setItem("username",name);
         sessionStorage.setItem("authToken", token);
         sessionStorage.setItem("userId", userId);
         sessionStorage.setItem("type", userType);

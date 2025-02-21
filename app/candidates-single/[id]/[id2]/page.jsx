@@ -16,7 +16,12 @@ const CandidateSingleDynamicV1 = ({ params }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${resolvedParams.id2}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?id=${resolvedParams.id2}&userId=${sessionStorage.getItem("userId")}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+            "Content-Type": "application/json",
+          }
+        });
         setProfile(response.data);
         setLoading(false);
       } catch (err) {
@@ -53,7 +58,7 @@ const CandidateSingleDynamicV1 = ({ params }) => {
                     <Image
                       width={100}
                       height={100}
-                      src={`https:backend.rotaracthub.in/api/users/get-user-image?userId=${resolvedParams.id2}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/api/users/get-user-image?userId=${resolvedParams.id2}`}
                       alt={profile.applicantProfile.fullLegalName}
                     />
                   </figure>
@@ -69,8 +74,9 @@ const CandidateSingleDynamicV1 = ({ params }) => {
                       <span className="icon flaticon-phone"></span>
                       {profile.applicantProfile.phoneNumber}
                     </li>
-                    <li>
+                    <li>{profile.applicantProfile.emailAddress &&
                       <span className="icon flaticon-mail"></span>
+                    }
                       {profile.applicantProfile.emailAddress}
                     </li>
                   </ul>
@@ -85,7 +91,7 @@ const CandidateSingleDynamicV1 = ({ params }) => {
                 <div className="btn-box">
                   <a
                     className="theme-btn btn-style-one"
-                    href={`https://backend.rotaracthub.in/api/jobs//companyjob/download-cv?applicationId=${resolvedParams.id}`}
+                    href={`${process.env.NEXT_PUBLIC_API_URL}/api/jobs//companyjob/download-cv?applicationId=${resolvedParams.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

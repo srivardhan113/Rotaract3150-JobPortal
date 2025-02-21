@@ -31,7 +31,7 @@ const JobFeatured = () => {
         jobType: selectedType,
         page: 1,
         limit: 5,
-        sortField: "offeredSalary",
+        sortField: "posteddate",
         sortOrder: "desc",
       };
       

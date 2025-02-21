@@ -35,11 +35,20 @@ const [state, setState] = useState({
   const fetchApplicants = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/findapplicants`, {
-        companyId: 1,
-        limit: 6,
-        period: selectedJob,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/findapplicants`,
+        {
+          userId:sessionStorage.getItem("userId"),
+          companyId: sessionStorage.getItem("companyId"),
+          limit: 4,
+          period: selectedJob,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
+      );
       setApplicants(response.data.applicants);
       const statusCounts = response.data.totalApplicantsByStatus.reduce(
         (acc, { status, _count }) => {
@@ -115,10 +124,10 @@ const [state, setState] = useState({
                             <div className="content">
                               <figure className="image ">
                                 <Image
-                                className="rounded-full"
-                                  width={90}
-                                  height={90}
-                                  src={`https://backend.rotaracthub.in/api/users/get-user-image?userId=${candidate.applicantId}`}
+                                
+                                  width={100}
+                                  height={100}
+                                  src={`${process.env.NEXT_PUBLIC_API_URL}/api/users/get-user-image?userId=${candidate.applicantId}`}
                                   alt="candidates"
                                 />
                               </figure>
@@ -184,11 +193,11 @@ const [state, setState] = useState({
                       ))}
                   </div>
                   <nav className="ls-pagination ">
-    <Pagination 
+    {/* <Pagination 
       currentPage={state.page}
       totalPages={state.totalPages}
       onPageChange={handlePageChange}
-    />
+    /> */}
   </nav>
                 </TabPanel>
               ))

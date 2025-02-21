@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import LoginPopup from "../common/form/login/LoginPopup";
+const RegBanner = (props) => {
 
-const RegBanner = () => {
   const regBannerContent = [
     {
       id: 1,
@@ -40,9 +42,11 @@ const RegBanner = () => {
             <div className="content">
               <h3>{item.name}</h3>
               <p>{item.text}</p>
-              <Link href="/register" className="theme-btn btn-style-five">
+              <button className="theme-btn btn-style-five" onClick={() => {props.setShowLoginPopup(true)
+                   props.setIsRegister(false)
+                  }}>
                 Register Account
-              </Link>
+              </button>
             </div>
             <figure className="image">
               <Image
@@ -54,7 +58,9 @@ const RegBanner = () => {
             </figure>
           </div>
         </div>
+        
       ))}
+       
     </>
   );
 };

@@ -7,8 +7,8 @@ const JobListingsTable = ({ companyId }) => {
   const [jobs, setJobs] = useState([]);
   const [period, setPeriod] = useState('6');
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  // const [page, setPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState(null);
   const [state, setState] = useState({
     page: 1,
@@ -19,7 +19,7 @@ const JobListingsTable = ({ companyId }) => {
   };
   useEffect(() => {
     fetchJobs();
-  }, [companyId, period, page]);
+  }, [companyId, period, state.page]);
 
   const fetchJobs = async () => {
     try {
@@ -28,15 +28,24 @@ const JobListingsTable = ({ companyId }) => {
       
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/findjobsandapplicants`,
          {
+          userId:sessionStorage.getItem("userId"),
           companyId:sessionStorage.getItem('companyId'),
           period:period,
-          page,
-          limit: 10
-        }
+          page:state.page,
+          limit:5
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
       
       setJobs(response.data.data);
-      setTotalPages(response.data.totalPages);
+      setState(prev => ({
+        ...prev,
+        totalPages: response.data.totalPages
+      }));
     } catch (error) {
       setError(error.response?.data?.message || 'Failed to fetch jobs');
       console.error('Error fetching jobs:', error);
@@ -131,11 +140,13 @@ const JobListingsTable = ({ companyId }) => {
                         </div>
                       </div>
                     </td>
-                    <Link href={`manage-jobs/${job.id}`}>
                     <td className="applied">
-                      <a href="#">{job._count.ApplicationStatus}+ Applied</a>
-                    </td>
+                    <Link href={`manage-jobs/${job.id}`}>
+                    
+                      {job._count.ApplicationStatus}+ Applied
+                   
                     </Link>
+                    </td>
                     <td>
                     
                       {formatDate(job.posteddate)} <br />

@@ -47,10 +47,17 @@ const WidgetContentBox = () => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/findapplicants`,
         {
+          userId:sessionStorage.getItem("userId"),
           companyId: sessionStorage.getItem("companyId"),
-          limit: 6,
+          limit:4,
+          page:state.page,
           period: selectedJob,
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
   
       console.log(response.data);
@@ -60,25 +67,57 @@ const WidgetContentBox = () => {
       setApplicants(fetchedApplicants);
   
       // Use `fetchedApplicants` instead of `applicants`
-      const statusCounts = fetchedApplicants.reduce(
-        (acc, applicant) => {
-          let status = applicant.status.toLowerCase(); // Normalize status
+      // const statusCounts = fetchedApplicants.reduce(
+      //   (acc, applicant) => {
+      //     let status = applicant.status.toLowerCase(); // Normalize status
       
-          if (status === "shortlisted") {
-            acc.approved += 1; // Treat "Shortlisted" as "Approved"
-          } else if (status === "rejected") {
-            acc.rejected += 1;
-          }
+      //     if (status === "shortlisted") {
+      //       acc.approved += 1; // Treat "Shortlisted" as "Approved"
+      //     } else if (status === "rejected") {
+      //       acc.rejected += 1;
+      //     }
       
-          acc.total += 1; // Always count total applicants
-          return acc;
-        },
-        { total: 0, approved: 0, rejected: 0 }
-      );
+      //     acc.total += 1; // Always count total applicants
+      //     return acc;
+      //   },
+      //   { total: 0, approved: 0, rejected: 0 }
+      // );
       
+      setState(prev => ({
+        ...prev,
+        totalPages: response.data.totalPages || 1
+      }));
+// Helper function to safely get count for a specific status
+const getStatusCount = (statusData, statusType) => {
+  const statusObj = statusData.find(item => item.status === statusType);
+  return statusObj ? statusObj._count.status : 0;
+};
+
+// Main function to process the response data
+const processApplicationCounts = (responseData) => {
+  const { totalApplications, totalApplicantsByStatus } = responseData.data;
   
-      setTotals(statusCounts);
-      
+  // Convert the array-like object to a proper array
+  const statusArray = Object.keys(totalApplicantsByStatus).map(key => ({
+    status: totalApplicantsByStatus[key].status,
+    _count: totalApplicantsByStatus[key]._count
+  }));
+
+  // Get counts for specific statuses
+  const shortlistedCount = getStatusCount(statusArray, "Shortlisted");
+  const rejectedCount = getStatusCount(statusArray, "Rejected");
+
+  // Set the totals object
+  const totals = {
+    total: totalApplications,
+    approved: shortlistedCount,
+    rejected: rejectedCount
+  };
+
+  return totals;
+};const totals = processApplicationCounts(response);
+setTotals(totals);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching applicants:", error);
     } finally {
@@ -120,6 +159,9 @@ const WidgetContentBox = () => {
       console.error("Error updating application status:", error);
     }
   };
+  useEffect(() => {
+    fetchApplicants();
+  }, [selectedJob, state.page]); // Add state.page dependency
   console.log(messages);
   return (
     <div className="widget-content">
@@ -153,10 +195,10 @@ const WidgetContentBox = () => {
                             <div className="content">
                               <figure className="image ">
                                 <Image
-                                className="rounded-full object-cover"
-                                  width={90}
+                                className="object-cover"
+                                  width={100}
                                   height={100}
-                                  src={`https://backend.rotaracthub.in/api/users/get-user-image?userId=${candidate.applicantId}`}
+                                  src={`${process.env.NEXT_PUBLIC_API_URL}/api/users/get-user-image?userId=${candidate.applicantId}`}
                                   alt="candidates"
                                 />
                               </figure>

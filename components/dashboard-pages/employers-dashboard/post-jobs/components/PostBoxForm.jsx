@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
-    companyId: "",
     jobRoleTitle: "",
     jobDescription: "",
     keyResponsibilities: "",
@@ -25,6 +24,37 @@ const PostBoxForm = () => {
     city: "",
     completeAddress: ""
   });
+    const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const API_KEY = "NkxnUTNTUk91U3JHTHk0T0s4WlcyaHRZaEdWRkg0NE1JQ1hwa3Y1SA==";
+  // Fetch Countries
+  useEffect(() => {
+      fetch("https://api.countrystatecity.in/v1/countries", {
+        headers: {
+          "X-CSCAPI-KEY": API_KEY,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setCountries(data))
+        .catch((err) => console.error("Error fetching countries:", err));
+    }, []);
+    
+    // Fetch States when country changes
+    useEffect(() => {
+      if (formData.country) {
+        fetch(`https://api.countrystatecity.in/v1/countries/${formData.country}/states`, {
+          headers: {
+            "X-CSCAPI-KEY": API_KEY,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => setStates(data))
+          .catch((err) => console.error("Error fetching states:", err));
+      } else {
+        setStates([]);
+      }
+    }, [formData.country]);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -87,6 +117,11 @@ const PostBoxForm = () => {
       ...prev,
       [name]: value,
     }));
+    if (name === "country") {
+      setFormData(prev => ({ ...prev, country: value,  city: "" }));
+    } else if (name === "state") {
+      setFormData(prev => ({ ...prev, city: value}));
+    } 
   };
 
   const handleSelectChange = (selectedOptions, actionMeta) => {
@@ -108,7 +143,7 @@ const PostBoxForm = () => {
     try {
       // Validate all required fields are present
       const requiredFields = [
-        "companyId", "jobRoleTitle", "jobDescription", "keyResponsibilities",
+         "jobRoleTitle", "jobDescription", "keyResponsibilities",
         "skillsAndExperience", "emailAddress", "specialisms", "jobType",
         "offeredSalary", "careerLevel", "experience", "gender", "industry",
         "qualification", "applicationDeadline", "country", "city", "completeAddress"
@@ -123,17 +158,21 @@ const PostBoxForm = () => {
       // Format the data as needed
       const submitData = {
         ...formData,
-        companyId: parseInt(formData.companyId),
+        companyId: parseInt(sessionStorage.getItem("companyId")),
         offeredSalary: parseFloat(formData.offeredSalary),
       };
 
       // Make the API call
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/postJob`, submitData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/postJob?userId=${sessionStorage.getItem("userId")}`, submitData,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},);
       console.log(response);
       setSuccess("Job posted successfully!");
       // Optionally reset form
       setFormData({
-        companyId: "",
         jobRoleTitle: "",
         jobDescription: "",
         keyResponsibilities: "",
@@ -141,7 +180,7 @@ const PostBoxForm = () => {
         emailAddress: "",
         specialisms: "",
         jobType: "",
-        offeredSalary: "",
+        offeredSalary: "0",
         careerLevel: "",
         experience: "",
         gender: "",
@@ -166,16 +205,6 @@ const PostBoxForm = () => {
       {success && <div className="alert alert-success">{success}</div>}
       
       <div className="row">
-        <div className="form-group col-lg-12 col-md-12">
-          <label>Company ID</label>
-          <input 
-            type="text" 
-            name="companyId" 
-            value={formData.companyId}
-            onChange={handleInputChange}
-            placeholder="Enter Company ID" 
-          />
-        </div>
 
         <div className="form-group col-lg-12 col-md-12">
           <label>Job Role Title</label>
@@ -256,7 +285,7 @@ const PostBoxForm = () => {
             <option value="Freelancer">Freelancer</option>
             <option value="Full Time">Full Time</option>
             <option value="Part Time">Part Time</option>
-            <option value="Temporary">Temporary</option>
+            <option value="Internship">Internship</option>
           </select>
         </div>
 
@@ -299,7 +328,8 @@ const PostBoxForm = () => {
             onChange={handleInputChange}
           >
             <option value="">Select</option>
-            <option value="No Experience">No Experience</option>
+            <option value="0 years">No Experience</option>
+            <option value="0-1 years">0-1 Years</option>
             <option value="1-2 Years">1-2 Years</option>
             <option value="2-5 Years">2-5 Years</option>
             <option value="5-10 Years">5-10 Years</option>
@@ -354,7 +384,7 @@ const PostBoxForm = () => {
         </div>
 
         <div className="form-group col-lg-12 col-md-12">
-          <label>Application Deadline Date</label>
+          <label className="me-2">Application Deadline Date</label>
           <input 
             type="date" 
             name="applicationDeadline"
@@ -371,12 +401,12 @@ const PostBoxForm = () => {
             value={formData.country}
             onChange={handleInputChange}
           >
-            <option value="">Select</option>
-            <option value="Australia">Australia</option>
-            <option value="Pakistan">Pakistan</option>
-            <option value="China">China</option>
-            <option value="Japan">Japan</option>
-            <option value="India">India</option>
+                                            <option value="">Select your country</option>
+    {countries.map((country) => (
+      <option key={country.iso2} value={country.iso2}>
+        {country.name}
+      </option>
+    ))}
           </select>
         </div>
 
@@ -388,11 +418,12 @@ const PostBoxForm = () => {
             value={formData.city}
             onChange={handleInputChange}
           >
-            <option value="">Select</option>
-            <option value="Melbourne">Melbourne</option>
-            <option value="Sydney">Sydney</option>
-            <option value="Brisbane">Brisbane</option>
-            <option value="Perth">Perth</option>
+                <option value="">Select your state</option>
+                {Array.isArray(states) && states.map((state) => (
+                            <option key={state.iso2} value={state.iso2}>
+                                {state.name}
+                            </option>
+                        ))}
           </select>
         </div>
 

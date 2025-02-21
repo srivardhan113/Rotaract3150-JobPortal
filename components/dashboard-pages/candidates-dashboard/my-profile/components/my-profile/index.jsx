@@ -103,6 +103,7 @@ const index = () => {
           <input
             type="text"
             name="name"
+            disabled={true}
             placeholder="creativelayers"
             required
           />

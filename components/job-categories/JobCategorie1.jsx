@@ -11,7 +11,7 @@ const JobCategorie1 = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://backend.rotaracthub.in/api/jobs/industry");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/industry`);
         setCategories(response.data); // Assumes response.data is the array
       } catch (err) {
         setError(err.message);
@@ -33,7 +33,7 @@ const JobCategorie1 = () => {
           className="category-block col-lg-4 col-md-6 col-sm-12"
           key={index}
         >
-          <div className="inner-box">
+          <div className="inner-box " style={{"height":"125px"}}>
             <div className="content">
             <span className={`icon ${item.icon}`}></span>
               <h4>

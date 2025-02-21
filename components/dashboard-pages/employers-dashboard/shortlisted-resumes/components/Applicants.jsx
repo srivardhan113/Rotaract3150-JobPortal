@@ -28,19 +28,25 @@ const Applicants = ({ companyId }) => {
         `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/findapplicants`,
         {
           companyId: sessionStorage.getItem("companyId"),
+          userId:sessionStorage.getItem("userId"),
           page: state.page,
-          limit: 6,
+          limit: 4,
           status: "Shortlisted",
           search: state.searchQuery,
           sortBy: state.sortBy
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
 
       const transformedApplicants = response.data.applicants.map(app => ({
         id: app.id,
         applicantId: app.applicantId,
         name: app.applicant.name,
-        avatar: `https:backend.rotaracthub.in/api/users/get-user-image?userId=${app.applicantId}`,
+        avatar: `${process.env.NEXT_PUBLIC_API_URL}/api/users/get-user-image?userId=${app.applicantId}`,
         designation: app.job.jobRoleTitle,
         location: `${app.job.city}, ${app.job.country}`,
         hourlyRate: app.job.offeredSalary,
@@ -97,6 +103,7 @@ const Applicants = ({ companyId }) => {
   return (
     <>
       <div className="widget-title">
+        <h4>Shortlisted Resumes</h4>
         {/* Filter Widget */}
         <div className="chosen-outer">
           <div className="search-box-one">
@@ -136,9 +143,8 @@ const Applicants = ({ companyId }) => {
             <div className="content">
               <figure className="image">
                 <Image
-                  className='rounded-full'
-                  width={120}
-                  height={90}
+                  width={100}
+                  height={100}
                   src={candidate.avatar}
                   alt="candidates"
                 />

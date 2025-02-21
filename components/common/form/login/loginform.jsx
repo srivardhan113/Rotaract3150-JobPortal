@@ -2,6 +2,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import LoginPopup from "./LoginPopup";
+import ForgotPasswordPopup from "./forgotpasswordpopup";
 
 const FormContent = (props) => {
   const [email, setEmail] = useState("");
@@ -10,7 +12,9 @@ const FormContent = (props) => {
   const router = useRouter();
 
   const URL = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login-cp`;
-
+  const [isForgotPassword, setisForgotPassword] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+   
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -31,11 +35,13 @@ const FormContent = (props) => {
       });
 
       if (response.status === 200) {
+        console.log(response.data)
         // Assuming the API returns a token or relevant user data
         const { token } = response.data;
         const type = response.data.userType;
         const userId= response.data.id;
         const companyId=response.data.companyId;
+        const username=response.data.username;
         console.log("token : ", response.data.token, "userType : ", type);
         // Save the token in sessionStorage for the current session
         sessionStorage.setItem("authToken", token);
@@ -47,13 +53,13 @@ const FormContent = (props) => {
         sessionStorage.setItem("type", type);
         sessionStorage.setItem("userId",userId);
         sessionStorage.setItem("companyId",companyId);
-
+        sessionStorage.setItem("username",username);
         // Optionally, save user information if provided in the response
         // Example:
         // sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
         // Redirect the user to a dashboard or home page
-        router.push("/");
+        props.onClose();
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -69,6 +75,7 @@ const FormContent = (props) => {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label>Email Address</label>
@@ -93,8 +100,28 @@ const FormContent = (props) => {
           value={password}
           onChange={handlePasswordChange}
         />
-      </div>
+        <div className="text" style={{ display: "flex", justifyContent: "flex-end" }}>
+  <button
+    onClick={(e) => {
+      e.preventDefault(); // Prevent any unintended form submission
+      props.Forgot(true);
+        props.onClose();
 
+    }}
+    style={{
+      display: "flex",
+      textAlign: "right",
+      marginLeft: "6px",
+      marginTop: "5px",
+      color: "#585050",
+    }}
+  >
+    Forgot password ?
+  </button>
+</div>
+
+      </div>
+   
       {errorMessage && (
         <div className="form-group">
           <p style={{ color: "red" }}>{errorMessage}</p>
@@ -107,6 +134,7 @@ const FormContent = (props) => {
         </button>
       </div>
     </form>
+    </>
   );
 };
 

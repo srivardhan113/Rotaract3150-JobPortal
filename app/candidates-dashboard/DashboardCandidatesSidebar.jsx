@@ -32,7 +32,7 @@ const DashboardCandidatesSidebar = () => {
     document.cookie = 'companyId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
     
     // Redirect to login page
-    router.push('/login');
+    router.push('/');
   };
 
   return (

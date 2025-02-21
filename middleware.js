@@ -8,7 +8,7 @@ export async function middleware(request) {
 
   // Quick check before making network request
   if (!authToken || !userId) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   try {
@@ -37,11 +37,11 @@ export async function middleware(request) {
 
     // User type validation
     if (path.includes('/candidates-dashboard') && userType !== 'Applicant') {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/', request.url));
     }
 
     if (path.includes('/employers-dashboard') && userType !== 'Company') {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/', request.url));
     }
 
   } catch (error) {

@@ -118,14 +118,14 @@ export const ExperienceForm = ({ onAdd, onCancel }) => {
               <div className="flex gap-3">
                 <button 
                   type="submit" 
-                  className="theme-btn btn-style-one"
+                  className="theme-btn btn-style-one m-2"
                 >
                   Add Experience
                 </button>
                 <button 
                   type="button" 
                   onClick={onCancel}
-                  className="theme-btn btn-style-three"
+                  className="theme-btn btn-style-three m-2"
                 >
                   Cancel
                 </button>
@@ -137,7 +137,6 @@ export const ExperienceForm = ({ onAdd, onCancel }) => {
     </div>
   );
 };
-
 // Achievement Form Component
 export const AchievementForm = ({ onAdd, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -207,14 +206,14 @@ export const AchievementForm = ({ onAdd, onCancel }) => {
               <div className="flex gap-3">
                 <button 
                   type="submit" 
-                  className="theme-btn btn-style-one"
+                  className="theme-btn btn-style-one m-2"
                 >
                   Add Achievement
                 </button>
                 <button 
                   type="button" 
                   onClick={onCancel}
-                  className="theme-btn btn-style-three"
+                  className="theme-btn btn-style-three m-2"
                 >
                   Cancel
                 </button>
@@ -326,14 +325,14 @@ const EducationForm = ({ onAdd, onCancel }) => {
               <div className="flex gap-3">
                 <button 
                   type="submit" 
-                  className="theme-btn btn-style-one"
+                  className="theme-btn btn-style-one m-2"
                 >
                   Add Education
                 </button>
                 <button 
                   type="button" 
                   onClick={onCancel}
-                  className="theme-btn btn-style-three"
+                  className="theme-btn btn-style-three m-2"
                 >
                   Cancel
                 </button>
@@ -351,7 +350,8 @@ const index = () => {
       const [converImg, setCoverImg] = useState("");
       const [logoPreview, setLogoPreview] = useState("");
       const [showEducationForm, setShowEducationForm] = useState(false);
-
+      const [pshow,setpshow]=useState(false);
+      
   const [input, setInput] = useState('');
 
       // Handle logo upload
@@ -391,8 +391,7 @@ const index = () => {
     
             if (response.data.data) {
                 setLogoImg(file);
-                // Optionally show success message
-                alert("Logo uploaded successfully!");
+               setpshow(true);
             }
         } catch (err) {
             console.error("Error uploading logo:", err);
@@ -423,6 +422,40 @@ const index = () => {
       achievements: [],
       socialLinks: []
     });
+    const [completedFields, setCompletedFields] = useState(0);
+
+// 2. Create an array of required field names
+const requiredFields = [
+  'fullLegalName',
+  'jobTitle',
+  'phoneNumber',
+  'personalWebsite',
+  'currentSalary',
+  'expectedSalary',
+  'ageRange',
+  'educationLevels',
+  'languages',
+  'skillsForSelect',
+  'country',
+  'state',
+  'city',
+  'completeAddress'
+];
+useEffect(() => {
+  const filledFieldsCount = requiredFields.reduce((count, fieldName) => {
+    const value = profile.applicantProfile[fieldName];
+    
+    // Special check for skills array
+    if (fieldName === 'skillsForSelect') {
+      return count + (Array.isArray(value) && value.length > 0 ? 1 : 0);
+    }
+    
+    // Check for other fields
+    return count + (value?.toString().trim() ? 1 : 0);
+  }, 0);
+
+  setCompletedFields(filledFieldsCount);
+}, [profile.applicantProfile]);
     const [showExperienceForm, setShowExperienceForm] = useState(false);
 const [showAchievementForm, setShowAchievementForm] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -444,7 +477,12 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
     const fetchProfile = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${sessionStorage.getItem('userId')}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuserprofile?userId=${sessionStorage.getItem('userId')}&id=${sessionStorage.getItem('userId')}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},);
         
         // Transform skills string to array of objects for react-select
         const skillsArray = response.data.applicantProfile.skills
@@ -459,9 +497,10 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
             skillsForSelect: skillsArray // Add new property for react-select
           }
         });
+        console.log(response.data)
       } catch (err) {
-        setError('Failed to load profile data');
-        console.error(err);
+        // setError('Failed to load profile data');
+        // console.error(err);
       } finally {
         setLoading(false);
       }
@@ -489,7 +528,8 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const userId = sessionStorage.getItem("userId");
+    if (completedFields === requiredFields.length) {
+      const userId = sessionStorage.getItem("userId");
     if (!userId) {
       setError('User not logged in');
       return;
@@ -517,17 +557,35 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
         {
           userId,
           ...submitData
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            "Content-Type": "application/json",
+          }},
       );
   
       if (response.data) {
-        alert('Profile updated successfully!');
+        // alert('Profile updated successfully!');
       }
     } catch (err) {
       setError('Failed to update profile');
       console.error('Profile update error:', err);
     } finally {
       setLoading(false);
+    }
+      console.log('Form is complete, submitting...', profile.applicantProfile);
+    } else {
+      // Show which fields are missing
+      const missingFields = requiredFields.filter(field => {
+        const value = profile.applicantProfile[field];
+        if (field === 'skills') {
+          return value.length === 0;
+        }
+        return !value?.toString().trim();
+      });
+      
+      alert(`Please fill in all required fields. Missing: ${missingFields.join(', ')}`);
     }
   };
   
@@ -549,6 +607,20 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
       }
     }));
   };
+  <div className="submit-field">
+  <div className="progress-text mb-2">
+    Form Completion: {completedFields} of {requiredFields.length} fields
+  </div>
+  <div className="progress" style={{ height: "10px" }}>
+    <div 
+      className="progress-bar" 
+      style={{ 
+        width: `${(completedFields / requiredFields.length) * 100}%`,
+        backgroundColor: completedFields === requiredFields.length ? '#28a745' : '#007bff'
+      }}
+    ></div>
+  </div>
+</div>
   const handleAddEducation = (newEducation) => {
     handleAddSection('education', newEducation);
     setShowEducationForm(false);
@@ -721,7 +793,13 @@ const handleSocialLinkChange = (e, index) => {
                 <div className="text">
                     Max file size is 1MB, Minimum dimension: 330x300 And
                     Suitable files are .jpg 
+                    {
+                  pshow&&<div className="text">
+                    <p className="text-danger">Profile updated succefuly</p>
+                    </div>
+                }
                 </div>
+                
             </div>
       {/* End logo and cover photo components */}
 
@@ -1235,8 +1313,8 @@ const handleSocialLinkChange = (e, index) => {
 
 
           <div className="form-group col-lg-6 col-md-12">
-            <button onClick={handleSubmit} className="theme-btn btn-style-one">
-              Save
+            <button onClick={handleSubmit} className="theme-btn btn-style-one"  disabled={completedFields !== requiredFields.length}>
+            {completedFields === requiredFields.length ? 'Submit Form' : `Complete All Fields (${completedFields}/${requiredFields.length})`}
             </button>
           </div>
           {/* End .row */}

@@ -46,12 +46,27 @@ const FilterJobBox = () => {
     dispatch(addJobTypeSelect(""));
     dispatch(addExperienceSelect(""));
     dispatch(addDatePosted(""));
-    dispatch(addSalary({ min: 0 }));
+    dispatch(addSalary({ min: 0 ,max:200000000}));
     dispatch(addSort(""));
     dispatch(addPerPage({ start: 0, end: 16 }));
     setCurrentPage(1);
   };
+  useEffect(() => {
+    // Run clearAll when component mounts
+    clearAll();
 
+    // Optional: Run on window reload
+    const handleBeforeUnload = () => {
+        clearAll();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup listener
+    return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+}, []); // Empty
   // Add new useEffect for clearing filters on load/reload
  
 
@@ -62,7 +77,7 @@ const FilterJobBox = () => {
         
         const requestBody = {
           page: currentPage,
-          limit: perPage.end || 16,
+          limit:8,
           sortField: "applicationDeadline",
           sortOrder: sort === "des" ? "desc" : "asc",
           ...(searchbar && { searchbar }),
@@ -125,13 +140,13 @@ const FilterJobBox = () => {
 
   const content = jobs.map((item) => (
     <div key={item.id} className="job-block col-lg-6 col-md-12 col-sm-12">
-      <div className="inner-box">
+      <div className="inner-box" style={{"height":"182px"}}>
         <div className="content">
           <span className="company-logo">
           <Image
               width={50}
                height={49}
-                src={`https://backend.rotaracthub.in/api/companies/get-image?companyId=${item.companyId}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/api/companies/get-image?companyId=${item.companyId}`}
                 alt="logo"
                 className='rounded'
                 />

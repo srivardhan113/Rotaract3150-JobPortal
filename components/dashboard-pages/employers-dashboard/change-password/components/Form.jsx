@@ -52,13 +52,14 @@ const Form = () => {
         {
           OldPassword: formData.oldPassword,
           NewPassword: formData.newPassword,
-          id:sessionStorage.getItem("userId")
+          id:sessionStorage.getItem("userId"),
+          userId:sessionStorage.getItem("userId")
         },
         {
           headers: {
             'Content-Type': 'application/json',
             // Assuming you're using JWT authentication
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${sessionStorage.getItem('authToken')}`
           }
         }
       );

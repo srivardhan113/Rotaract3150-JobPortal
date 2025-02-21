@@ -11,36 +11,37 @@ import {
 } from "../../utils/linkActiveChecker";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import LoginPopup from "@/components/common/form/login/LoginPopup";
+import ForgotPasswordPopup from "@/components/common/form/login/forgotpasswordpopup";
+// Adjust the import path accordingly
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
-  const [bgColor, setBgColor] = useState("rgba(0, 0, 0, 0.3)"); // Initial background color is transparent
-  const [scrollProgress, setScrollProgress] = useState(0); // Scroll progress percentage
-  const pathname = usePathname(); // Used to determine the active route
+  const [bgColor, setBgColor] = useState("rgba(0, 0, 0, 0.3)");
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showLoginPopup, setShowLoginPopup] = useState(false); // State for modal visibility
+  const pathname = usePathname();
   const isLoggedIn = !!sessionStorage.getItem("authToken");
   const router = useRouter();
   const type = sessionStorage.getItem("type");
-
+  const [isRegister, setIsRegister] = useState(false);
   const handleLogout = (e) => {
     e.preventDefault();
     sessionStorage.clear();
-  
-  // Clear cookies
-  document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-  document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-  document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-  document.cookie = 'companyId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-  
-  router.push('/login');
+    document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'companyId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    router.push('/');
   };
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);
-      setBgColor("rgba(0, 0, 0, 0.3)"); // Transparent black background on scroll
+      setBgColor("rgba(0, 0, 0, 0.3)");
     } else {
       setNavbar(false);
-      setBgColor("rgba(0, 0, 0, 0.3)"); // Transparent background when at the top
+      setBgColor("rgba(0, 0, 0, 0.3)");
     }
   };
 
@@ -63,179 +64,146 @@ const Header = () => {
       window.removeEventListener("scroll", updateScrollProgress);
     };
   }, []);
-
+  const [showForgetPasswordPopup, setShowForgotPasswordPopup] = useState(false);
   const shiningPinkStyle = {
-    background: "linear-gradient(90deg, pink, white, silver)", // Gradient colors
-    WebkitBackgroundClip: "text", // Clip gradient to text
-    WebkitTextFillColor: "transparent", // Makes text fill transparent to show the gradient
-    fontWeight: "bold", // Make text bold
-    transition: "0.3s ease", // Smooth transition for hover effects
+    background: "linear-gradient(90deg, pink, white, silver)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    fontWeight: "bold",
+    transition: "0.3s ease",
   };
 
   return (
-    <header
-      className={`main-header -type-11 ${
-        navbar ? "fixed-header animated slideInDown" : ""
-      }`}
-      style={{
-        backgroundColor: bgColor, // Dynamic background color
-        backdropFilter: navbar ? "blur(20px)" : "none", // Apply blur on scroll
-        borderRadius: "15px", // Set border radius to 15px
-        paddingTop: "-40px",
-        paddingButton: "-40px", // 20px top padding to float the navbar
-        paddingLeft: "0px", // 30px left padding
-        paddingRight: "0px", // 30px right padding
-        position: "fixed", // Fixed position for floating effect
-        left: "20px", // Ensure it stays aligned to the left
-        right: "20px", // Ensure it stays aligned to the right
-        top: "20px",
-        width: "auto",
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Constant box shadow
-        transition: "background-color 0.3s ease, backdrop-filter 0.3s ease", // Smooth transition
-        zIndex: 1000, // Ensure it stays on top of other content
-      }}
-    >
-      <div className="main-box">
-        {/* Logo Section */}
-        <div className="nav-outer">
-          <div className="logo-box">
-            <div className="logo">
-              <Link href="/">
-                <Image
-                  width={154}
-                  height={50}
-                  src="/images-rotaract/ri3150-logo.png"
-                  alt="ROTARACT3150 || SRIPTO"
-                />
-              </Link>
+    <>
+      <header
+        className={`main-header -type-11 ${
+          navbar ? "fixed-header animated slideInDown" : ""
+        }`}
+        style={{
+          backgroundColor: bgColor,
+          backdropFilter: navbar ? "blur(20px)" : "none",
+          borderRadius: "15px",
+          paddingTop: "-40px",
+          paddingButton: "-40px",
+          paddingLeft: "0px",
+          paddingRight: "0px",
+          position: "fixed",
+          left: "20px",
+          right: "20px",
+          top: "20px",
+          width: "auto",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+          transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
+          zIndex: 1000,
+        }}
+      >
+        <div className="main-box">
+          <div className="nav-outer">
+            <div className="logo-box">
+              <div className="logo">
+                <Link href="/">
+                  <Image
+                    width={154}
+                    height={50}
+                    src="/images-rotaract/ri3150-logo.png"
+                    alt="ROTARACT3150 || SRIPTO"
+                  />
+                </Link>
+              </div>
             </div>
+
+            <nav className="nav main-menu">
+              <ul className="navigation" id="navbar">
+                <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
+                  <Link href="/" className="underline-animation">
+                    Home
+                  </Link>
+                </li>
+                <li className={`${isActiveLink("/find-jobs", pathname) ? "current" : ""}`}>
+                  <Link href="/job-list" className="underline-animation">
+                    Find Jobs
+                  </Link>
+                </li>
+                {type === "Company" && (
+                  <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
+                    <Link href="/employers-dashboard" className="underline-animation">
+                      Job Provider Dashboard
+                    </Link>
+                  </li>
+                )}
+                {type === "Applicant" && (
+                  <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
+                    <Link href="/candidates-dashboard" className="underline-animation">
+                      Job Seeker Dashboard
+                    </Link>
+                  </li>
+                )}
+                <li className={`${isActiveParentChaild(pageItems, pathname) ? "current" : ""} dropdown`}>
+                  <span className="">More</span>
+                  <ul>
+                    {pageItems.map((item, i) => (
+                      <li className={isActiveLink(item.routePath, pathname) ? "current" : ""} key={i}>
+                        <Link href={item.routePath} className="underline-animation">
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+            </nav>
           </div>
 
-          {/* Navigation Menu */}
-          <nav className="nav main-menu">
-            <ul className="navigation" id="navbar">
-              {/* Home */}
-              <li className={`${isActiveLink("/", pathname) ? "current" : ""}`}>
-                <Link href="/" className="underline-animation">
-                  Home
-                </Link>
-              </li>
-
-              {/* Find Jobs */}
-              <li
-                className={`${
-                  isActiveLink("/find-jobs", pathname) ? "current" : ""
-                }`}
-              >
-                <Link href="/job-list" className="underline-animation">
-                  Find Jobs
-                </Link>
-              </li>
-
-              {/* Employers */}
-
-              {type === "Company" && (
-                <li
-                  className={`${isActiveLink("/", pathname) ? "current" : ""}`}
+          <div className="outer-box">
+            {!isLoggedIn ? (
+              <div className="btn-box">
+                <button
+                  className="theme-btn btn-style-three btn-white-10 call-modal"
+                  onClick={() => {setShowLoginPopup(true)
+                    setIsRegister(false)
+                  }} // Open the modal
                 >
-                  <Link
-                    href="/employers-dashboard"
-                    className="underline-animation"
-                  >
-                    Job Provider Dashboard
-                  </Link>
-                </li>
-              )}
-
-              {/* Candidates */}
-
-              {type === "Applicant" && (
-                <li
-                  className={`${isActiveLink("/", pathname) ? "current" : ""}`}
+                  Login / Register
+                </button>
+             
+              </div>
+            ) : (
+              <div className="btn-box">
+                <button
+                  className="theme-btn btn-style-three btn-white-10 call-modal"
+                  onClick={handleLogout}
                 >
-                  <Link
-                    href="/candidates-dashboard"
-                    className="underline-animation"
-                  >
-                    Job Seeker Dashboard
-                  </Link>
-                </li>
-              )}
-
-              {/* Pages Dropdown */}
-              <li
-                className={`${
-                  isActiveParentChaild(pageItems, pathname) ? "current" : ""
-                } dropdown`}
-              >
-                <span className="">More</span>
-                <ul>
-                  {pageItems.map((item, i) => (
-                    <li
-                      className={
-                        isActiveLink(item.routePath, pathname) ? "current" : ""
-                      }
-                      key={i}
-                    >
-                      <Link
-                        href={item.routePath}
-                        className="underline-animation"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-          </nav>
+                  Logout
+                </button>
+                {type === "Company" && (
+                <Link href="/employers-dashboard/post-jobs" className="theme-btn btn-style-one btn-white">
+                  Job Post
+                </Link>)}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Login/Register and Job Post Buttons */}
-        <div className="outer-box">
-          {!isLoggedIn ? (
-            <div className="btn-box">
-              <a
-                href="/register"
-                className="theme-btn btn-style-three btn-white-10 call-modal"
-              >
-                Login / Register
-              </a>
-              <Link
-                href="/employers-dashboard/post-jobs"
-                className="theme-btn btn-style-one btn-white"
-              >
-                Job Post
-              </Link>
-            </div>
-          ) : (
-            <div className="btn-box">
-              <button
-                className="theme-btn btn-style-three btn-white-10 call-modal"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+        {/* Scroll Progress Loader */}
+        <div
+          style={{
+            height: "4px",
+            backgroundColor: "#CE1266",
+            width: `calc(${scrollProgress}% - 18px)`,
+            position: "absolute",
+            bottom: "1px",
+            borderRadius: "5px",
+            left: "9px",
+            right: "9px",
+            transition: "width 0.2s ease",
+          }}
+        ></div>
+      </header>
 
-      {/* Scroll Progress Loader */}
-      <div
-        style={{
-          height: "4px",
-          backgroundColor: "#CE1266",
-          width: `calc(${scrollProgress}% - 18px)`, // Adjust width by subtracting the gap on both sides
-          position: "absolute",
-          bottom: "1px",
-          borderRadius: "5px",
-          left: "9px", // Start 8px from the left
-          right: "9px", // End 8px from the right
-          transition: "width 0.2s ease", // Smooth transition for the progress bar
-        }}
-      ></div>
-    </header>
+      {/* Render the LoginPopup modal */}
+      <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister} isForgotPassword={setShowForgotPasswordPopup}/>
+      <ForgotPasswordPopup show={showForgetPasswordPopup} onClose={()=> setShowForgotPasswordPopup(false)} />
+    </>
   );
 };
 

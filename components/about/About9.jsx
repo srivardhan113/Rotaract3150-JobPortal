@@ -84,10 +84,10 @@ const About9 = () => {
                   </div>
                 </div>
                 <Link
-                  href="/candidates-dashboard/cv-manager"
+                  href="/job-list"
                   className="theme-btn btn-style-one"
                 >
-                  Job Portal
+                  Find Jobs
                 </Link>
               </div>
             </div>

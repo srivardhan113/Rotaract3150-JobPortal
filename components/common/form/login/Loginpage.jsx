@@ -6,9 +6,14 @@ import LoginWithSocial from "./LoginWithSocial";
 import Loginform from "./loginform";
 import Link from "next/link";
 
-const Loginpage = () => {
-  const [userType, setUserType] = useState("Applicant");
+import LoginPopup from "./LoginPopup";
 
+const Loginpage = ({onClose,ForgotPassword}) => {
+  const [userType, setUserType] = useState("Applicant");
+ 
+  const [isRegister, setIsRegister] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false); 
+  console.log(userType);
   return (
     <div className="form-inner">
       <h3 className="text-center pt-4">Login to Rotaract3150 - Job Portal</h3>
@@ -18,13 +23,13 @@ const Loginpage = () => {
           <TabList className="btn-box row">
             <Tab className="col-lg-6 col-md-12">
               <button className="theme-btn btn-style-four">
-                <i className="la la-user"></i> Candidate (Job Seeker)
+                <i className="la la-user"></i> Candidate 
               </button>
             </Tab>
 
             <Tab className="col-lg-6 col-md-12">
               <button className="theme-btn btn-style-four">
-                <i className="la la-briefcase"></i> Employer (Job Provider)
+                <i className="la la-briefcase"></i> Employer 
               </button>
             </Tab>
           </TabList>
@@ -32,12 +37,12 @@ const Loginpage = () => {
         {/* End .form-group */}
 
         <TabPanel>
-          <Loginform userType={userType} />
+          <Loginform userType={userType} onClose={onClose} Forgot={ForgotPassword} />
         </TabPanel>
         {/* End candidates Form */}
 
         <TabPanel>
-          <Loginform userType={userType} />
+          <Loginform userType={userType} onClose={onClose}  Forgot={ForgotPassword}/>
         </TabPanel>
         {/* End Employer Form */}
       </Tabs>
@@ -46,16 +51,19 @@ const Loginpage = () => {
       <div className="bottom-box">
         <div className="text">
           Don't have an account?{" "}
-          <Link href="/register" className="call-modal login">
+          <button onClick={() =>{ setShowLoginPopup(true)
+            setIsRegister(true)
+          }} className="call-modal login">
             Register
-          </Link>
+          </button>
         </div>
         <div className="divider">
           <span>or</span>
         </div>
-        <LoginWithSocial />
+        <LoginWithSocial userType={userType} />
       </div>
-      {/* End bottom-box LoginWithSocial */}
+      
+      <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister}/>
     </div>
   );
 };

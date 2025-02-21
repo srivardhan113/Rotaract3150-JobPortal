@@ -18,8 +18,12 @@ import Footer from "./Footer";
 import React from "react";
 import { FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
 import "../../styles/styles.css";
-
+import { useState } from "react";
+import LoginPopup from "@/components/common/form/login/LoginPopup";
+import AutoHideSection from "@/components/about/autohidesction";
 const index = () => {
+  const [showLoginPopup, setShowLoginPopup] = useState(false); 
+  const [isRegister, setIsRegister] = useState(false);
   return (
     <>
       {/* <LoginPopup /> */}
@@ -120,14 +124,11 @@ const index = () => {
       {/* <!-- End About Section --> */}
 
       {/* ----------------------------------------------------------------------------------------------------------------- */}
-
-      <section className="layout-pt-60 layout-pb-60">
-        <div className="auto-container">
-          <div className="row" data-aos="fade-up">
-            <RegBanner />
-          </div>
-        </div>
-      </section>
+      
+      <AutoHideSection
+  setIsRegister={setIsRegister}
+  setShowLoginPopup={setShowLoginPopup}
+/>
       {/* <!-- End Registeration Banners --> */}
 
       {/* ----------------------------------------------------------------------------------------------------------------- */}
@@ -253,6 +254,7 @@ const index = () => {
 
       <Footer />
       {/* <!-- End Main Footer --> */}
+      <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister}/>
     </>
   );
 };

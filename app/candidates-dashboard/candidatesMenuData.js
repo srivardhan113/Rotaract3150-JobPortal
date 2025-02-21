@@ -1,13 +1,20 @@
 module.exports = [
   {
     id: 1,
-    name: "Dashboard",
+    name: "Home",
     icon: "la-home",
-    routePath: "/candidates-dashboard",
+    routePath: "/",
     active: "active",
   },
   {
     id: 2,
+    name: "Dashboard",
+    icon: "la-box",
+    routePath: "/candidates-dashboard",
+    active: "",
+  },
+  {
+    id: 3,
     name: "My Profile",
     icon: "la-user-tie",
     routePath: "/candidates-dashboard/my-profile",

@@ -13,6 +13,7 @@ const Loginpage = ({onClose,ForgotPassword}) => {
  
   const [isRegister, setIsRegister] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false); 
+  console.log(userType);
   return (
     <div className="form-inner">
       <h3 className="text-center pt-4">Login to Rotaract3150 - Job Portal</h3>

@@ -74,8 +74,9 @@ const CandidateSingleDynamicV1 = ({ params }) => {
                       <span className="icon flaticon-phone"></span>
                       {profile.applicantProfile.phoneNumber}
                     </li>
-                    <li>
+                    <li>{profile.applicantProfile.emailAddress &&
                       <span className="icon flaticon-mail"></span>
+                    }
                       {profile.applicantProfile.emailAddress}
                     </li>
                   </ul>

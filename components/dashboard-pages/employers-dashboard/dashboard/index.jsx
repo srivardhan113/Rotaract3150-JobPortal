@@ -40,7 +40,7 @@ const [state, setState] = useState({
         {
           userId:sessionStorage.getItem("userId"),
           companyId: sessionStorage.getItem("companyId"),
-          limit: 6,
+          limit: 4,
           period: selectedJob,
         },
         {

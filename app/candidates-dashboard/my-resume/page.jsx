@@ -2,10 +2,10 @@
 
 import MyResume from "@/components/dashboard-pages/candidates-dashboard/my-resume";
 
-export const metadata = {
-  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-};
+// export const metadata = {
+//   title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+//   description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+// };
 
 const Index = () => {
   return <MyResume />;

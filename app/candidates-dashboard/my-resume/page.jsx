@@ -1,4 +1,5 @@
-import dynamic from "next/dynamic";
+"use client";  // This makes it a Client Component
+
 import MyResume from "@/components/dashboard-pages/candidates-dashboard/my-resume";
 
 export const metadata = {
@@ -6,12 +7,8 @@ export const metadata = {
   description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
 };
 
-const index = () => {
-  return (
-    <>
-      <MyResume />
-    </>
-  );
+const Index = () => {
+  return <MyResume />;
 };
 
-export default dynamic(() => Promise.resolve(index), { ssr: false });
+export default Index;  // No need for `next/dynamic`

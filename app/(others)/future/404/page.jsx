@@ -1,17 +1,19 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-  description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
-};
+// export const metadata = {
+//   title: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+//   description: "Rotaract3150 || Job portal || Sri Vardhan Yeluri || SRIPTO",
+// };
 
-const index = () => {
+const Index = () => {
   return (
     <>
       <div
-        className="error-page-wrapper "
+        className="error-page-wrapper"
         style={{
           backgroundImage: `url(/images/404.jpg)`,
         }}
@@ -43,4 +45,4 @@ const index = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(index), { ssr: false });
+export default Index; // No need for dynamic import

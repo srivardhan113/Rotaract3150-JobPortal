@@ -10,7 +10,7 @@ import MobileMenu from "/components/header/MobileMenu";
 import Hero from "/components/hero";
 import JobCategorie1 from "/components/job-categories/JobCategorie1";
 import JobFeatured9 from "/components/job-featured/JobFeatured9";
-import Initiated from "@/components/Initiated";
+import TeamSection from "../../components/TeamSection/TeamSection";
 // import Pricing3 from "../pricing/Pricing3";
 // import TopCompany from "../top-company/TopCompany";
 import Header from "./Header";
@@ -213,7 +213,7 @@ const index = () => {
     </div>
     <div className="sponsors-outer wow fadeInUp">
       <div className="sponsors-carousel">
-        <Initiated />
+        <TeamSection />
       </div>
     </div>
   </div>

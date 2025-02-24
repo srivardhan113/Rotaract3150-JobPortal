@@ -115,6 +115,35 @@ useEffect(() => {
     }
   }, [formData.country]);
   console.log(states)
+  const placeholders = {
+    CompanyLegalNmae: "Enter Company Name",
+    EmailAddress: "Email Address",
+    Phone: "Enter Phone Number",
+    Website: "Enter Website Name",
+    EstSince: "Enter The Date Of Establishment",
+    AboutCompany: "Description Of Your Company",
+    completeAddress: "Enter Your Complete Address"
+  };
+
+  // State to track current placeholders
+  const [currentPlaceholders, setCurrentPlaceholders] = useState(placeholders);
+
+  // Handle focus - remove placeholder
+  const handleFocus = (fieldName) => {
+    setCurrentPlaceholders(prev => ({
+      ...prev,
+      [fieldName]: ''
+    }));
+  };
+
+  // Handle blur - restore placeholder
+  const handleBlur = (fieldName) => {
+    setCurrentPlaceholders(prev => ({
+      ...prev,
+      [fieldName]: placeholders[fieldName]
+    }));
+  };
+
     // Handle logo upload
     const logoHandler = async (file) => {
         try {
@@ -288,7 +317,9 @@ useEffect(() => {
                             name="name"
                             value={formData.name}
                             onChange={handleInputChange}
-                            placeholder="Company Name"
+                            placeholder={currentPlaceholders.CompanyLegalNmae}
+                            onFocus={() => handleFocus('CompanyLegalNmae')}
+                            onBlur={() => handleBlur('CompanyLegalNmae')}
                             required
                         />
                     </div>
@@ -300,7 +331,9 @@ useEffect(() => {
                         name="name"
                         disabled={true}
                         value={formData.email}
-                        placeholder="ib-themes"
+                        placeholder={currentPlaceholders.EmailAddress}
+                        onFocus={() => handleFocus('EmailAddress')}
+                        onBlur={() => handleBlur('EmailAddress')}
                         required
                     />
                 </div>
@@ -312,7 +345,9 @@ useEffect(() => {
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
-                            placeholder="0 123 456 7890"
+                            placeholder={currentPlaceholders.Phone}
+                            onFocus={() => handleFocus('Phone')}
+                            onBlur={() => handleBlur('Phone')}
                             required
                         />
                     </div>
@@ -324,7 +359,9 @@ useEffect(() => {
                             name="website"
                             value={formData.website}
                             onChange={handleInputChange}
-                            placeholder="www.company.com"
+                            placeholder={currentPlaceholders.Website}
+                            onFocus={() => handleFocus('Website')}
+                            onBlur={() => handleBlur('Website')}
                             required
                         />
                     </div>
@@ -334,7 +371,9 @@ useEffect(() => {
                         <input
                             type="text"
                             name="establishedSince"
-                            placeholder='ib-themes'
+                            placeholder={currentPlaceholders.EstSince}
+                            onFocus={() => handleFocus('EstSince')}
+                            onBlur={() => handleBlur('EstSince')}
                             value={formData.establishedSince}
                             onChange={handleInputChange}
                             required
@@ -394,7 +433,9 @@ useEffect(() => {
                             name="about"
                             value={formData.about}
                             onChange={handleInputChange}
-                            placeholder="Company description..."
+                            placeholder={currentPlaceholders.AboutCompany}
+                            onFocus={() => handleFocus('AboutCompany')}
+                            onBlur={() => handleBlur('AboutCompany')}
                             required
                         ></textarea>
                     </div>
@@ -500,7 +541,9 @@ useEffect(() => {
                             name="completeAddress"
                             value={formData.completeAddress}
                             onChange={handleInputChange}
-                            placeholder="Full address"
+                            placeholder={currentPlaceholders.completeAddress}
+                            onFocus={() => handleFocus('completeAddress')}
+                            onBlur={() => handleBlur('completeAddress')}
                             required
                         />
                     </div>

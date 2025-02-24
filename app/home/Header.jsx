@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import LoginPopup from "@/components/common/form/login/LoginPopup";
 import ForgotPasswordPopup from "@/components/common/form/login/forgotpasswordpopup";
+import RoleSwitchWarningPopup from "@/components/common/form/popupwarning";
 // Adjust the import path accordingly
 
 const Header = () => {
@@ -25,6 +26,7 @@ const Header = () => {
   const router = useRouter();
   const type = sessionStorage.getItem("type");
   const [isRegister, setIsRegister] = useState(false);
+  const [isRoleSwitching, setIsRoleSwitching] = useState(false);
   const handleLogout = (e) => {
     e.preventDefault();
     sessionStorage.clear();
@@ -34,7 +36,38 @@ const Header = () => {
     document.cookie = 'companyId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
     router.push('/');
   };
-
+  const [showWarning, setShowWarning] = useState(false);
+  const handleRoleSwitch = async () => {
+    try {
+      setIsRoleSwitching(true)
+      const userId = sessionStorage.getItem("userId");
+      
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/switchRole`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem("authToken")}`
+        },
+        body: JSON.stringify({
+          userId: userId,
+          type: type === "Company" ? "Applicant" : "Company" // Fix: Send the target type, not current type
+        })
+      });
+  
+      const data = await response.json();
+      
+      if (response.ok) {
+        setShowWarning(false);
+        handleLogout({ preventDefault: () => {} });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.error('Error switching role:', error);
+    } finally {
+      setIsRoleSwitching(false);
+    }
+  };
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);
@@ -155,33 +188,46 @@ const Header = () => {
           </div>
 
           <div className="outer-box">
-            {!isLoggedIn ? (
-              <div className="btn-box">
-                <button
-                  className="theme-btn btn-style-three btn-white-10 call-modal"
-                  onClick={() => {setShowLoginPopup(true)
-                    setIsRegister(false)
-                  }} // Open the modal
-                >
-                  Login / Register
-                </button>
-             
-              </div>
-            ) : (
-              <div className="btn-box">
-                <button
-                  className="theme-btn btn-style-three btn-white-10 call-modal"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-                {type === "Company" && (
-                <Link href="/employers-dashboard/post-jobs" className="theme-btn btn-style-one btn-white">
+          {!isLoggedIn ? (
+            <div className="btn-box">
+              <button
+                className="theme-btn btn-style-three btn-white-10 call-modal ml-1"
+                onClick={() => {
+                  setShowLoginPopup(true);
+                  setIsRegister(false);
+                }}
+              >
+                Login / Register
+              </button>
+            </div>
+          ) : (
+            <div className="btn-box">
+              {/* Add Role Switch Button */}
+              <button
+                className="theme-btn btn-style-three btn-white-10 call-modal me-2 "
+                onClick={()=>{
+                   setShowWarning(true)}}
+                disabled={isRoleSwitching}
+              >
+                {isRoleSwitching ? 'Switching...' : `Switch to ${type === "Applicant" ? "Company" : "Applicant"}`}
+              </button>
+              
+              <button
+                className="theme-btn btn-style-three btn-white-10 call-modal ml-1"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+              
+              {type === "Company" && (
+                <Link href="/employers-dashboard/post-jobs" className="theme-btn btn-style-one btn-white ml-2">
                   Job Post
-                </Link>)}
-              </div>
-            )}
-          </div>
+                </Link>
+              )}
+            </div>
+          )}
+        </div>
+
         </div>
 
         {/* Scroll Progress Loader */}
@@ -199,7 +245,12 @@ const Header = () => {
           }}
         ></div>
       </header>
-
+      <RoleSwitchWarningPopup
+        show={showWarning} 
+        onClose={() => setShowWarning(false)} 
+        onConfirm={handleRoleSwitch} 
+        usertype={type === "Applicant" ? "Company" : "Applicant"}
+      />
       {/* Render the LoginPopup modal */}
       <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister} isForgotPassword={setShowForgotPasswordPopup}/>
       <ForgotPasswordPopup show={showForgetPasswordPopup} onClose={()=> setShowForgotPasswordPopup(false)} />

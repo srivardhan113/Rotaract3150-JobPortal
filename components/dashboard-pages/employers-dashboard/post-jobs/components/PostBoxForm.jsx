@@ -59,6 +59,34 @@ const PostBoxForm = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+const placeholders = {
+    jobRoleTitle: "Enter Job Name",
+    jobDescription: "Enter Job Description",
+    keyResponsibilities: "Enter Key Responsibilities",
+    skillsAndExperience: "Enter Required Skills And Experience",
+    emailAddress: "Enter Email Address",
+    offeredSalary: "Enter Offered Salary",
+    completeAddress: "Enter Your Complete Address"
+  };
+
+  // State to track current placeholders
+  const [currentPlaceholders, setCurrentPlaceholders] = useState(placeholders);
+
+  // Handle focus - remove placeholder
+  const handleFocus = (fieldName) => {
+    setCurrentPlaceholders(prev => ({
+      ...prev,
+      [fieldName]: ''
+    }));
+  };
+
+  // Handle blur - restore placeholder
+  const handleBlur = (fieldName) => {
+    setCurrentPlaceholders(prev => ({
+      ...prev,
+      [fieldName]: placeholders[fieldName]
+    }));
+  };
 
   const specialisms = [
     {
@@ -213,7 +241,9 @@ const PostBoxForm = () => {
             name="jobRoleTitle" 
             value={formData.jobRoleTitle}
             onChange={handleInputChange}
-            placeholder="Title" 
+            placeholder={currentPlaceholders.jobRoleTitle}
+            onFocus={() => handleFocus('jobRoleTitle')}
+            onBlur={() => handleBlur('jobRoleTitle')}
           />
         </div>
 
@@ -223,7 +253,9 @@ const PostBoxForm = () => {
             name="jobDescription"
             value={formData.jobDescription}
             onChange={handleInputChange}
-            placeholder="Enter job description"
+            placeholder={currentPlaceholders.jobDescription}
+            onFocus={() => handleFocus('jobDescription')}
+            onBlur={() => handleBlur('jobDescription')}
           ></textarea>
         </div>
 
@@ -233,7 +265,9 @@ const PostBoxForm = () => {
             name="keyResponsibilities"
             value={formData.keyResponsibilities}
             onChange={handleInputChange}
-            placeholder="Enter key responsibilities"
+            placeholder={currentPlaceholders.keyResponsibilities}
+            onFocus={() => handleFocus('keyResponsibilities')}
+            onBlur={() => handleBlur('keyResponsibilities')}
           ></textarea>
         </div>
 
@@ -243,7 +277,9 @@ const PostBoxForm = () => {
             name="skillsAndExperience"
             value={formData.skillsAndExperience}
             onChange={handleInputChange}
-            placeholder="Enter required skills and experience"
+            placeholder={currentPlaceholders.skillsAndExperience}
+            onFocus={() => handleFocus('skillsAndExperience')}
+            onBlur={() => handleBlur('skillsAndExperience')}
           ></textarea>
         </div>
 
@@ -254,7 +290,9 @@ const PostBoxForm = () => {
             name="emailAddress"
             value={formData.emailAddress}
             onChange={handleInputChange}
-            placeholder="Enter email address" 
+            placeholder={currentPlaceholders.emailAddress}
+            onFocus={() => handleFocus('emailAddress')}
+            onBlur={() => handleBlur('emailAddress')}
           />
         </div>
 
@@ -297,7 +335,9 @@ const PostBoxForm = () => {
             value={formData.offeredSalary}
             onChange={handleInputChange}
             className="form-control"
-            placeholder="Enter Offered Salary"
+            placeholder={currentPlaceholders.offeredSalary}
+            onFocus={() => handleFocus('offeredSalary')}
+            onBlur={() => handleBlur('offeredSalary')}
             min="0"
           />
         </div>
@@ -434,7 +474,9 @@ const PostBoxForm = () => {
             name="completeAddress"
             value={formData.completeAddress}
             onChange={handleInputChange}
-            placeholder="Enter complete address"
+            placeholder={currentPlaceholders.completeAddress}
+            onFocus={() => handleFocus('completeAddress')}
+            onBlur={() => handleBlur('completeAddress')}
           />
         </div>
 

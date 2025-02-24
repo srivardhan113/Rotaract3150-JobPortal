@@ -21,9 +21,11 @@ import "../../styles/styles.css";
 import { useState } from "react";
 import LoginPopup from "@/components/common/form/login/LoginPopup";
 import AutoHideSection from "@/components/about/autohidesction";
+import ForgotPasswordPopup from "@/components/common/form/login/forgotpasswordpopup";
 const index = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false); 
   const [isRegister, setIsRegister] = useState(false);
+  const [showForgetPasswordPopup, setShowForgotPasswordPopup] = useState(false);
   return (
     <>
       {/* <LoginPopup /> */}
@@ -128,6 +130,7 @@ const index = () => {
       <AutoHideSection
   setIsRegister={setIsRegister}
   setShowLoginPopup={setShowLoginPopup}
+  setShowForgotPasswordPopup={setShowForgotPasswordPopup}
 />
       {/* <!-- End Registeration Banners --> */}
 
@@ -254,7 +257,8 @@ const index = () => {
 
       <Footer />
       {/* <!-- End Main Footer --> */}
-      <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister}/>
+      <LoginPopup show={showLoginPopup} onClose={() => setShowLoginPopup(false)} isRegister={isRegister} isForgotPassword={setShowForgotPasswordPopup}/>
+      <ForgotPasswordPopup show={showForgetPasswordPopup} onClose={()=> setShowForgotPasswordPopup(false)} />
     </>
   );
 };

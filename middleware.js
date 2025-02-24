@@ -14,7 +14,7 @@ export async function middleware(request) {
   try {
     // Add timeout to the fetch request
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 6000); // 5 second timeout
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/protected`, {
       method: 'POST',
@@ -32,7 +32,7 @@ export async function middleware(request) {
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/', request.url));
     }
 
     // User type validation
@@ -50,7 +50,7 @@ export async function middleware(request) {
     } else {
       console.error('Auth error:', error);
     }
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   // Cache the successful response

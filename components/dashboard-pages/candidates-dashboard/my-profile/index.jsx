@@ -403,10 +403,9 @@ const index = () => {
         fullLegalName: '',
         jobTitle: '',
         phoneNumber: '',
-        emailAddress: '',
         personalWebsite: '',
-        currentSalary: '',
-        expectedSalary: '',
+        currentSalary: '0',
+        expectedSalary: '0',
         ageRange: '',
         educationLevels: '',
         languages: '',
@@ -423,6 +422,38 @@ const index = () => {
       socialLinks: []
     });
     const [completedFields, setCompletedFields] = useState(0);
+    const placeholders = {
+      fullLegalName: "Enter Your Name",
+      jobTitle: "Enter Your Current Job",
+      phoneNumber: "Enter Your Phone Number",
+      emailAddress: "Email Address",
+      personalWebsite: "Enter Your Personal Website",
+      languages: "Enter The Languages You Know",
+      description: "Spent several years working on sheep on Wall Street...",
+      country: "Enter Country",
+      state: "Enter State",
+      city: "Enter City",
+      completeAddress: "Door No. 143.143, Lakshmi Mohan Residency, Tilak Road"
+    };
+  
+    // State to track current placeholders
+    const [currentPlaceholders, setCurrentPlaceholders] = useState(placeholders);
+  
+    // Handle focus - remove placeholder
+    const handleFocus = (fieldName) => {
+      setCurrentPlaceholders(prev => ({
+        ...prev,
+        [fieldName]: ''
+      }));
+    };
+  
+    // Handle blur - restore placeholder
+    const handleBlur = (fieldName) => {
+      setCurrentPlaceholders(prev => ({
+        ...prev,
+        [fieldName]: placeholders[fieldName]
+      }));
+    };
 
 // 2. Create an array of required field names
 const requiredFields = [
@@ -645,7 +676,7 @@ const [showAchievementForm, setShowAchievementForm] = useState(false);
   
       return {
         ...prev,
-        [section]: [...prev[section], { ...newItem, id: newId }]
+        [section]: [...prev[section], { ...newItem}]
       };
     });
   };
@@ -814,20 +845,24 @@ const handleSocialLinkChange = (e, index) => {
             name="fullLegalName"
             value={profile.applicantProfile.fullLegalName}
             onChange={(e) => handleInputChange(e)}
-            placeholder="Jerome"
+            placeholder={currentPlaceholders.fullLegalName}
+            onFocus={() => handleFocus('fullLegalName')}
+            onBlur={() => handleBlur('fullLegalName')}
             required
           />
         </div>
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Job Title</label>
+          <label>Current Status</label>
           <input
             type="text"
             name="jobTitle"
             value={profile.applicantProfile.jobTitle}
             onChange={(e) => handleInputChange(e)}
-            placeholder="UI Designer"
+            placeholder={currentPlaceholders.jobTitle}
+            onFocus={() => handleFocus('jobTitle')}
+            onBlur={() => handleBlur('jobTitle')}
             required
           />
         </div>
@@ -841,7 +876,9 @@ const handleSocialLinkChange = (e, index) => {
     name="phoneNumber"
     value={profile.applicantProfile.phoneNumber}
     onChange={(e) => handleInputChange(e)}
-    placeholder="0 123 456 7890"
+    placeholder={currentPlaceholders.phoneNumber}
+    onFocus={() => handleFocus('phoneNumber')}
+    onBlur={() => handleBlur('phoneNumber')}
     required
   />
 </div>
@@ -852,10 +889,12 @@ const handleSocialLinkChange = (e, index) => {
   <input
     type="text"
     name="emailAddress"
-    value={profile.applicantProfile.emailAddress}
+    value={profile.emailAddress}
     disabled={true}
     onChange={(e) => handleInputChange(e)}
-    placeholder="creativelayers"
+    placeholder={currentPlaceholders.emailAddress}
+    onFocus={() => handleFocus('emailAddress')}
+    onBlur={() => handleBlur('emailAddress')}
     required
   />
 </div>
@@ -868,27 +907,29 @@ const handleSocialLinkChange = (e, index) => {
     name="personalWebsite"
     value={profile.applicantProfile.personalWebsite}
     onChange={(e) => handleInputChange(e)}
-    placeholder="www.sripto.com"
+    placeholder={currentPlaceholders.personalWebsite}
+    onFocus={() => handleFocus('personalWebsite')}
+    onBlur={() => handleBlur('personalWebsite')}
     required
   />
 </div>
 
-{/* Current Salary */}
-<div className="form-group col-lg-3 col-md-12">
+
+{/* <div className="form-group col-lg-3 col-md-12">
   <label>Current Salary(₹)</label>
   <input 
     type="text" 
     className="form-control"
     name="currentSalary"
-    value={profile.applicantProfile.currentSalary}
-    onChange={(e) => handleInputChange(e)}
+    // value={profile.applicantProfile.currentSalary}
+    // onChange={(e) => handleInputChange(e)}
     placeholder="Current Amount" 
     required 
   />
-</div>
+</div> */}
 
 {/* Expected Salary */}
-<div className="form-group col-lg-3 col-md-12">
+{/* <div className="form-group col-lg-3 col-md-12">
   <label>Expected Salary(₹)</label>
   <input 
     type="text" 
@@ -899,7 +940,7 @@ const handleSocialLinkChange = (e, index) => {
     placeholder="Expected Amount" 
     required 
   />
-</div>
+</div> */}
 
 {/* Age */}
 <div className="form-group col-lg-6 col-md-12">
@@ -959,7 +1000,9 @@ const handleSocialLinkChange = (e, index) => {
     name="languages"
     value={profile.applicantProfile.languages}
     onChange={(e) => handleInputChange(e)}
-    placeholder="English, Telugu"
+    placeholder={currentPlaceholders.languages}
+    onFocus={() => handleFocus('languages')}
+    onBlur={() => handleBlur('languages')}
     required
   />
 </div>
@@ -994,7 +1037,9 @@ const handleSocialLinkChange = (e, index) => {
     name="description"
     value={profile.applicantProfile.description}
     onChange={(e) => handleInputChange(e)}
-    placeholder="Spent several years working on sheep on Wall Street..."
+    placeholder={currentPlaceholders.description}
+    onFocus={() => handleFocus('description')}
+    onBlur={() => handleBlur('description')}
   ></textarea>
 </div>
 
@@ -1007,7 +1052,9 @@ const handleSocialLinkChange = (e, index) => {
     name="country"
     value={profile.applicantProfile.country}
     onChange={(e) => handleInputChange(e)}
-    placeholder="Enter Country" 
+    placeholder={currentPlaceholders.country}
+    onFocus={() => handleFocus('country')}
+    onBlur={() => handleBlur('country')}
     required 
   />
 </div>
@@ -1021,7 +1068,9 @@ const handleSocialLinkChange = (e, index) => {
     name="state"
     value={profile.applicantProfile.state}
     onChange={(e) => handleInputChange(e)}
-    placeholder="Enter State" 
+    placeholder={currentPlaceholders.state}
+    onFocus={() => handleFocus('state')}
+    onBlur={() => handleBlur('state')}
     required 
   />
 </div>
@@ -1035,7 +1084,9 @@ const handleSocialLinkChange = (e, index) => {
     name="city"
     value={profile.applicantProfile.city}
     onChange={(e) => handleInputChange(e)}
-    placeholder="Enter City" 
+    placeholder={currentPlaceholders.city}
+    onFocus={() => handleFocus('city')}
+    onBlur={() => handleBlur('city')}
     required 
   />
 </div>
@@ -1048,7 +1099,9 @@ const handleSocialLinkChange = (e, index) => {
     name="completeAddress"
     value={profile.applicantProfile.completeAddress}
     onChange={(e) => handleInputChange(e)}
-    placeholder="Door No. 143.143, Lakshmi Mohan Residency, Tilak Road"
+    placeholder={currentPlaceholders.completeAddress}
+    onFocus={() => handleFocus('completeAddress')}
+    onBlur={() => handleBlur('completeAddress')}
     required
   />
 </div>

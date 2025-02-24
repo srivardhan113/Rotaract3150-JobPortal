@@ -12,7 +12,7 @@ const CandidateSingleDynamicV1 = ({ params }) => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const[status,setStatus]=useState('');
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -22,6 +22,7 @@ const CandidateSingleDynamicV1 = ({ params }) => {
             "Content-Type": "application/json",
           }
         });
+        console.log(response.data)
         setProfile(response.data);
         setLoading(false);
       } catch (err) {
@@ -36,11 +37,45 @@ const CandidateSingleDynamicV1 = ({ params }) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!profile) return <div>Profile not found</div>;
-
+  
   // Convert comma-separated strings to arrays
   const skillsArray = profile.applicantProfile.skills.split(', ');
   const languagesArray = profile.applicantProfile.languages.split(', ');
   const educationLevelsArray = profile.applicantProfile.educationLevels.split(', ');
+
+  const handleAcceptance = async (acceptance) => {
+    try {
+      setLoading(true); // Show loading state while updating
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/companyjob/acceptationOfApplicant`, {
+        companyId: sessionStorage.getItem('companyId'),
+        applicationId: resolvedParams.id,
+        acceptance: acceptance
+      });
+      
+      // Extract status from response message
+      if (response.data && response.data.message) {
+        // Check the message to determine status
+        if (response.data.message.includes("Shortlisted")) {
+          setStatus("Shortlisted");
+        } else if (response.data.message.includes("Rejected")) {
+          setStatus("Rejected");
+        } else {
+          // Fallback if message doesn't contain expected text
+          setStatus(acceptance === true ? "Shortlisted" : "Rejected");
+        }
+      } else {
+        // Fallback if no message in response
+        setStatus(acceptance === true ? "Shortlisted" : "Rejected");
+      }
+      
+      setLoading(false);
+    } catch (error) {
+      console.error("Error updating application status:", error);
+      setLoading(false);
+      // Display error to user
+      setError("Failed to update application status. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -74,10 +109,9 @@ const CandidateSingleDynamicV1 = ({ params }) => {
                       <span className="icon flaticon-phone"></span>
                       {profile.applicantProfile.phoneNumber}
                     </li>
-                    <li>{profile.applicantProfile.emailAddress &&
+                    <li>
                       <span className="icon flaticon-mail"></span>
-                    }
-                      {profile.applicantProfile.emailAddress}
+                      {profile.emailAddress}
                     </li>
                   </ul>
 
@@ -88,7 +122,7 @@ const CandidateSingleDynamicV1 = ({ params }) => {
                   </ul>
                 </div>
 
-                <div className="btn-box">
+                <div className="btn-box" style={{display:"flex",flexDirection:"column"}}>
                   <a
                     className="theme-btn btn-style-one"
                     href={`${process.env.NEXT_PUBLIC_API_URL}/api/jobs//companyjob/download-cv?applicationId=${resolvedParams.id}`}
@@ -97,9 +131,36 @@ const CandidateSingleDynamicV1 = ({ params }) => {
                   >
                     CV Download
                   </a>
-                  {/* <button className="bookmark-btn">
-                    <i className="flaticon-bookmark"></i>
-                  </button> */}
+                  <div className="option-box m-auto p-3">
+                              <ul className="option-list">
+                                <li>
+                                  <button 
+                                    data-text="Approve Application" 
+                                    onClick={() => handleAcceptance( true)}
+                                  >
+                                    <span className="la la-check"></span>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button 
+                                    data-text="Reject Application"
+                                    onClick={() => handleAcceptance(false)}
+                                  >
+                                    <span className="la la-times-circle"></span>
+                                  </button>
+                                </li>
+                                  {/* <li>
+                                    <button data-text="Reject Aplication">
+                                      <span className="la la-pencil"></span>
+                                    </button>
+                                  </li> */}
+                              </ul>
+                              <li
+ style={{ color: status === "Rejected" ? "red" : "green" }}
+                                    >
+                                      {status}
+                              </li>    
+                           </div>
                 </div>
               </div>
             </div>

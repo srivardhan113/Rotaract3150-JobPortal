@@ -152,7 +152,7 @@ const [state, setState] = useState({
                             {candidate.job.offeredSalary}
                           </li>
                               
-                        <ul className="post-tags" style={{ padding: "8px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                        <ul className="post-tags" style={{ padding: "4px", display: "flex", gap: "8px", flexWrap: "wrap",marginLeft:"0px",paddingLeft:"0px" }}>
                           {candidate.job.specialisms.split(", ").slice(0,2).map((val, i) => (
                             <li key={i}>
                               <a href="#">{val}</a>
@@ -162,7 +162,7 @@ const [state, setState] = useState({
                        
                               </ul>
 
-                              <div className="option-box m-3 mt-0">
+                              <div className="option-box m-3 mt-1 ms-0 mb-0">
                               <ul className="option-list">
                                 
                               <Link href={`/candidates-single/${candidate.id}/${candidate.applicantId}`}>

@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: 'backend.rotaracthub.in',
         pathname: '/api/companies/get-image/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'backend.rotaracthub.in',
+        pathname: '/api/users/get-user-image/**',
+      },
     ],
   },
 };

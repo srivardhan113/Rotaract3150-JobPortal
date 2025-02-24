@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import RegBanner from '../block/RegBanner';
 
-const AutoHideSection = ({ setIsRegister, setShowLoginPopup }) => {
+const AutoHideSection = ({ setIsRegister, setShowLoginPopup ,setShowForgotPasswordPopup}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -44,8 +44,9 @@ const AutoHideSection = ({ setIsRegister, setShowLoginPopup }) => {
         <div className="row" data-aos="fade-up">
           <RegBanner 
             setIsRegister={setIsRegister} 
-            setShowLoginPopup={setShowLoginPopup} 
+            setShowLoginPopup={setShowLoginPopup}
           />
+
         </div>
       </div>
     </section>

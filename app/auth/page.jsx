@@ -7,7 +7,7 @@ import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 export default function AuthPage() {
   const router = useRouter();
   const [status, setStatus] = useState("Processing...");
-
+  
   useEffect(() => {
     const handleAuth = async () => {
       try {
@@ -15,14 +15,14 @@ export default function AuthPage() {
         const params = new URLSearchParams(window.location.search);
         const token = params.get("token");
         const userId = params.get("userId");
-        console.log(userId);
         const userType = params.get("type");
         const companyId = params.get("companyId");
-        const name= params.get("name");
+        const name = params.get("name");
+        
         if (!token || !userId || !userType) {
           throw new Error("Missing auth parameters");
         }
-
+        
         // Set cookies with explicit domain and path
         const cookieOptions = "path=/; secure; samesite=lax; max-age=7200"; // 2 hours
         document.cookie = `authToken=${token}; ${cookieOptions}`;
@@ -31,28 +31,29 @@ export default function AuthPage() {
         if (companyId) {
           document.cookie = `companyId=${companyId}; ${cookieOptions}`;
         }
-
-        // Set session storage
-        // sessionStorage.setItem("username",name);
-        // sessionStorage.setItem("authToken", token);
-        // sessionStorage.setItem("userId", userId);
-        // sessionStorage.setItem("type", userType);
-        // if (companyId) {
-        //   sessionStorage.setItem("companyId", companyId);
-        // }
-
+        
+        // Safely set sessionStorage only in the browser
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem("username", name);
+          sessionStorage.setItem("authToken", token);
+          sessionStorage.setItem("userId", userId);
+          sessionStorage.setItem("type", userType);
+          if (companyId) {
+            sessionStorage.setItem("companyId", companyId);
+          }
+        }
+        
         setStatus("Authentication successful, preparing redirect...");
-
+        
         // Ensure cookies are set before redirect
         await new Promise(resolve => setTimeout(resolve, 500));
-
-        // Use window.location.href for a full page reload
-        const redirectPath = userType === "Applicant" 
-          ? "/candidates-dashboard" 
-          : "/employers-dashboard";
         
+        // Use window.location.href for a full page reload
+        const redirectPath = userType === "Applicant"
+          ? "/candidates-dashboard"
+          : "/employers-dashboard";
+          
         window.location.href = redirectPath;
-
       } catch (error) {
         console.error("Auth error:", error);
         setStatus("Authentication failed: " + error.message);
@@ -61,10 +62,10 @@ export default function AuthPage() {
         }, 2000);
       }
     };
-
+    
     handleAuth();
   }, []);
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="p-8 w-full max-w-md">

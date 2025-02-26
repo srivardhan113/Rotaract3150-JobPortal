@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Select from "react-select";
 import axios from 'axios';
+import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 
 const CompanyProfileForm = () => {
     const [logoImg, setLogoImg] = useState("");
@@ -36,11 +37,11 @@ const CompanyProfileForm = () => {
     useEffect(() => {
         const fetchCompanyProfile = async () => {
             try {
-                const companyId = sessionStorage.getItem('companyId');
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/companies/get-company-profile?companyId=${companyId}&userId=${sessionStorage.getItem("userId")}`,
+                const companyId = getCookie('companyId');
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/companies/get-company-profile?companyId=${companyId}&userId=${getCookie("userId")}`,
                 {
                   headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+                    Authorization: `Bearer ${getCookie("authToken")}`, // Example token
                     "Content-Type": "application/json",
                   }},);
               
@@ -167,7 +168,7 @@ useEffect(() => {
             }
             const formData = new FormData();
             formData.append('image', file);
-            formData.append('companyId', sessionStorage.getItem('companyId'));
+            formData.append('companyId', getCookie('companyId'));
     
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API_URL}/api/companies/upload-image`,
@@ -229,7 +230,7 @@ useEffect(() => {
         setError(null);
 
         try {
-            const userId = sessionStorage.getItem('userId');
+            const userId = getCookie('userId');
             const socialLinksArray = Object.entries(formData.socialLinks).map(([platform, url]) => ({
                 platform,
                 url
@@ -242,7 +243,7 @@ useEffect(() => {
             },
             {
               headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+                Authorization: `Bearer ${getCookie("authToken")}`, // Example token
                 "Content-Type": "application/json",
               }},);
 

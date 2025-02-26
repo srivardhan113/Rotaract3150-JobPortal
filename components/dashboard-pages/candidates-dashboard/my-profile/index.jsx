@@ -1,21 +1,21 @@
 'use client'
 
 import { useState,useEffect } from "react";
-import { Alert } from "bootstrap";
+// import { Alert } from "bootstrap";
 
 import Select from "react-select";
 import MobileMenu from "/components/dashboard-pages/mobileheader";
 import DashboardCandidatesSidebar from "/app/candidates-dashboard/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
-import MyProfile from "./components/my-profile";
+// import MyProfile from "./components/my-profile";
 import CopyrightFooter from "../../CopyrightFooter";
 import DashboardCandidatesHeader from "/components/dashboard-pages/dashboardheader";
 import MenuToggler from "../../MenuToggler";
-import Achievements from "./components/career-data/Achievements";
-import Social from "./components/my-profile/SocialNetworkBox";
-import Education from "./components/career-data/Education";
-import Experiences from "./components/career-data/Experiences";
-import Skills from "./components/career-data/SkillsMultiple";
+// import Achievements from "./components/career-data/Achievements";
+// import Social from "./components/my-profile/SocialNetworkBox";
+// import Education from "./components/career-data/Education";
+// import Experiences from "./components/career-data/Experiences";
+// import Skills from "./components/career-data/SkillsMultiple";
 import axios from "axios";
 // Experience Form Component
 export const ExperienceForm = ({ onAdd, onCancel }) => {

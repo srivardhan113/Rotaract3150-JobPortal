@@ -31,7 +31,7 @@ const FormContent = (props) => {
       const response = await axios.post(URL, {
         emailAddress: email,
         password: password,
-        type:props.userType
+        type: props.userType
       });
 
       if (response.status === 200) {
@@ -39,10 +39,11 @@ const FormContent = (props) => {
         // Assuming the API returns a token or relevant user data
         const { token } = response.data;
         const type = response.data.userType;
-        const userId= response.data.id;
-        const companyId=response.data.companyId;
-        const username=response.data.username;
+        const userId = response.data.id;
+        const companyId = response.data.companyId;
+        const username = response.data.username;
         console.log("token : ", response.data.token, "userType : ", type);
+        
         // Save the token in sessionStorage for the current session
         sessionStorage.setItem("authToken", token);
         // In your handleSubmit function, after setting sessionStorage:
@@ -51,15 +52,15 @@ const FormContent = (props) => {
         document.cookie = `userId=${userId}; path=/`;
         document.cookie = `companyId=${companyId}; path=/`;
         sessionStorage.setItem("type", type);
-        sessionStorage.setItem("userId",userId);
-        sessionStorage.setItem("companyId",companyId);
-        sessionStorage.setItem("username",username);
-        // Optionally, save user information if provided in the response
-        // Example:
-        // sessionStorage.setItem("user", JSON.stringify(response.data.user));
-
-        // Redirect the user to a dashboard or home page
+        sessionStorage.setItem("userId", userId);
+        sessionStorage.setItem("companyId", companyId);
+        sessionStorage.setItem("username", username);
+        
+        // Close the popup first
         props.onClose();
+        
+        // Reload the page to reflect the changes
+        window.location.reload();
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -101,25 +102,23 @@ const FormContent = (props) => {
           onChange={handlePasswordChange}
         />
         <div className="text" style={{ display: "flex", justifyContent: "flex-end" }}>
-  <button
-    onClick={(e) => {
-      e.preventDefault(); // Prevent any unintended form submission
-      props.Forgot(true);
-        props.onClose();
-
-    }}
-    style={{
-      display: "flex",
-      textAlign: "right",
-      marginLeft: "6px",
-      marginTop: "5px",
-      color: "#585050",
-    }}
-  >
-    Forgot password ?
-  </button>
-</div>
-
+          <button
+            onClick={(e) => {
+              e.preventDefault(); // Prevent any unintended form submission
+              props.Forgot(true);
+              props.onClose();
+            }}
+            style={{
+              display: "flex",
+              textAlign: "right",
+              marginLeft: "6px",
+              marginTop: "5px",
+              color: "#585050",
+            }}
+          >
+            Forgot password ?
+          </button>
+        </div>
       </div>
    
       {errorMessage && (

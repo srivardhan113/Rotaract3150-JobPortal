@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 
 export default function AuthPage() {
   const router = useRouter();
@@ -33,13 +33,13 @@ export default function AuthPage() {
         }
 
         // Set session storage
-        sessionStorage.setItem("username",name);
-        sessionStorage.setItem("authToken", token);
-        sessionStorage.setItem("userId", userId);
-        sessionStorage.setItem("type", userType);
-        if (companyId) {
-          sessionStorage.setItem("companyId", companyId);
-        }
+        // sessionStorage.setItem("username",name);
+        // sessionStorage.setItem("authToken", token);
+        // sessionStorage.setItem("userId", userId);
+        // sessionStorage.setItem("type", userType);
+        // if (companyId) {
+        //   sessionStorage.setItem("companyId", companyId);
+        // }
 
         setStatus("Authentication successful, preparing redirect...");
 
@@ -73,9 +73,9 @@ export default function AuthPage() {
           <p className="text-lg font-medium text-gray-700">{status}</p>
           {/* Debug info - remove in production */}
           <div className="text-sm text-gray-500 mt-4">
-            Auth Token: {sessionStorage.getItem("authToken") ? "Set ✓" : "Not set ✗"}<br />
-            User Type: {sessionStorage.getItem("type") ? "Set ✓" : "Not set ✗"}<br />
-            User ID: {sessionStorage.getItem("userId") ? "Set ✓" : "Not set ✗"}
+            Auth Token: {getCookie("authToken") ? "Set ✓" : "Not set ✗"}<br />
+            User Type: {getCookie("type") ? "Set ✓" : "Not set ✗"}<br />
+            User ID: {getCookie("userId") ? "Set ✓" : "Not set ✗"}
           </div>
         </div>
       </div>

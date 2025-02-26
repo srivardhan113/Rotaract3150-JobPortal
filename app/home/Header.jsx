@@ -14,43 +14,64 @@ import { useRouter } from "next/navigation";
 import LoginPopup from "@/components/common/form/login/LoginPopup";
 import ForgotPasswordPopup from "@/components/common/form/login/forgotpasswordpopup";
 import RoleSwitchWarningPopup from "@/components/common/form/popupwarning";
-// Adjust the import path accordingly
+import { getCookie, setCookie, deleteCookie } from 'cookies-next'; // Import cookie functions
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
   const [bgColor, setBgColor] = useState("rgba(0, 0, 0, 0.3)");
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [showLoginPopup, setShowLoginPopup] = useState(false); // State for modal visibility
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const pathname = usePathname();
-  const isLoggedIn = !!sessionStorage.getItem("authToken");
   const router = useRouter();
-  const type = sessionStorage.getItem("type");
   const [isRegister, setIsRegister] = useState(false);
   const [isRoleSwitching, setIsRoleSwitching] = useState(false);
+  
+  // Use state to track auth status and user type, initializing from cookies
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [type, setType] = useState("");
+  
+  // Initialize auth state from cookies on client-side only
+  useEffect(() => {
+    const authToken = getCookie('authToken');
+    const userType = getCookie('type');
+    
+    setIsLoggedIn(!!authToken);
+    setType(userType || "");
+  }, []);
+  
   const handleLogout = (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     sessionStorage.clear();
-    document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-    document.cookie = 'companyId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    // Clear cookies
+    deleteCookie('authToken', { path: '/' });
+    deleteCookie('type', { path: '/' });
+    deleteCookie('userId', { path: '/' });
+    deleteCookie('companyId', { path: '/' });
+    
+    // Update state
+    setIsLoggedIn(false);
+    setType("");
+    
     router.push('/');
   };
+  
   const [showWarning, setShowWarning] = useState(false);
+  
   const handleRoleSwitch = async () => {
     try {
-      setIsRoleSwitching(true)
-      const userId = sessionStorage.getItem("userId");
+      setIsRoleSwitching(true);
+      const userId = getCookie('userId');
+      const authToken = getCookie('authToken');
       
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/switchRole`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${sessionStorage.getItem("authToken")}`
+          'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify({
           userId: userId,
-          type: type === "Company" ? "Applicant" : "Company" // Fix: Send the target type, not current type
+          type: type === "Company" ? "Applicant" : "Company"
         })
       });
   
@@ -68,6 +89,7 @@ const Header = () => {
       setIsRoleSwitching(false);
     }
   };
+  
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);
@@ -97,7 +119,9 @@ const Header = () => {
       window.removeEventListener("scroll", updateScrollProgress);
     };
   }, []);
+  
   const [showForgetPasswordPopup, setShowForgotPasswordPopup] = useState(false);
+  
   const shiningPinkStyle = {
     background: "linear-gradient(90deg, pink, white, silver)",
     WebkitBackgroundClip: "text",

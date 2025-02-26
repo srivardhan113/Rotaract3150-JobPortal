@@ -57,9 +57,7 @@ const Header = () => {
 
           <div className="outer-box flex justify-between items-center">
             {/* <!-- Left Side (Hi, Sri Vardhan Yeluri) --> */}
-            <div className="welcome-message text-4xl text-gray-800">
-              Hi, {`${sessionStorage.getItem("username")}`}
-            </div>
+            
 
             {/* <!-- Login/Register Button --> */}
             <div className="btn-box">

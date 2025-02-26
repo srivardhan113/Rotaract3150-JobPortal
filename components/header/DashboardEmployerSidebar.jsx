@@ -22,8 +22,17 @@ const DashboardEmployerSidebar = () => {
     // handle logout
     const handleLogout = () => {
         // Clear sessionStorage
-        sessionStorage.clear();
-        
+
+        if (typeof window !== 'undefined') {
+            // Clear specific items
+            sessionStorage.removeItem('authToken');
+            sessionStorage.removeItem('type');
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('companyId');
+            
+            // Or clear everything
+            // sessionStorage.clear();
+          }
         // Clear cookies
         document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
   document.cookie = 'type=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';

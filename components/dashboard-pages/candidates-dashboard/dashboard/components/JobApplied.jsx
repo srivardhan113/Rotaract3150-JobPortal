@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
-
+import { getCookie, setCookie, deleteCookie } from 'cookies-next'; 
 const JobApplied = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,15 +13,15 @@ const JobApplied = () => {
     const fetchAppliedJobs = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/userjob/get-applied-jobs`, {
-          userId:sessionStorage.getItem("userId"),
-          applicantid:sessionStorage.getItem("userId"),  // Change to dynamic user ID
+          userId:getCookie("userId"),
+          applicantid:getCookie("userId"),  // Change to dynamic user ID
           page: 1,
           limit: 4,
           orderBy: "desc",
         },
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Example token
+            Authorization: `Bearer ${getCookie("authToken")}`, // Example token
             "Content-Type": "application/json",
           }},);
 

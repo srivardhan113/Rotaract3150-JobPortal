@@ -376,8 +376,9 @@ const index = () => {
                 reader.readAsDataURL(file);
             }
             const formData = new FormData();
-            formData.append('image', file);
             formData.append('userId', sessionStorage.getItem('userId'));
+            formData.append('image', file);
+
     
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API_URL}/api/users/update-user-image`,

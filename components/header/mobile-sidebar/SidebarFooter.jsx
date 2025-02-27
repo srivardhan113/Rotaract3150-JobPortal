@@ -1,3 +1,6 @@
+"use client"
+import Link from "next/link";
+import { useState,useEffect} from "react";
 const SidebarFooter = () => {
   const socialContent = [
     { id: 1, icon: "fa-facebook-f", link: "https://www.facebook.com/" },
@@ -5,12 +8,16 @@ const SidebarFooter = () => {
     { id: 3, icon: "fa-instagram", link: "https://www.instagram.com/" },
     { id: 4, icon: "fa-linkedin-in", link: "https://www.linkedin.com/" },
   ];
-
+  const [userType, setUserType] = useState(null);
+    useEffect(() => {
+      const storedUserType = sessionStorage.getItem("type");
+      setUserType(storedUserType);
+    }, []);
   return (
     <div className="mm-add-listing mm-listitem pro-footer">
-      <a href="#" className="theme-btn btn-style-one mm-listitem__text">
+      {userType === "Company" && <Link href="employers-dashboard/post-jobs" className="theme-btn btn-style-one mm-listitem__text"> 
         Job Post
-      </a>
+      </Link>}
       {/* job post btn */}
 
       <div className="mm-listitem__text">

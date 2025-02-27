@@ -37,6 +37,7 @@ const index = () => {
           <div className="ls-widget">
             <div className="widget-title">
               <h4>Change Password</h4>
+              <h4>Need Not to Write Old Password for Oauth If using First Time</h4>
             </div>
 
             <div className="widget-content">
